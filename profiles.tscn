@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://profiles.gd" type="Script" id=1]
+
+[node name="profiles" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="hboxButtons" type="HBoxContainer" parent="."]
+margin_right = 960.0
+margin_bottom = 20.0
+
+[node name="btnAdd" type="Button" parent="hboxButtons"]
+margin_right = 20.0
+margin_bottom = 20.0
+text = "+"
+
+[node name="btnDelete" type="Button" parent="hboxButtons"]
+margin_left = 24.0
+margin_right = 41.0
+margin_bottom = 20.0
+text = "-"
+
+[node name="listProfiles" type="ItemList" parent="."]
+margin_top = 24.0
+margin_right = 960.0
+margin_bottom = 540.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="item_selected" from="listProfiles" to="." method="_on_listProfiles_item_selected"]

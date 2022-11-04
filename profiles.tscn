@@ -22,11 +22,34 @@ margin_right = 41.0
 margin_bottom = 20.0
 text = "-"
 
-[node name="listProfiles" type="ItemList" parent="."]
+[node name="btnRename" type="Button" parent="hboxButtons"]
+margin_left = 45.0
+margin_right = 109.0
+margin_bottom = 20.0
+text = "Rename"
+
+[node name="hboxActiveProfile" type="HBoxContainer" parent="."]
 margin_top = 24.0
+margin_right = 960.0
+margin_bottom = 44.0
+
+[node name="lblActiveProfile" type="Label" parent="hboxActiveProfile"]
+margin_top = 3.0
+margin_right = 89.0
+margin_bottom = 17.0
+text = "Active Profile:"
+
+[node name="btnActiveProfile" type="OptionButton" parent="hboxActiveProfile"]
+margin_left = 93.0
+margin_right = 122.0
+margin_bottom = 20.0
+
+[node name="listProfiles" type="ItemList" parent="."]
+margin_top = 48.0
 margin_right = 960.0
 margin_bottom = 540.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[connection signal="item_selected" from="hboxActiveProfile/btnActiveProfile" to="." method="_on_btnActiveProfile_item_selected"]
 [connection signal="item_selected" from="listProfiles" to="." method="_on_listProfiles_item_selected"]

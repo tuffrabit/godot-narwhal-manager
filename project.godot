@@ -19,7 +19,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://device.gd"
 }, {
-"base": "GridContainer",
+"base": "OptionButton",
+"class": "InputOptionButton",
+"language": "GDScript",
+"path": "res://inputOptionButton.gd"
+}, {
+"base": "HBoxContainer",
 "class": "Profile",
 "language": "GDScript",
 "path": "res://profile.gd"
@@ -32,6 +37,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Connect": "",
 "Device": "",
+"InputOptionButton": "",
 "Profile": "",
 "Profiles": ""
 }
@@ -45,6 +51,7 @@ config/icon="res://icon.png"
 [autoload]
 
 SerialHelper="*res://serialHelper.gd"
+Inputs="*res://inputs.gd"
 
 [display]
 
@@ -62,6 +69,7 @@ project/assembly_name="godot-narwhal-manager"
 
 [physics]
 
+common/physics_fps=30
 common/enable_pause_aware_picking=true
 
 [rendering]

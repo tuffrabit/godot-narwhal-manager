@@ -1,20 +1,511 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://profile.gd" type="Script" id=1]
+[ext_resource path="res://inputOptionButton.tscn" type="PackedScene" id=2]
 
-[node name="profile" type="GridContainer"]
+[node name="profile" type="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-columns = 2
+margin_left = 7.0
+margin_top = 7.0
+margin_right = -7.0
+margin_bottom = -7.0
 script = ExtResource( 1 )
 
-[node name="lblKey1" type="Label" parent="."]
+[node name="vboxLeft" type="VBoxContainer" parent="."]
+margin_right = 312.0
+margin_bottom = 526.0
+size_flags_horizontal = 3
+
+[node name="hboxKey1" type="HBoxContainer" parent="vboxLeft"]
+margin_right = 312.0
+margin_bottom = 20.0
+
+[node name="label" type="Label" parent="vboxLeft/hboxKey1"]
+margin_top = 3.0
 margin_right = 39.0
-margin_bottom = 14.0
+margin_bottom = 17.0
 text = "Key 1:"
 
-[node name="txtKey1" type="TextEdit" parent="."]
+[node name="button" parent="vboxLeft/hboxKey1" instance=ExtResource( 2 )]
 margin_left = 43.0
-margin_right = 960.0
-margin_bottom = 14.0
+margin_right = 72.0
+
+[node name="hboxKey2" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 24.0
+margin_right = 312.0
+margin_bottom = 44.0
+
+[node name="label" type="Label" parent="vboxLeft/hboxKey2"]
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 17.0
+text = "Key 2:"
+
+[node name="button" parent="vboxLeft/hboxKey2" instance=ExtResource( 2 )]
+margin_left = 43.0
+margin_right = 72.0
+
+[node name="hboxKey3" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 48.0
+margin_right = 312.0
+margin_bottom = 68.0
+
+[node name="label" type="Label" parent="vboxLeft/hboxKey3"]
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 17.0
+text = "Key 3:"
+
+[node name="button" parent="vboxLeft/hboxKey3" instance=ExtResource( 2 )]
+margin_left = 43.0
+margin_right = 72.0
+
+[node name="hboxKey4" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 72.0
+margin_right = 312.0
+margin_bottom = 92.0
+
+[node name="label" type="Label" parent="vboxLeft/hboxKey4"]
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 17.0
+text = "Key 4:"
+
+[node name="button" parent="vboxLeft/hboxKey4" instance=ExtResource( 2 )]
+margin_left = 43.0
+margin_right = 72.0
+
+[node name="hboxKey5" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 96.0
+margin_right = 312.0
+margin_bottom = 116.0
+
+[node name="label" type="Label" parent="vboxLeft/hboxKey5"]
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 17.0
+text = "Key 5:"
+
+[node name="button" parent="vboxLeft/hboxKey5" instance=ExtResource( 2 )]
+margin_left = 43.0
+margin_right = 72.0
+
+[node name="hboxKey6" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 120.0
+margin_right = 312.0
+margin_bottom = 140.0
+
+[node name="label" type="Label" parent="vboxLeft/hboxKey6"]
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 17.0
+text = "Key 6:"
+
+[node name="button" parent="vboxLeft/hboxKey6" instance=ExtResource( 2 )]
+margin_left = 43.0
+margin_right = 72.0
+
+[node name="hboxKey7" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 144.0
+margin_right = 312.0
+margin_bottom = 164.0
+
+[node name="label" type="Label" parent="vboxLeft/hboxKey7"]
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 17.0
+text = "Key 7:"
+
+[node name="button" parent="vboxLeft/hboxKey7" instance=ExtResource( 2 )]
+margin_left = 43.0
+margin_right = 72.0
+
+[node name="hboxKey8" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 168.0
+margin_right = 312.0
+margin_bottom = 188.0
+
+[node name="label" type="Label" parent="vboxLeft/hboxKey8"]
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 17.0
+text = "Key 8:"
+
+[node name="button" parent="vboxLeft/hboxKey8" instance=ExtResource( 2 )]
+margin_left = 43.0
+margin_right = 72.0
+
+[node name="hboxKey9" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 192.0
+margin_right = 312.0
+margin_bottom = 212.0
+
+[node name="label" type="Label" parent="vboxLeft/hboxKey9"]
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 17.0
+text = "Key 9:"
+
+[node name="button" parent="vboxLeft/hboxKey9" instance=ExtResource( 2 )]
+margin_left = 43.0
+margin_right = 72.0
+
+[node name="hboxKey10" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 216.0
+margin_right = 312.0
+margin_bottom = 236.0
+
+[node name="label" type="Label" parent="vboxLeft/hboxKey10"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 10:"
+
+[node name="button" parent="vboxLeft/hboxKey10" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="thumbKey" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 240.0
+margin_right = 312.0
+margin_bottom = 260.0
+
+[node name="label" type="Label" parent="vboxLeft/thumbKey"]
+margin_top = 3.0
+margin_right = 75.0
+margin_bottom = 17.0
+text = "Thumb Key:"
+
+[node name="button" parent="vboxLeft/thumbKey" instance=ExtResource( 2 )]
+margin_left = 79.0
+margin_right = 108.0
+
+[node name="vboxMiddle" type="VBoxContainer" parent="."]
+margin_left = 316.0
+margin_right = 629.0
+margin_bottom = 526.0
 size_flags_horizontal = 3
+
+[node name="hboxKey11" type="HBoxContainer" parent="vboxMiddle"]
+margin_right = 313.0
+margin_bottom = 20.0
+
+[node name="label" type="Label" parent="vboxMiddle/hboxKey11"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 11:"
+
+[node name="button" parent="vboxMiddle/hboxKey11" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="hboxKey12" type="HBoxContainer" parent="vboxMiddle"]
+margin_top = 24.0
+margin_right = 313.0
+margin_bottom = 44.0
+
+[node name="label" type="Label" parent="vboxMiddle/hboxKey12"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 12:"
+
+[node name="button" parent="vboxMiddle/hboxKey12" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="hboxKey13" type="HBoxContainer" parent="vboxMiddle"]
+margin_top = 48.0
+margin_right = 313.0
+margin_bottom = 68.0
+
+[node name="label" type="Label" parent="vboxMiddle/hboxKey13"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 13:"
+
+[node name="button" parent="vboxMiddle/hboxKey13" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="hboxKey14" type="HBoxContainer" parent="vboxMiddle"]
+margin_top = 72.0
+margin_right = 313.0
+margin_bottom = 92.0
+
+[node name="label" type="Label" parent="vboxMiddle/hboxKey14"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 14:"
+
+[node name="button" parent="vboxMiddle/hboxKey14" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="hboxKey15" type="HBoxContainer" parent="vboxMiddle"]
+margin_top = 96.0
+margin_right = 313.0
+margin_bottom = 116.0
+
+[node name="label" type="Label" parent="vboxMiddle/hboxKey15"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 15:"
+
+[node name="button" parent="vboxMiddle/hboxKey15" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="hboxKey16" type="HBoxContainer" parent="vboxMiddle"]
+margin_top = 120.0
+margin_right = 313.0
+margin_bottom = 140.0
+
+[node name="label" type="Label" parent="vboxMiddle/hboxKey16"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 16:"
+
+[node name="button" parent="vboxMiddle/hboxKey16" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="hboxKey17" type="HBoxContainer" parent="vboxMiddle"]
+margin_top = 144.0
+margin_right = 313.0
+margin_bottom = 164.0
+
+[node name="label" type="Label" parent="vboxMiddle/hboxKey17"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 17:"
+
+[node name="button" parent="vboxMiddle/hboxKey17" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="hboxKey18" type="HBoxContainer" parent="vboxMiddle"]
+margin_top = 168.0
+margin_right = 313.0
+margin_bottom = 188.0
+
+[node name="label" type="Label" parent="vboxMiddle/hboxKey18"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 18:"
+
+[node name="button" parent="vboxMiddle/hboxKey18" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="hboxKey19" type="HBoxContainer" parent="vboxMiddle"]
+margin_top = 192.0
+margin_right = 313.0
+margin_bottom = 212.0
+
+[node name="label" type="Label" parent="vboxMiddle/hboxKey19"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 19:"
+
+[node name="button" parent="vboxMiddle/hboxKey19" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="hboxKey20" type="HBoxContainer" parent="vboxMiddle"]
+margin_top = 216.0
+margin_right = 313.0
+margin_bottom = 236.0
+
+[node name="label" type="Label" parent="vboxMiddle/hboxKey20"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "Key 20:"
+
+[node name="button" parent="vboxMiddle/hboxKey20" instance=ExtResource( 2 )]
+margin_left = 51.0
+margin_right = 80.0
+
+[node name="joystickButton" type="HBoxContainer" parent="vboxMiddle"]
+margin_top = 240.0
+margin_right = 313.0
+margin_bottom = 260.0
+
+[node name="label" type="Label" parent="vboxMiddle/joystickButton"]
+margin_top = 3.0
+margin_right = 99.0
+margin_bottom = 17.0
+text = "Joystick Button:"
+
+[node name="button" parent="vboxMiddle/joystickButton" instance=ExtResource( 2 )]
+margin_left = 103.0
+margin_right = 132.0
+
+[node name="vboxRight" type="VBoxContainer" parent="."]
+margin_left = 633.0
+margin_right = 946.0
+margin_bottom = 526.0
+size_flags_horizontal = 3
+
+[node name="kbModeEnabled" type="HBoxContainer" parent="vboxRight"]
+margin_right = 313.0
+margin_bottom = 40.0
+
+[node name="label" type="Label" parent="vboxRight/kbModeEnabled"]
+margin_top = 13.0
+margin_right = 115.0
+margin_bottom = 27.0
+text = "KB Mode Enabled:"
+
+[node name="button" type="CheckButton" parent="vboxRight/kbModeEnabled"]
+margin_left = 119.0
+margin_right = 195.0
+margin_bottom = 40.0
+
+[node name="kbModeUp" type="HBoxContainer" parent="vboxRight"]
+margin_top = 44.0
+margin_right = 313.0
+margin_bottom = 64.0
+
+[node name="label" type="Label" parent="vboxRight/kbModeUp"]
+margin_top = 3.0
+margin_right = 83.0
+margin_bottom = 17.0
+text = "KB Mode Up:"
+
+[node name="button" parent="vboxRight/kbModeUp" instance=ExtResource( 2 )]
+margin_left = 87.0
+margin_right = 116.0
+
+[node name="kbModeDown" type="HBoxContainer" parent="vboxRight"]
+margin_top = 68.0
+margin_right = 313.0
+margin_bottom = 88.0
+
+[node name="label" type="Label" parent="vboxRight/kbModeDown"]
+margin_top = 3.0
+margin_right = 101.0
+margin_bottom = 17.0
+text = "KB Mode Down:"
+
+[node name="button" parent="vboxRight/kbModeDown" instance=ExtResource( 2 )]
+margin_left = 105.0
+margin_right = 134.0
+
+[node name="kbModeLeft" type="HBoxContainer" parent="vboxRight"]
+margin_top = 92.0
+margin_right = 313.0
+margin_bottom = 112.0
+
+[node name="label" type="Label" parent="vboxRight/kbModeLeft"]
+margin_top = 3.0
+margin_right = 89.0
+margin_bottom = 17.0
+text = "KB Mode Left:"
+
+[node name="button" parent="vboxRight/kbModeLeft" instance=ExtResource( 2 )]
+margin_left = 93.0
+margin_right = 122.0
+
+[node name="kbModeRight" type="HBoxContainer" parent="vboxRight"]
+margin_top = 116.0
+margin_right = 313.0
+margin_bottom = 136.0
+
+[node name="label" type="Label" parent="vboxRight/kbModeRight"]
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 17.0
+text = "KB Mode Right:"
+
+[node name="button" parent="vboxRight/kbModeRight" instance=ExtResource( 2 )]
+margin_left = 101.0
+margin_right = 130.0
+
+[node name="dpadUp" type="HBoxContainer" parent="vboxRight"]
+margin_top = 140.0
+margin_right = 313.0
+margin_bottom = 160.0
+
+[node name="label" type="Label" parent="vboxRight/dpadUp"]
+margin_top = 3.0
+margin_right = 63.0
+margin_bottom = 17.0
+text = "DPAD Up:"
+
+[node name="button" parent="vboxRight/dpadUp" instance=ExtResource( 2 )]
+margin_left = 67.0
+margin_right = 96.0
+
+[node name="dpadDown" type="HBoxContainer" parent="vboxRight"]
+margin_top = 164.0
+margin_right = 313.0
+margin_bottom = 184.0
+
+[node name="label" type="Label" parent="vboxRight/dpadDown"]
+margin_top = 3.0
+margin_right = 81.0
+margin_bottom = 17.0
+text = "DPAD Down:"
+
+[node name="button" parent="vboxRight/dpadDown" instance=ExtResource( 2 )]
+margin_left = 85.0
+margin_right = 114.0
+
+[node name="dpadLeft" type="HBoxContainer" parent="vboxRight"]
+margin_top = 188.0
+margin_right = 313.0
+margin_bottom = 208.0
+
+[node name="label" type="Label" parent="vboxRight/dpadLeft"]
+margin_top = 3.0
+margin_right = 69.0
+margin_bottom = 17.0
+text = "DPAD Left:"
+
+[node name="button" parent="vboxRight/dpadLeft" instance=ExtResource( 2 )]
+margin_left = 73.0
+margin_right = 102.0
+
+[node name="dpadRight" type="HBoxContainer" parent="vboxRight"]
+margin_top = 212.0
+margin_right = 313.0
+margin_bottom = 232.0
+
+[node name="label" type="Label" parent="vboxRight/dpadRight"]
+margin_top = 3.0
+margin_right = 77.0
+margin_bottom = 17.0
+text = "DPAD Right:"
+
+[node name="button" parent="vboxRight/dpadRight" instance=ExtResource( 2 )]
+margin_left = 81.0
+margin_right = 110.0
+
+[node name="rgb" type="HBoxContainer" parent="vboxRight"]
+margin_top = 236.0
+margin_right = 313.0
+margin_bottom = 256.0
+
+[node name="label" type="Label" parent="vboxRight/rgb"]
+margin_top = 3.0
+margin_right = 59.0
+margin_bottom = 17.0
+text = "RGB LED:"
+
+[node name="button" type="ColorPickerButton" parent="vboxRight/rgb"]
+margin_left = 63.0
+margin_right = 93.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 30, 0 )
+edit_alpha = false

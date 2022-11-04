@@ -8,20 +8,194 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="hsplitMain" type="HSplitContainer" parent="."]
+[node name="vboxGlobal" type="VBoxContainer" parent="."]
+margin_right = 960.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="hboxButtons" type="HBoxContainer" parent="vboxGlobal"]
+margin_right = 960.0
+margin_bottom = 20.0
+
+[node name="btnSave" type="Button" parent="vboxGlobal/hboxButtons"]
+margin_right = 41.0
+margin_bottom = 20.0
+text = "Save"
+
+[node name="btnDisconnect" type="Button" parent="vboxGlobal/hboxButtons"]
+margin_left = 45.0
+margin_right = 129.0
+margin_bottom = 20.0
+text = "Disconnect"
+
+[node name="tabs" type="TabContainer" parent="."]
+margin_top = 24.0
 margin_right = 960.0
 margin_bottom = 540.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+tab_align = 0
+
+[node name="hsplitMain" type="HSplitContainer" parent="tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 split_offset = 100
 
-[node name="profiles" parent="hsplitMain" instance=ExtResource( 1 )]
+[node name="profiles" parent="tabs/hsplitMain" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 141.0
-margin_bottom = 540.0
+margin_right = 209.0
+margin_bottom = 480.0
 
-[node name="pnlProfile" type="Panel" parent="hsplitMain"]
+[node name="pnlProfile" type="Panel" parent="tabs/hsplitMain"]
+margin_left = 221.0
+margin_right = 952.0
+margin_bottom = 480.0
+
+[node name="vboxAdvanced" type="VBoxContainer" parent="tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="hboxSettings" type="HBoxContainer" parent="tabs/vboxAdvanced"]
+margin_right = 952.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 150 )
+
+[node name="vboxLeft" type="VBoxContainer" parent="tabs/vboxAdvanced/hboxSettings"]
+margin_right = 474.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+
+[node name="stickBoundLowX" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft"]
+margin_right = 474.0
+margin_bottom = 24.0
+
+[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX"]
+margin_top = 5.0
+margin_right = 139.0
+margin_bottom = 19.0
+text = "Stick Boundary Low X:"
+
+[node name="edit" type="LineEdit" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX"]
+margin_left = 143.0
+margin_right = 218.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 75, 0 )
+
+[node name="stickBoundHighX" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft"]
+margin_top = 28.0
+margin_right = 474.0
+margin_bottom = 52.0
+
+[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX"]
+margin_top = 5.0
+margin_right = 143.0
+margin_bottom = 19.0
+text = "Stick Boundary High X:"
+
+[node name="edit" type="LineEdit" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX"]
+margin_left = 147.0
+margin_right = 222.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 75, 0 )
+
+[node name="stickBoundLowY" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft"]
+margin_top = 56.0
+margin_right = 474.0
+margin_bottom = 80.0
+
+[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY"]
+margin_top = 5.0
+margin_right = 138.0
+margin_bottom = 19.0
+text = "Stick Boundary Low Y:"
+
+[node name="edit" type="LineEdit" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY"]
+margin_left = 142.0
+margin_right = 217.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 75, 0 )
+
+[node name="stickBoundHighY" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft"]
+margin_top = 84.0
+margin_right = 474.0
+margin_bottom = 108.0
+
+[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY"]
+margin_top = 5.0
+margin_right = 142.0
+margin_bottom = 19.0
+text = "Stick Boundary High Y:"
+
+[node name="edit" type="LineEdit" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY"]
+margin_left = 146.0
+margin_right = 221.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 75, 0 )
+
+[node name="vboxRight" type="VBoxContainer" parent="tabs/vboxAdvanced/hboxSettings"]
+margin_left = 478.0
+margin_right = 952.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+
+[node name="deadzoneSize" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
+margin_right = 474.0
+margin_bottom = 24.0
+
+[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSize"]
+margin_top = 5.0
+margin_right = 98.0
+margin_bottom = 19.0
+text = "Deadzone Size:"
+
+[node name="edit" type="LineEdit" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSize"]
+margin_left = 102.0
+margin_right = 177.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 75, 0 )
+
+[node name="kbModeStartOffsetX" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
+margin_top = 28.0
+margin_right = 474.0
+margin_bottom = 52.0
+
+[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX"]
+margin_top = 5.0
+margin_right = 149.0
+margin_bottom = 19.0
+text = "KB Mode Start Offset X:"
+
+[node name="edit" type="LineEdit" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX"]
 margin_left = 153.0
-margin_right = 960.0
-margin_bottom = 540.0
+margin_right = 228.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 75, 0 )
+
+[node name="kbModeStartOffsetY" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
+margin_top = 56.0
+margin_right = 474.0
+margin_bottom = 80.0
+
+[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY"]
+margin_top = 5.0
+margin_right = 148.0
+margin_bottom = 19.0
+text = "KB Mode Start Offset Y:"
+
+[node name="edit" type="LineEdit" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY"]
+margin_left = 152.0
+margin_right = 227.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 75, 0 )

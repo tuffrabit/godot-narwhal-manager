@@ -6,6 +6,7 @@ signal profileSelected(profile)
 
 var profiles: Dictionary
 var previousActiveProfile: int
+var profileToDelete: int
 
 onready var btnActiveProfile: OptionButton = $hboxActiveProfile/btnActiveProfile
 onready var listProfiles: ItemList = $listProfiles
@@ -50,6 +51,7 @@ func setActiveProfile(profileName: String) -> void:
 	if response != null and "setActiveProfile" in response:
 		if response["setActiveProfile"] == false:
 			self.btnActiveProfile.select(self.previousActiveProfile)
+			Dialogs.showAlertDialog("Set active profile failed.", "Error")
 
 func getProfile(profileName: String) -> Dictionary:
 	var profile: Dictionary
@@ -80,3 +82,58 @@ func _on_btnActiveProfile_item_selected(index):
 	
 	if profileName:
 		self.setActiveProfile(profileName)
+
+func _on_btnAdd_pressed() -> void:
+	if self.listProfiles.get_item_count() < 20:
+		Dialogs.showTextInputDialog("New profile name...", self, "createNewProfile")
+	else:
+		Dialogs.showAlertDialog("You have reached the profile limit.", "Can't create new profile")
+
+func createNewProfile(newProfileName: String) -> void:
+	if newProfileName and self.listProfiles.get_item_count() < 20:
+		var newProfileNameExists: bool = false
+		
+		for index in range(self.listProfiles.get_item_count()):
+			if newProfileName == self.listProfiles.get_item_text(index):
+				newProfileNameExists = true
+				break
+		
+		if newProfileNameExists == false:
+			var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+				"createNewProfile", newProfileName)
+			
+			if response != null and "createNewProfile" in response:
+				if response["createNewProfile"]:
+					self.listProfiles.add_item(newProfileName)
+					self.btnActiveProfile.add_item(newProfileName)
+					Dialogs.showAlertDialog("Profile successfully created.", "Success!")
+				else:
+					Dialogs.showAlertDialog("Profile creation failed on the device.", "Can't create new profile")
+		else:
+			Dialogs.showAlertDialog("Profile with that name already exists.", "Can't create new profile")
+
+func _on_btnDelete_pressed() -> void:
+	var selectedItemIndexes: PoolIntArray = self.listProfiles.get_selected_items()
+	
+	if selectedItemIndexes.size() > 0:
+		if selectedItemIndexes[0] != self.btnActiveProfile.selected:
+			self.profileToDelete = selectedItemIndexes[0]
+			Dialogs.showConfirmationDialog("Are you sure you want to remove the selected profile", self, "deleteProfile")
+		else:
+			Dialogs.showAlertDialog("You can't remove the active profile.", "Can't remove profile")
+
+func deleteProfile():
+	if self.profileToDelete > -1:
+		var profileIndex = self.profileToDelete
+		var profileName: String = self.listProfiles.get_item_text(self.profileToDelete)
+		self.profileToDelete = -1
+		var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+				"deleteProfile", profileName)
+		
+		if response and "deleteProfile" in response:
+			if response["deleteProfile"]:
+				self.btnActiveProfile.remove_item(profileIndex)
+				self.listProfiles.remove_item(profileIndex)
+				Dialogs.showAlertDialog("Profile successfully removed.", "Success!")
+			else:
+				Dialogs.showAlertDialog("Profile removal failed on the device.", "Can't remove profile")

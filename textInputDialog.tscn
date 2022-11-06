@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://textInputDialog.gd" type="Script" id=1]
+
+[node name="textInputDialog" type="ConfirmationDialog"]
+visible = true
+margin_right = 40.0
+margin_bottom = 40.0
+popup_exclusive = true
+window_title = "New Value"
+script = ExtResource( 1 )
+
+[node name="txtValue" type="LineEdit" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -85.5
+margin_top = 7.0
+margin_right = 85.5
+margin_bottom = 24.0
+
+[connection signal="confirmed" from="." to="." method="_on_textInputDialog_confirmed"]

@@ -27,7 +27,7 @@ margin_right = 39.0
 margin_bottom = 17.0
 text = "Key 1:"
 
-[node name="button" parent="vboxLeft/hboxKey1" instance=ExtResource( 2 )]
+[node name="key0" parent="vboxLeft/hboxKey1" instance=ExtResource( 2 )]
 margin_left = 43.0
 margin_right = 72.0
 
@@ -42,7 +42,7 @@ margin_right = 39.0
 margin_bottom = 17.0
 text = "Key 2:"
 
-[node name="button" parent="vboxLeft/hboxKey2" instance=ExtResource( 2 )]
+[node name="key1" parent="vboxLeft/hboxKey2" instance=ExtResource( 2 )]
 margin_left = 43.0
 margin_right = 72.0
 
@@ -57,7 +57,7 @@ margin_right = 39.0
 margin_bottom = 17.0
 text = "Key 3:"
 
-[node name="button" parent="vboxLeft/hboxKey3" instance=ExtResource( 2 )]
+[node name="key2" parent="vboxLeft/hboxKey3" instance=ExtResource( 2 )]
 margin_left = 43.0
 margin_right = 72.0
 
@@ -72,7 +72,7 @@ margin_right = 39.0
 margin_bottom = 17.0
 text = "Key 4:"
 
-[node name="button" parent="vboxLeft/hboxKey4" instance=ExtResource( 2 )]
+[node name="key3" parent="vboxLeft/hboxKey4" instance=ExtResource( 2 )]
 margin_left = 43.0
 margin_right = 72.0
 
@@ -87,7 +87,7 @@ margin_right = 39.0
 margin_bottom = 17.0
 text = "Key 5:"
 
-[node name="button" parent="vboxLeft/hboxKey5" instance=ExtResource( 2 )]
+[node name="key4" parent="vboxLeft/hboxKey5" instance=ExtResource( 2 )]
 margin_left = 43.0
 margin_right = 72.0
 
@@ -102,7 +102,7 @@ margin_right = 39.0
 margin_bottom = 17.0
 text = "Key 6:"
 
-[node name="button" parent="vboxLeft/hboxKey6" instance=ExtResource( 2 )]
+[node name="key5" parent="vboxLeft/hboxKey6" instance=ExtResource( 2 )]
 margin_left = 43.0
 margin_right = 72.0
 
@@ -117,7 +117,7 @@ margin_right = 39.0
 margin_bottom = 17.0
 text = "Key 7:"
 
-[node name="button" parent="vboxLeft/hboxKey7" instance=ExtResource( 2 )]
+[node name="key6" parent="vboxLeft/hboxKey7" instance=ExtResource( 2 )]
 margin_left = 43.0
 margin_right = 72.0
 
@@ -132,7 +132,7 @@ margin_right = 39.0
 margin_bottom = 17.0
 text = "Key 8:"
 
-[node name="button" parent="vboxLeft/hboxKey8" instance=ExtResource( 2 )]
+[node name="key7" parent="vboxLeft/hboxKey8" instance=ExtResource( 2 )]
 margin_left = 43.0
 margin_right = 72.0
 
@@ -147,7 +147,7 @@ margin_right = 39.0
 margin_bottom = 17.0
 text = "Key 9:"
 
-[node name="button" parent="vboxLeft/hboxKey9" instance=ExtResource( 2 )]
+[node name="key8" parent="vboxLeft/hboxKey9" instance=ExtResource( 2 )]
 margin_left = 43.0
 margin_right = 72.0
 
@@ -162,7 +162,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 10:"
 
-[node name="button" parent="vboxLeft/hboxKey10" instance=ExtResource( 2 )]
+[node name="key9" parent="vboxLeft/hboxKey10" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -177,7 +177,7 @@ margin_right = 75.0
 margin_bottom = 17.0
 text = "Thumb Key:"
 
-[node name="button" parent="vboxLeft/thumbKey" instance=ExtResource( 2 )]
+[node name="thumbButton" parent="vboxLeft/thumbKey" instance=ExtResource( 2 )]
 margin_left = 79.0
 margin_right = 108.0
 
@@ -197,7 +197,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 11:"
 
-[node name="button" parent="vboxMiddle/hboxKey11" instance=ExtResource( 2 )]
+[node name="key10" parent="vboxMiddle/hboxKey11" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -212,7 +212,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 12:"
 
-[node name="button" parent="vboxMiddle/hboxKey12" instance=ExtResource( 2 )]
+[node name="key11" parent="vboxMiddle/hboxKey12" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -227,7 +227,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 13:"
 
-[node name="button" parent="vboxMiddle/hboxKey13" instance=ExtResource( 2 )]
+[node name="key12" parent="vboxMiddle/hboxKey13" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -242,7 +242,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 14:"
 
-[node name="button" parent="vboxMiddle/hboxKey14" instance=ExtResource( 2 )]
+[node name="key13" parent="vboxMiddle/hboxKey14" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -257,7 +257,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 15:"
 
-[node name="button" parent="vboxMiddle/hboxKey15" instance=ExtResource( 2 )]
+[node name="key14" parent="vboxMiddle/hboxKey15" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -272,7 +272,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 16:"
 
-[node name="button" parent="vboxMiddle/hboxKey16" instance=ExtResource( 2 )]
+[node name="key15" parent="vboxMiddle/hboxKey16" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -287,7 +287,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 17:"
 
-[node name="button" parent="vboxMiddle/hboxKey17" instance=ExtResource( 2 )]
+[node name="key16" parent="vboxMiddle/hboxKey17" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -302,7 +302,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 18:"
 
-[node name="button" parent="vboxMiddle/hboxKey18" instance=ExtResource( 2 )]
+[node name="key17" parent="vboxMiddle/hboxKey18" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -317,7 +317,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 19:"
 
-[node name="button" parent="vboxMiddle/hboxKey19" instance=ExtResource( 2 )]
+[node name="key18" parent="vboxMiddle/hboxKey19" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -332,7 +332,7 @@ margin_right = 47.0
 margin_bottom = 17.0
 text = "Key 20:"
 
-[node name="button" parent="vboxMiddle/hboxKey20" instance=ExtResource( 2 )]
+[node name="key19" parent="vboxMiddle/hboxKey20" instance=ExtResource( 2 )]
 margin_left = 51.0
 margin_right = 80.0
 
@@ -347,7 +347,7 @@ margin_right = 99.0
 margin_bottom = 17.0
 text = "Joystick Button:"
 
-[node name="button" parent="vboxMiddle/joystickButton" instance=ExtResource( 2 )]
+[node name="joystickButton" parent="vboxMiddle/joystickButton" instance=ExtResource( 2 )]
 margin_left = 103.0
 margin_right = 132.0
 
@@ -367,7 +367,7 @@ margin_right = 115.0
 margin_bottom = 27.0
 text = "KB Mode Enabled:"
 
-[node name="button" type="CheckButton" parent="vboxRight/kbModeEnabled"]
+[node name="isKbModeEnabled" type="CheckButton" parent="vboxRight/kbModeEnabled"]
 margin_left = 119.0
 margin_right = 195.0
 margin_bottom = 40.0
@@ -383,7 +383,7 @@ margin_right = 83.0
 margin_bottom = 17.0
 text = "KB Mode Up:"
 
-[node name="button" parent="vboxRight/kbModeUp" instance=ExtResource( 2 )]
+[node name="kbup" parent="vboxRight/kbModeUp" instance=ExtResource( 2 )]
 margin_left = 87.0
 margin_right = 116.0
 
@@ -398,7 +398,7 @@ margin_right = 101.0
 margin_bottom = 17.0
 text = "KB Mode Down:"
 
-[node name="button" parent="vboxRight/kbModeDown" instance=ExtResource( 2 )]
+[node name="kbdown" parent="vboxRight/kbModeDown" instance=ExtResource( 2 )]
 margin_left = 105.0
 margin_right = 134.0
 
@@ -413,7 +413,7 @@ margin_right = 89.0
 margin_bottom = 17.0
 text = "KB Mode Left:"
 
-[node name="button" parent="vboxRight/kbModeLeft" instance=ExtResource( 2 )]
+[node name="kbleft" parent="vboxRight/kbModeLeft" instance=ExtResource( 2 )]
 margin_left = 93.0
 margin_right = 122.0
 
@@ -428,7 +428,7 @@ margin_right = 97.0
 margin_bottom = 17.0
 text = "KB Mode Right:"
 
-[node name="button" parent="vboxRight/kbModeRight" instance=ExtResource( 2 )]
+[node name="kbright" parent="vboxRight/kbModeRight" instance=ExtResource( 2 )]
 margin_left = 101.0
 margin_right = 130.0
 
@@ -443,7 +443,7 @@ margin_right = 63.0
 margin_bottom = 17.0
 text = "DPAD Up:"
 
-[node name="button" parent="vboxRight/dpadUp" instance=ExtResource( 2 )]
+[node name="dpadup" parent="vboxRight/dpadUp" instance=ExtResource( 2 )]
 margin_left = 67.0
 margin_right = 96.0
 
@@ -458,7 +458,7 @@ margin_right = 81.0
 margin_bottom = 17.0
 text = "DPAD Down:"
 
-[node name="button" parent="vboxRight/dpadDown" instance=ExtResource( 2 )]
+[node name="dpaddown" parent="vboxRight/dpadDown" instance=ExtResource( 2 )]
 margin_left = 85.0
 margin_right = 114.0
 
@@ -473,7 +473,7 @@ margin_right = 69.0
 margin_bottom = 17.0
 text = "DPAD Left:"
 
-[node name="button" parent="vboxRight/dpadLeft" instance=ExtResource( 2 )]
+[node name="dpadleft" parent="vboxRight/dpadLeft" instance=ExtResource( 2 )]
 margin_left = 73.0
 margin_right = 102.0
 
@@ -488,7 +488,7 @@ margin_right = 77.0
 margin_bottom = 17.0
 text = "DPAD Right:"
 
-[node name="button" parent="vboxRight/dpadRight" instance=ExtResource( 2 )]
+[node name="dpadright" parent="vboxRight/dpadRight" instance=ExtResource( 2 )]
 margin_left = 81.0
 margin_right = 110.0
 
@@ -503,7 +503,7 @@ margin_right = 59.0
 margin_bottom = 17.0
 text = "RGB LED:"
 
-[node name="button" type="ColorPickerButton" parent="vboxRight/rgb"]
+[node name="rgb" type="ColorPickerButton" parent="vboxRight/rgb"]
 margin_left = 63.0
 margin_right = 93.0
 margin_bottom = 20.0

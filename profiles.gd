@@ -7,6 +7,7 @@ signal profileSelected(profile)
 var profiles: Dictionary
 var previousActiveProfile: int
 var profileToDelete: int
+var profileToRename: int
 
 onready var btnActiveProfile: OptionButton = $hboxActiveProfile/btnActiveProfile
 onready var listProfiles: ItemList = $listProfiles
@@ -137,3 +138,39 @@ func deleteProfile():
 				Dialogs.showAlertDialog("Profile successfully removed.", "Success!")
 			else:
 				Dialogs.showAlertDialog("Profile removal failed on the device.", "Can't remove profile")
+
+func _on_btnRename_pressed():
+	var selectedItemIndexes: PoolIntArray = self.listProfiles.get_selected_items()
+	
+	if selectedItemIndexes.size() > 0:
+		if selectedItemIndexes[0] != self.btnActiveProfile.selected:
+			self.profileToRename = selectedItemIndexes[0]
+			Dialogs.showTextInputDialog("Profile name...", self, "renameProfile")
+		else:
+			Dialogs.showAlertDialog("You can't rename the active profile.", "Can't rename profile")
+
+func renameProfile(newProfileName: String) -> void:
+	if newProfileName:
+		var profileNameExists: bool = false
+		
+		for index in range(self.listProfiles.get_item_count()):
+			if newProfileName == self.listProfiles.get_item_text(index):
+				profileNameExists = true
+				break
+		
+		if profileNameExists == false:
+			var oldProfileName: String = self.listProfiles.get_item_text(self.profileToRename)
+			var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+				"renameProfile", {"newProfileName": newProfileName, "oldProfileName": oldProfileName})
+			
+			if response != null and "renameProfile" in response:
+				if response["renameProfile"]:
+					self.listProfiles.set_item_text(self.profileToRename, newProfileName)
+					self.btnActiveProfile.set_item_text(self.profileToRename, newProfileName)
+					Dialogs.showAlertDialog("Profile successfully renamed.", "Success!")
+				else:
+					Dialogs.showAlertDialog("Profile creation failed on the device.", "Can't create new profile")
+		else:
+			Dialogs.showAlertDialog("Profile with that name already exists.", "Can't rename profile")
+	
+	self.profileToRename = -1

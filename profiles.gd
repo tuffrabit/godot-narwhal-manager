@@ -3,6 +3,7 @@ extends VBoxContainer
 class_name Profiles
 
 signal profileSelected(profile)
+signal profileRenamed(oldProfileName, newProfileName)
 
 var profiles: Dictionary
 var previousActiveProfile: int
@@ -167,6 +168,7 @@ func renameProfile(newProfileName: String) -> void:
 				if response["renameProfile"]:
 					self.listProfiles.set_item_text(self.profileToRename, newProfileName)
 					self.btnActiveProfile.set_item_text(self.profileToRename, newProfileName)
+					self.emit_signal("profileRenamed", oldProfileName, newProfileName)
 					Dialogs.showAlertDialog("Profile successfully renamed.", "Success!")
 				else:
 					Dialogs.showAlertDialog("Profile creation failed on the device.", "Can't create new profile")

@@ -19,6 +19,7 @@ func _ready() -> void:
 	self.tabs.set_tab_title(0, "Profiles")
 	self.tabs.set_tab_title(1, "Advanced")
 	self.profiles.connect("profileSelected", self, "profileSelected")
+	self.profiles.connect("profileRenamed", self, "profileRenamed")
 	
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse("getGlobalSettings")
 	
@@ -45,4 +46,13 @@ func profileSelected(profile: Dictionary) -> void:
 		child.queue_free()
 	
 	self.pnlProfile.add_child(profileInstance)
+	profileInstance.setProfileName(profile['name'])
 	profileInstance.setProfileData(profile)
+
+func profileRenamed(oldProfileName: String, newProfileName: String) -> void:
+	if oldProfileName and newProfileName:
+		
+		for child in self.pnlProfile.get_children():
+			if child.getProfileName() == oldProfileName:
+				child.setProfileName(newProfileName)
+				break

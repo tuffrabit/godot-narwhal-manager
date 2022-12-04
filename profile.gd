@@ -2,6 +2,8 @@ extends HBoxContainer
 
 class_name Profile
 
+var profileName: String = ""
+
 onready var vboxLeft: VBoxContainer = $vboxLeft
 onready var vboxMiddle: VBoxContainer = $vboxMiddle
 onready var vboxRight: VBoxContainer = $vboxRight
@@ -37,6 +39,12 @@ onready var btnDpadDown: InputOptionButton = $vboxRight/dpadDown/dpaddown
 onready var btnDpadLeft: InputOptionButton = $vboxRight/dpadLeft/dpadleft
 onready var btnDpadRight: InputOptionButton = $vboxRight/dpadRight/dpadright
 onready var btnRgb: ColorPickerButton = $vboxRight/rgb/rgb
+
+func getProfileName() -> String:
+	return self.profileName
+
+func setProfileName(name: String) -> void:
+	self.profileName = name
 
 func setProfileData(profile: Dictionary) -> void:
 	self.btnKey1.select(Inputs.getIndexFromName(profile["keys"][0]))
@@ -91,21 +99,21 @@ func setupInputBindingsForChildren(parent: Container) -> void:
 
 func optionButtonSelectionChanged(selectionIndex: int, nodeName: String) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setProfileValue", {"name": nodeName, "value": Inputs.getInputs()[selectionIndex]})
+			"setProfileValue", {"profile": self.profileName, "valueName": nodeName, "value": Inputs.getInputs()[selectionIndex]})
 	
 	if response and "setProfileValue" in response:
 		pass
 
 func checkButtonToggled(newState: bool, nodeName: String) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setProfileValue", {"name": nodeName, "value": newState})
+			"setProfileValue", {"profile": self.profileName, "valueName": nodeName, "value": newState})
 	
 	if response and "setProfileValue" in response:
 		pass
 
 func colorPickerButtonColorChanged(newColor: Color, nodeName: String) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setProfileValue", {"name": nodeName, "value": newColor.to_html(false)})
+			"setProfileValue", {"profile": self.profileName, "valueName": nodeName, "value": newColor.to_html(false)})
 	
 	if response and "setProfileValue" in response:
 		pass

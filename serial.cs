@@ -6,6 +6,17 @@ public class serial : Node
 {
 	protected SerialPort port = null;
 	
+	public bool isGood()
+	{
+		bool good = false;
+		
+		if (this.port != null && this.port.IsOpen) {
+			good = true;
+		}
+		
+		return good;
+	}
+	
 	public string[] getAvailablePortNames()
 	{
 		return SerialPort.GetPortNames();
@@ -40,9 +51,13 @@ public class serial : Node
 	
 	public void writeLine(string message)
 	{
-		if (this.port != null && this.port.IsOpen)
-		{
-			this.port.WriteLine(message);
+		try {
+			if (this.port != null && this.port.IsOpen)
+			{
+				this.port.WriteLine(message);
+			}
+		}
+		catch {
 		}
 	}
 	
@@ -50,12 +65,16 @@ public class serial : Node
 	{
 		string line = "";
 		
-		if (this.port != null && this.port.IsOpen)
-		{
-			try {
-				line = this.port.ReadLine();
+		try {
+			if (this.port != null && this.port.IsOpen)
+			{
+				try {
+					line = this.port.ReadLine();
+				}
+				catch (System.TimeoutException e) { }
 			}
-			catch (System.TimeoutException e) { }
+		}
+		catch {
 		}
 		
 		return line;

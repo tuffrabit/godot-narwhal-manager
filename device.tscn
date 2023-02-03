@@ -50,11 +50,11 @@ split_offset = 100
 [node name="profiles" parent="tabs/hsplitMain" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 209.0
+margin_right = 222.0
 margin_bottom = 480.0
 
 [node name="pnlProfile" type="Panel" parent="tabs/hsplitMain"]
-margin_left = 221.0
+margin_left = 234.0
 margin_right = 952.0
 margin_bottom = 480.0
 
@@ -199,3 +199,6 @@ margin_left = 152.0
 margin_right = 227.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 75, 0 )
+
+[connection signal="pressed" from="vboxGlobal/hboxButtons/btnSave" to="." method="_on_btnSave_pressed"]
+[connection signal="pressed" from="vboxGlobal/hboxButtons/btnDisconnect" to="." method="_on_btnDisconnect_pressed"]

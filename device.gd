@@ -2,6 +2,8 @@ extends VBoxContainer
 
 class_name Device
 
+signal disconnectClick;
+
 var profileScene: PackedScene = preload("res://profile.tscn")
 
 onready var tabs: TabContainer = $tabs
@@ -56,3 +58,44 @@ func profileRenamed(oldProfileName: String, newProfileName: String) -> void:
 			if child.getProfileName() == oldProfileName:
 				child.setProfileName(newProfileName)
 				break
+
+func _on_btnDisconnect_pressed() -> void:
+	self.emit_signal("disconnectClick")
+
+func _on_btnSave_pressed() -> void:
+	Dialogs.showConfirmationDialog("Are you sure? This will save all configurations to the device, and it will self-reboot.", self, "saveEverything")
+
+func getCorrectDriveName() -> String:
+	var driveName: String = ""
+	var dir: Directory = Directory.new()
+	var driveCount: int = dir.get_drive_count()
+	
+	for driveIndex in driveCount:
+		var drive: String = dir.get_drive(driveIndex)
+		var checkFilename: String = drive + "\\iamindeedatuffpad"
+		
+		if dir.file_exists(checkFilename):
+			driveName = drive
+			break
+	
+	
+	return driveName
+
+func saveEverything() -> void:
+	var drive: String = self.getCorrectDriveName()
+	
+	if drive != "":
+		var response: Dictionary = SerialHelper.sendCommandAndGetResponse("getSaveData")
+		
+		if response != null and "getSaveData" in response:
+			var data: String = response["getSaveData"]
+			var file: File = File.new()
+			var configFilename: String = drive + "\\config.json"
+			
+			file.open(configFilename, File.WRITE)
+			file.store_string(data)
+			file.close()
+		else:
+			Dialogs.showAlertDialog("Could not retrieve valid data to save from TuFFpad.", "Can't save")
+	else:
+		Dialogs.showAlertDialog("Could not locate a TuFFpad config file location.", "Can't save")

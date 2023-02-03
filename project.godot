@@ -50,7 +50,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="godot-narwhal-manager"
+config/name="TuFFpad Manager"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 

@@ -7,9 +7,6 @@ signal portConnected;
 onready var lblError: Label = $vboxMain/lblError
 onready var btnRetry: Button = $vboxMain/btnRetry
 
-func _ready():
-	self.getPortConnection()
-
 func getPortConnection() -> void:
 	self.hideFields()
 	var isConnected = SerialHelper.doHandshake()

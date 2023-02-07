@@ -9,10 +9,10 @@ var profileScene: PackedScene = preload("res://profile.tscn")
 onready var tabs: TabContainer = $tabs
 onready var profiles: Profiles = $tabs/hsplitMain/profiles
 onready var pnlProfile: Panel = $tabs/hsplitMain/pnlProfile
-onready var stickBoundLowX: LineEdit = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX/edit
-onready var stickBoundHighX: LineEdit = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX/edit
-onready var stickBoundLowY: LineEdit = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY/edit
-onready var stickBoundHighY: LineEdit = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY/edit
+onready var stickBoundLowX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX/edit
+onready var stickBoundHighX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX/edit
+onready var stickBoundLowY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY/edit
+onready var stickBoundHighY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY/edit
 onready var deadzoneSize: LineEdit = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSize/edit
 onready var kbModeStartOffsetX: LineEdit = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX/edit
 onready var kbModeStartOffsetY: LineEdit = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY/edit
@@ -32,13 +32,18 @@ func _ready() -> void:
 		"stickBoundaries" in globalSettings and
 		"deadzoneSize" in globalSettings and
 		"kbModeOffsets" in globalSettings):
-			self.stickBoundLowX.text = str(globalSettings["stickBoundaries"]["lowX"])
-			self.stickBoundHighX.text = str(globalSettings["stickBoundaries"]["highX"])
-			self.stickBoundLowY.text = str(globalSettings["stickBoundaries"]["lowY"])
-			self.stickBoundHighY.text = str(globalSettings["stickBoundaries"]["highY"])
+			self.stickBoundLowX.value = int(globalSettings["stickBoundaries"]["lowX"])
+			self.stickBoundHighX.value = int(globalSettings["stickBoundaries"]["highX"])
+			self.stickBoundLowY.value = int(globalSettings["stickBoundaries"]["lowY"])
+			self.stickBoundHighY.value = int(globalSettings["stickBoundaries"]["highY"])
 			self.deadzoneSize.text = str(globalSettings["deadzoneSize"])
 			self.kbModeStartOffsetX.text = str(globalSettings["kbModeOffsets"]["x"])
 			self.kbModeStartOffsetY.text = str(globalSettings["kbModeOffsets"]["y"])
+		
+		self.stickBoundLowX.connect("value_changed", self, "stickBoundLowXValueChanged")
+		self.stickBoundHighX.connect("value_changed", self, "stickBoundHighXValueChanged")
+		self.stickBoundLowY.connect("value_changed", self, "stickBoundLowYValueChanged")
+		self.stickBoundHighY.connect("value_changed", self, "stickBoundHighYValueChanged")
 
 func profileSelected(profile: Dictionary) -> void:
 	var profileInstance: Profile = self.profileScene.instance()
@@ -78,11 +83,24 @@ func getCorrectDriveName() -> String:
 			driveName = drive
 			break
 	
+	return driveName
+
+func getCorrectDriveName2() -> String:
+	var driveName: String = ""
+	var dir: Directory = Directory.new()
+	var possibleDrives = ["A:", "B:", "C:", "D:", "E:", "F:", "G:", "H:", "I:", "J:", "K:", "L:", "M:", "N:", "O:", "P:", "Q:", "R:", "S:", "T:", "U:", "V:", "W:", "X:", "Y:", "Z:"]
+	
+	for possibleDrive in possibleDrives:
+		var checkFilename: String = possibleDrive + "\\iamindeedatuffpad"
+		
+		if dir.file_exists(checkFilename):
+			driveName = possibleDrive
+			break
 	
 	return driveName
 
 func saveEverything() -> void:
-	var drive: String = self.getCorrectDriveName()
+	var drive: String = self.getCorrectDriveName2()
 	
 	if drive != "":
 		var response: Dictionary = SerialHelper.sendCommandAndGetResponse("getSaveData")
@@ -99,3 +117,31 @@ func saveEverything() -> void:
 			Dialogs.showAlertDialog("Could not retrieve valid data to save from TuFFpad.", "Can't save")
 	else:
 		Dialogs.showAlertDialog("Could not locate a TuFFpad config file location.", "Can't save")
+
+func stickBoundLowXValueChanged(value: float) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setStickXLow", int(value))
+	
+	if response and "setStickXLow" in response:
+		pass
+
+func stickBoundHighXValueChanged(value: float) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setStickXHigh", int(value))
+	
+	if response and "setStickXHigh" in response:
+		pass
+
+func stickBoundLowYValueChanged(value: float) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setStickYLow", int(value))
+	
+	if response and "setStickYLow" in response:
+		pass
+
+func stickBoundHighYValueChanged(value: float) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setStickYHigh", int(value))
+	
+	if response and "setStickYHigh" in response:
+		pass

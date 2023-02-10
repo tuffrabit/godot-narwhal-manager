@@ -13,9 +13,9 @@ onready var stickBoundLowX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/s
 onready var stickBoundHighX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX/edit
 onready var stickBoundLowY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY/edit
 onready var stickBoundHighY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY/edit
-onready var deadzoneSize: LineEdit = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSize/edit
-onready var kbModeStartOffsetX: LineEdit = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX/edit
-onready var kbModeStartOffsetY: LineEdit = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY/edit
+onready var deadzoneSize: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize/edit
+onready var kbModeStartOffsetX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX/edit
+onready var kbModeStartOffsetY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY/edit
 
 func _ready() -> void:
 	self.tabs.set_tab_title(0, "Profiles")
@@ -36,14 +36,17 @@ func _ready() -> void:
 			self.stickBoundHighX.value = int(globalSettings["stickBoundaries"]["highX"])
 			self.stickBoundLowY.value = int(globalSettings["stickBoundaries"]["lowY"])
 			self.stickBoundHighY.value = int(globalSettings["stickBoundaries"]["highY"])
-			self.deadzoneSize.text = str(globalSettings["deadzoneSize"])
-			self.kbModeStartOffsetX.text = str(globalSettings["kbModeOffsets"]["x"])
-			self.kbModeStartOffsetY.text = str(globalSettings["kbModeOffsets"]["y"])
+			self.deadzoneSize.value = int(globalSettings["deadzoneSize"])
+			self.kbModeStartOffsetX.value = int(globalSettings["kbModeOffsets"]["x"])
+			self.kbModeStartOffsetY.value = int(globalSettings["kbModeOffsets"]["y"])
 		
 		self.stickBoundLowX.connect("value_changed", self, "stickBoundLowXValueChanged")
 		self.stickBoundHighX.connect("value_changed", self, "stickBoundHighXValueChanged")
 		self.stickBoundLowY.connect("value_changed", self, "stickBoundLowYValueChanged")
 		self.stickBoundHighY.connect("value_changed", self, "stickBoundHighYValueChanged")
+		self.deadzoneSize.connect("value_changed", self, "deadzoneSizeValueChanged")
+		self.kbModeStartOffsetX.connect("value_changed", self, "kbModeStartOffsetXValueChanged")
+		self.kbModeStartOffsetY.connect("value_changed", self, "kbModeStartOffsetYValueChanged")
 
 func profileSelected(profile: Dictionary) -> void:
 	var profileInstance: Profile = self.profileScene.instance()
@@ -83,6 +86,7 @@ func getCorrectDriveName() -> String:
 			driveName = drive
 			break
 	
+	print("Good drivename: " + driveName)
 	return driveName
 
 func getCorrectDriveName2() -> String:
@@ -144,4 +148,25 @@ func stickBoundHighYValueChanged(value: float) -> void:
 			"setStickYHigh", int(value))
 	
 	if response and "setStickYHigh" in response:
+		pass
+
+func deadzoneSizeValueChanged(value: float) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setDeadzone", int(value))
+	
+	if response and "setDeadzone" in response:
+		pass
+
+func kbModeStartOffsetXValueChanged(value: float) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setKbModeXStartOffset", int(value))
+	
+	if response and "setKbModeXStartOffset" in response:
+		pass
+
+func kbModeStartOffsetYValueChanged(value: float) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setKbModeYStartOffset", int(value))
+	
+	if response and "setKbModeYStartOffset" in response:
 		pass

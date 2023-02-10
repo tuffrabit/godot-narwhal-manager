@@ -157,21 +157,33 @@ margin_right = 952.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 
-[node name="deadzoneSize" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
+[node name="deadzoneSizeCont" type="VBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="deadzoneSize" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont"]
 margin_right = 474.0
 margin_bottom = 24.0
 
-[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSize"]
+[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize"]
 margin_top = 5.0
 margin_right = 98.0
 margin_bottom = 19.0
 text = "Deadzone Size:"
 
-[node name="edit" type="LineEdit" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSize"]
-margin_left = 102.0
-margin_right = 177.0
+[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize"]
+margin_left = -478.0
+margin_right = -404.0
 margin_bottom = 24.0
-rect_min_size = Vector2( 75, 0 )
+min_value = 1.0
+max_value = 65535.0
+value = 1.0
+
+[node name="deadzoneSizeWarning" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Note: Deadzone is calculated only at device boot. Changes to this field will not take effect until after save and restart."
+autowrap = true
 
 [node name="kbModeStartOffsetX" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
 margin_top = 28.0
@@ -184,11 +196,14 @@ margin_right = 149.0
 margin_bottom = 19.0
 text = "KB Mode Start Offset X:"
 
-[node name="edit" type="LineEdit" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX"]
-margin_left = 153.0
-margin_right = 228.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 75, 0 )
+[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX"]
+margin_left = -478.0
+margin_top = -28.0
+margin_right = -404.0
+margin_bottom = -4.0
+min_value = 1.0
+max_value = 127.0
+value = 1.0
 
 [node name="kbModeStartOffsetY" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
 margin_top = 56.0
@@ -201,11 +216,14 @@ margin_right = 148.0
 margin_bottom = 19.0
 text = "KB Mode Start Offset Y:"
 
-[node name="edit" type="LineEdit" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY"]
-margin_left = 152.0
-margin_right = 227.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 75, 0 )
+[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY"]
+margin_left = -478.0
+margin_top = -56.0
+margin_right = -404.0
+margin_bottom = -32.0
+min_value = 1.0
+max_value = 127.0
+value = 1.0
 
 [connection signal="pressed" from="vboxGlobal/hboxButtons/btnSave" to="." method="_on_btnSave_pressed"]
 [connection signal="pressed" from="vboxGlobal/hboxButtons/btnDisconnect" to="." method="_on_btnDisconnect_pressed"]

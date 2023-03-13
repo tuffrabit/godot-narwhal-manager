@@ -71,7 +71,8 @@ func _on_btnDisconnect_pressed() -> void:
 	self.emit_signal("disconnectClick")
 
 func _on_btnSave_pressed() -> void:
-	Dialogs.showConfirmationDialog("Are you sure? This will save all configurations to the device, and it will self-reboot.", self, "saveEverything")
+	Dialogs.showConfirmationDialog("Are you sure? This will save all configurations to the device.", self, "saveEverything2")
+	#Dialogs.showConfirmationDialog("Are you sure? This will save all configurations to the device, and it will self-reboot.", self, "saveEverything")
 
 func getCorrectDriveName() -> String:
 	var driveName: String = ""
@@ -121,6 +122,14 @@ func saveEverything() -> void:
 			Dialogs.showAlertDialog("Could not retrieve valid data to save from TuFFpad.", "Can't save")
 	else:
 		Dialogs.showAlertDialog("Could not locate a TuFFpad config file location.", "Can't save")
+
+func saveEverything2() -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse("save")
+	
+	if response != null and "save" in response:
+		pass
+	else:
+		Dialogs.showAlertDialog("Config write on device failed.", "Can't save")
 
 func stickBoundLowXValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(

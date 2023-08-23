@@ -88,7 +88,8 @@ margin_bottom = 19.0
 text = "Stick Boundary Low X:"
 
 [node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX"]
-margin_right = 74.0
+margin_left = 143.0
+margin_right = 217.0
 margin_bottom = 24.0
 min_value = 1.0
 max_value = 65535.0
@@ -106,9 +107,9 @@ margin_bottom = 19.0
 text = "Stick Boundary High X:"
 
 [node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX"]
-margin_top = -28.0
-margin_right = 74.0
-margin_bottom = -4.0
+margin_left = 147.0
+margin_right = 221.0
+margin_bottom = 24.0
 min_value = 1.0
 max_value = 65535.0
 value = 1.0
@@ -125,9 +126,9 @@ margin_bottom = 19.0
 text = "Stick Boundary Low Y:"
 
 [node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY"]
-margin_top = -56.0
-margin_right = 74.0
-margin_bottom = -32.0
+margin_left = 142.0
+margin_right = 216.0
+margin_bottom = 24.0
 min_value = 1.0
 max_value = 65535.0
 value = 1.0
@@ -144,9 +145,9 @@ margin_bottom = 19.0
 text = "Stick Boundary High Y:"
 
 [node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY"]
-margin_top = -84.0
-margin_right = 74.0
-margin_bottom = -60.0
+margin_left = 146.0
+margin_right = 220.0
+margin_bottom = 24.0
 min_value = 1.0
 max_value = 65535.0
 value = 1.0
@@ -158,8 +159,8 @@ margin_bottom = 150.0
 size_flags_horizontal = 3
 
 [node name="deadzoneSizeCont" type="VBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 474.0
+margin_bottom = 59.0
 
 [node name="deadzoneSize" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont"]
 margin_right = 474.0
@@ -172,23 +173,24 @@ margin_bottom = 19.0
 text = "Deadzone Size:"
 
 [node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize"]
-margin_left = -478.0
-margin_right = -404.0
+margin_left = 102.0
+margin_right = 176.0
 margin_bottom = 24.0
 min_value = 1.0
 max_value = 65535.0
 value = 1.0
 
 [node name="deadzoneSizeWarning" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_top = 28.0
+margin_right = 474.0
+margin_bottom = 59.0
 text = "Note: Deadzone is calculated only at device boot. Changes to this field will not take effect until after save and restart."
 autowrap = true
 
 [node name="kbModeStartOffsetX" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
-margin_top = 28.0
+margin_top = 63.0
 margin_right = 474.0
-margin_bottom = 52.0
+margin_bottom = 87.0
 
 [node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX"]
 margin_top = 5.0
@@ -197,18 +199,17 @@ margin_bottom = 19.0
 text = "KB Mode Start Offset X:"
 
 [node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX"]
-margin_left = -478.0
-margin_top = -28.0
-margin_right = -404.0
-margin_bottom = -4.0
+margin_left = 153.0
+margin_right = 227.0
+margin_bottom = 24.0
 min_value = 1.0
 max_value = 127.0
 value = 1.0
 
 [node name="kbModeStartOffsetY" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
-margin_top = 56.0
+margin_top = 91.0
 margin_right = 474.0
-margin_bottom = 80.0
+margin_bottom = 115.0
 
 [node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY"]
 margin_top = 5.0
@@ -217,13 +218,88 @@ margin_bottom = 19.0
 text = "KB Mode Start Offset Y:"
 
 [node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY"]
-margin_left = -478.0
-margin_top = -56.0
-margin_right = -404.0
-margin_bottom = -32.0
+margin_left = 152.0
+margin_right = 226.0
+margin_bottom = 24.0
 min_value = 1.0
 max_value = 127.0
 value = 1.0
+
+[node name="vboxStickAxesOrientation" type="VBoxContainer" parent="tabs/vboxAdvanced"]
+margin_top = 154.0
+margin_right = 952.0
+margin_bottom = 220.0
+
+[node name="lblStickAxesOrientation" type="Label" parent="tabs/vboxAdvanced/vboxStickAxesOrientation"]
+margin_right = 952.0
+margin_bottom = 14.0
+text = "Stick Axes Orientation"
+align = 1
+
+[node name="hboxAxes" type="HBoxContainer" parent="tabs/vboxAdvanced/vboxStickAxesOrientation"]
+margin_top = 18.0
+margin_right = 952.0
+margin_bottom = 66.0
+custom_constants/separation = 30
+alignment = 1
+
+[node name="xAxis" type="VBoxContainer" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes"]
+margin_left = 373.0
+margin_right = 461.0
+margin_bottom = 48.0
+
+[node name="axis" type="HBoxContainer" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis"]
+margin_right = 88.0
+margin_bottom = 20.0
+
+[node name="label" type="Label" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/axis"]
+margin_top = 3.0
+margin_right = 47.0
+margin_bottom = 17.0
+text = "X Axis: "
+
+[node name="axis" type="OptionButton" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/axis"]
+margin_left = 51.0
+margin_right = 88.0
+margin_bottom = 20.0
+text = "0"
+items = [ "0", null, false, 0, null, "1", null, false, 1, null ]
+selected = 0
+
+[node name="chkReverse" type="CheckBox" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis"]
+margin_top = 24.0
+margin_right = 88.0
+margin_bottom = 48.0
+text = "Reverse"
+
+[node name="yAxis" type="VBoxContainer" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes"]
+margin_left = 491.0
+margin_right = 578.0
+margin_bottom = 48.0
+
+[node name="axis" type="HBoxContainer" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis"]
+margin_right = 87.0
+margin_bottom = 20.0
+
+[node name="label" type="Label" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/axis"]
+margin_top = 3.0
+margin_right = 46.0
+margin_bottom = 17.0
+text = "Y Axis: "
+
+[node name="axis" type="OptionButton" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/axis"]
+margin_left = 50.0
+margin_right = 87.0
+margin_bottom = 20.0
+text = "0"
+items = [ "0", null, false, 0, null, "1", null, false, 1, null ]
+selected = 0
+
+[node name="chkReverse" type="CheckBox" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis"]
+margin_top = 24.0
+margin_right = 87.0
+margin_bottom = 48.0
+text = "Reverse"
 
 [connection signal="pressed" from="vboxGlobal/hboxButtons/btnSave" to="." method="_on_btnSave_pressed"]
 [connection signal="pressed" from="vboxGlobal/hboxButtons/btnDisconnect" to="." method="_on_btnDisconnect_pressed"]

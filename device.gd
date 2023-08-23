@@ -16,6 +16,10 @@ onready var stickBoundHighY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/
 onready var deadzoneSize: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize/edit
 onready var kbModeStartOffsetX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX/edit
 onready var kbModeStartOffsetY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY/edit
+onready var stickXAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/axis/axis
+onready var stickXAxisReverse: CheckBox = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/chkReverse
+onready var stickYAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/axis/axis
+onready var stickYAxisReverse: CheckBox = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/chkReverse
 
 func _ready() -> void:
 	self.tabs.set_tab_title(0, "Profiles")
@@ -39,6 +43,10 @@ func _ready() -> void:
 			self.deadzoneSize.value = int(globalSettings["deadzoneSize"])
 			self.kbModeStartOffsetX.value = int(globalSettings["kbModeOffsets"]["x"])
 			self.kbModeStartOffsetY.value = int(globalSettings["kbModeOffsets"]["y"])
+			self.stickXAxis.select(int(globalSettings["stickAxesOrientation"]["x"]["axis"]))
+			self.stickXAxisReverse.pressed = bool(globalSettings["stickAxesOrientation"]["x"]["reverse"])
+			self.stickYAxis.select(int(globalSettings["stickAxesOrientation"]["y"]["axis"]))
+			self.stickYAxisReverse.pressed = bool(globalSettings["stickAxesOrientation"]["y"]["reverse"])
 		
 		self.stickBoundLowX.connect("value_changed", self, "stickBoundLowXValueChanged")
 		self.stickBoundHighX.connect("value_changed", self, "stickBoundHighXValueChanged")
@@ -47,6 +55,10 @@ func _ready() -> void:
 		self.deadzoneSize.connect("value_changed", self, "deadzoneSizeValueChanged")
 		self.kbModeStartOffsetX.connect("value_changed", self, "kbModeStartOffsetXValueChanged")
 		self.kbModeStartOffsetY.connect("value_changed", self, "kbModeStartOffsetYValueChanged")
+		self.stickXAxis.connect("item_selected", self, "stickXAxisItemSelected")
+		self.stickXAxisReverse.connect("toggled", self, "stickXAxisReverseToggled")
+		self.stickYAxis.connect("item_selected", self, "stickYAxisItemSelected")
+		self.stickYAxisReverse.connect("toggled", self, "stickYAxisReverseToggled")
 
 func profileSelected(profile: Dictionary) -> void:
 	var profileInstance: Profile = self.profileScene.instance()
@@ -178,4 +190,32 @@ func kbModeStartOffsetYValueChanged(value: float) -> void:
 			"setKbModeYStartOffset", int(value))
 	
 	if response and "setKbModeYStartOffset" in response:
+		pass
+
+func stickXAxisItemSelected(value: int) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setStickXOrientation", {"axis": value, "reverse": self.stickXAxisReverse.pressed})
+	
+	if response and "setStickXOrientation" in response:
+		pass
+
+func stickXAxisReverseToggled(value: bool) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setStickXOrientation", {"axis": self.stickXAxis.selected, "reverse": value})
+	
+	if response and "setStickXOrientation" in response:
+		pass
+
+func stickYAxisItemSelected(value: int) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setStickYOrientation", {"axis": value, "reverse": self.stickYAxisReverse.pressed})
+	
+	if response and "setStickYOrientation" in response:
+		pass
+
+func stickYAxisReverseToggled(value: bool) -> void:
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setStickYOrientation", {"axis": self.stickYAxis.selected, "reverse": value})
+	
+	if response and "setStickYOrientation" in response:
 		pass

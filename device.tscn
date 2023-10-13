@@ -95,6 +95,15 @@ min_value = 1.0
 max_value = 65535.0
 value = 1.0
 
+[node name="slider" type="HSlider" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX"]
+margin_left = 221.0
+margin_right = 474.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 65535.0
+value = 1.0
+
 [node name="stickBoundHighX" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft"]
 margin_top = 28.0
 margin_right = 474.0
@@ -110,6 +119,15 @@ text = "Stick Boundary High X:"
 margin_left = 147.0
 margin_right = 221.0
 margin_bottom = 24.0
+min_value = 1.0
+max_value = 65535.0
+value = 1.0
+
+[node name="slider" type="HSlider" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX"]
+margin_left = 225.0
+margin_right = 474.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 65535.0
 value = 1.0
@@ -133,6 +151,15 @@ min_value = 1.0
 max_value = 65535.0
 value = 1.0
 
+[node name="slider" type="HSlider" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY"]
+margin_left = 220.0
+margin_right = 474.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 65535.0
+value = 1.0
+
 [node name="stickBoundHighY" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft"]
 margin_top = 84.0
 margin_right = 474.0
@@ -148,6 +175,15 @@ text = "Stick Boundary High Y:"
 margin_left = 146.0
 margin_right = 220.0
 margin_bottom = 24.0
+min_value = 1.0
+max_value = 65535.0
+value = 1.0
+
+[node name="slider" type="HSlider" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY"]
+margin_left = 224.0
+margin_right = 474.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 65535.0
 value = 1.0

@@ -10,9 +10,13 @@ onready var tabs: TabContainer = $tabs
 onready var profiles: Profiles = $tabs/hsplitMain/profiles
 onready var pnlProfile: Panel = $tabs/hsplitMain/pnlProfile
 onready var stickBoundLowX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX/edit
+onready var stickBoundLowXSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX/slider
 onready var stickBoundHighX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX/edit
+onready var stickBoundHighXSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX/slider
 onready var stickBoundLowY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY/edit
+onready var stickBoundLowYSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY/slider
 onready var stickBoundHighY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY/edit
+onready var stickBoundHighYSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY/slider
 onready var deadzoneSize: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize/edit
 onready var kbModeStartOffsetX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX/edit
 onready var kbModeStartOffsetY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY/edit
@@ -37,9 +41,13 @@ func _ready() -> void:
 		"deadzoneSize" in globalSettings and
 		"kbModeOffsets" in globalSettings):
 			self.stickBoundLowX.value = int(globalSettings["stickBoundaries"]["lowX"])
+			self.stickBoundLowXSlider.value = int(globalSettings["stickBoundaries"]["lowX"])
 			self.stickBoundHighX.value = int(globalSettings["stickBoundaries"]["highX"])
+			self.stickBoundHighXSlider.value = int(globalSettings["stickBoundaries"]["highX"])
 			self.stickBoundLowY.value = int(globalSettings["stickBoundaries"]["lowY"])
+			self.stickBoundLowYSlider.value = int(globalSettings["stickBoundaries"]["lowY"])
 			self.stickBoundHighY.value = int(globalSettings["stickBoundaries"]["highY"])
+			self.stickBoundHighYSlider.value = int(globalSettings["stickBoundaries"]["highY"])
 			self.deadzoneSize.value = int(globalSettings["deadzoneSize"])
 			self.kbModeStartOffsetX.value = int(globalSettings["kbModeOffsets"]["x"])
 			self.kbModeStartOffsetY.value = int(globalSettings["kbModeOffsets"]["y"])
@@ -49,9 +57,13 @@ func _ready() -> void:
 			self.stickYAxisReverse.pressed = bool(globalSettings["stickAxesOrientation"]["y"]["reverse"])
 		
 		self.stickBoundLowX.connect("value_changed", self, "stickBoundLowXValueChanged")
+		self.stickBoundLowXSlider.connect("value_changed", self, "stickBoundLowXSliderValueChanged")
 		self.stickBoundHighX.connect("value_changed", self, "stickBoundHighXValueChanged")
+		self.stickBoundHighXSlider.connect("value_changed", self, "stickBoundHighXSliderValueChanged")
 		self.stickBoundLowY.connect("value_changed", self, "stickBoundLowYValueChanged")
+		self.stickBoundLowYSlider.connect("value_changed", self, "stickBoundLowYSliderValueChanged")
 		self.stickBoundHighY.connect("value_changed", self, "stickBoundHighYValueChanged")
+		self.stickBoundHighYSlider.connect("value_changed", self, "stickBoundHighYSliderValueChanged")
 		self.deadzoneSize.connect("value_changed", self, "deadzoneSizeValueChanged")
 		self.kbModeStartOffsetX.connect("value_changed", self, "kbModeStartOffsetXValueChanged")
 		self.kbModeStartOffsetY.connect("value_changed", self, "kbModeStartOffsetYValueChanged")
@@ -148,28 +160,44 @@ func stickBoundLowXValueChanged(value: float) -> void:
 			"setStickXLow", int(value))
 	
 	if response and "setStickXLow" in response:
-		pass
+		if value != stickBoundLowXSlider.value:
+			stickBoundLowXSlider.value = value
+
+func stickBoundLowXSliderValueChanged(value: float) -> void:
+	stickBoundLowX.value = value
 
 func stickBoundHighXValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 			"setStickXHigh", int(value))
 	
 	if response and "setStickXHigh" in response:
-		pass
+		if value != stickBoundHighXSlider.value:
+			stickBoundHighXSlider.value = value
+
+func stickBoundHighXSliderValueChanged(value: float) -> void:
+	stickBoundHighX.value = value
 
 func stickBoundLowYValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 			"setStickYLow", int(value))
 	
 	if response and "setStickYLow" in response:
-		pass
+		if value != stickBoundLowYSlider.value:
+			stickBoundLowYSlider.value = value
+
+func stickBoundLowYSliderValueChanged(value: float) -> void:
+	stickBoundLowY.value = value
 
 func stickBoundHighYValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 			"setStickYHigh", int(value))
 	
 	if response and "setStickYHigh" in response:
-		pass
+		if value != stickBoundHighYSlider.value:
+			stickBoundHighYSlider.value = value
+
+func stickBoundHighYSliderValueChanged(value: float) -> void:
+	stickBoundHighY.value = value
 
 func deadzoneSizeValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(

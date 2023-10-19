@@ -18,8 +18,10 @@ onready var stickBoundLowYSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxL
 onready var stickBoundHighY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY/edit
 onready var stickBoundHighYSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY/slider
 onready var deadzoneSize: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize/edit
+onready var deadzoneSizeSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize/slider
 onready var kbModeStartOffsetX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX/edit
 onready var kbModeStartOffsetY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY/edit
+onready var kbModeYConeEnd: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeYConeEnd/edit
 onready var stickXAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/axis/axis
 onready var stickXAxisReverse: CheckBox = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/chkReverse
 onready var stickYAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/axis/axis
@@ -39,7 +41,8 @@ func _ready() -> void:
 		if (globalSettings and
 		"stickBoundaries" in globalSettings and
 		"deadzoneSize" in globalSettings and
-		"kbModeOffsets" in globalSettings):
+		"kbModeOffsets" in globalSettings and
+		"kbModeYConeEnd" in globalSettings):
 			self.stickBoundLowX.value = int(globalSettings["stickBoundaries"]["lowX"])
 			self.stickBoundLowXSlider.value = int(globalSettings["stickBoundaries"]["lowX"])
 			self.stickBoundHighX.value = int(globalSettings["stickBoundaries"]["highX"])
@@ -49,8 +52,10 @@ func _ready() -> void:
 			self.stickBoundHighY.value = int(globalSettings["stickBoundaries"]["highY"])
 			self.stickBoundHighYSlider.value = int(globalSettings["stickBoundaries"]["highY"])
 			self.deadzoneSize.value = int(globalSettings["deadzoneSize"])
+			self.deadzoneSizeSlider.value = int(globalSettings["deadzoneSize"])
 			self.kbModeStartOffsetX.value = int(globalSettings["kbModeOffsets"]["x"])
 			self.kbModeStartOffsetY.value = int(globalSettings["kbModeOffsets"]["y"])
+			self.kbModeYConeEnd.value = int(globalSettings["kbModeYConeEnd"])
 			self.stickXAxis.select(int(globalSettings["stickAxesOrientation"]["x"]["axis"]))
 			self.stickXAxisReverse.pressed = bool(globalSettings["stickAxesOrientation"]["x"]["reverse"])
 			self.stickYAxis.select(int(globalSettings["stickAxesOrientation"]["y"]["axis"]))
@@ -65,8 +70,10 @@ func _ready() -> void:
 		self.stickBoundHighY.connect("value_changed", self, "stickBoundHighYValueChanged")
 		self.stickBoundHighYSlider.connect("value_changed", self, "stickBoundHighYSliderValueChanged")
 		self.deadzoneSize.connect("value_changed", self, "deadzoneSizeValueChanged")
+		self.deadzoneSizeSlider.connect("value_changed", self, "deadzoneSizeSliderValueChanged")
 		self.kbModeStartOffsetX.connect("value_changed", self, "kbModeStartOffsetXValueChanged")
 		self.kbModeStartOffsetY.connect("value_changed", self, "kbModeStartOffsetYValueChanged")
+		self.kbModeYConeEnd.connect("value_changed", self, "kbModeYConeEndValueChanged")
 		self.stickXAxis.connect("item_selected", self, "stickXAxisItemSelected")
 		self.stickXAxisReverse.connect("toggled", self, "stickXAxisReverseToggled")
 		self.stickYAxis.connect("item_selected", self, "stickYAxisItemSelected")
@@ -204,14 +211,22 @@ func deadzoneSizeValueChanged(value: float) -> void:
 			"setDeadzone", int(value))
 	
 	if response and "setDeadzone" in response:
-		pass
+		if value != deadzoneSizeSlider.value:
+			deadzoneSizeSlider.value = value
+
+func deadzoneSizeSliderValueChanged(value: float) -> void:
+	if value != deadzoneSize.value:
+		deadzoneSize.value = value
 
 func kbModeStartOffsetXValueChanged(value: float) -> void:
-	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setKbModeXStartOffset", int(value))
-	
-	if response and "setKbModeXStartOffset" in response:
-		pass
+	if value <= kbModeYConeEnd.value:
+		var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+				"setKbModeXStartOffset", int(value))
+		
+		if response and "setKbModeXStartOffset" in response:
+			pass
+	else:
+		kbModeStartOffsetX.value = kbModeYConeEnd.value
 
 func kbModeStartOffsetYValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
@@ -219,6 +234,16 @@ func kbModeStartOffsetYValueChanged(value: float) -> void:
 	
 	if response and "setKbModeYStartOffset" in response:
 		pass
+
+func kbModeYConeEndValueChanged(value: float) -> void:
+	if value >= kbModeStartOffsetX.value:
+		var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+			"setKbModeYConeEnd", int(value))
+		
+		if response and "setKbModeYConeEnd" in response:
+			pass
+	else:
+		kbModeYConeEnd.value = kbModeStartOffsetX.value
 
 func stickXAxisItemSelected(value: int) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(

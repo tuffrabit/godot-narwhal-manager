@@ -37,6 +37,7 @@ size_flags_vertical = 3
 tab_align = 0
 
 [node name="hsplitMain" type="HSplitContainer" parent="tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -59,7 +60,6 @@ margin_right = 952.0
 margin_bottom = 480.0
 
 [node name="vboxAdvanced" type="VBoxContainer" parent="tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -196,7 +196,7 @@ size_flags_horizontal = 3
 
 [node name="deadzoneSizeCont" type="VBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
 margin_right = 474.0
-margin_bottom = 59.0
+margin_bottom = 24.0
 
 [node name="deadzoneSize" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont"]
 margin_right = 474.0
@@ -212,21 +212,21 @@ text = "Deadzone Size:"
 margin_left = 102.0
 margin_right = 176.0
 margin_bottom = 24.0
-min_value = 1.0
-max_value = 65535.0
+max_value = 32768.0
 value = 1.0
 
-[node name="deadzoneSizeWarning" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont"]
-margin_top = 28.0
+[node name="slider" type="HSlider" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize"]
+margin_left = 180.0
 margin_right = 474.0
-margin_bottom = 59.0
-text = "Note: Deadzone is calculated only at device boot. Changes to this field will not take effect until after save and restart."
-autowrap = true
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 32768.0
+value = 1.0
 
 [node name="kbModeStartOffsetX" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
-margin_top = 63.0
+margin_top = 28.0
 margin_right = 474.0
-margin_bottom = 87.0
+margin_bottom = 52.0
 
 [node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX"]
 margin_top = 5.0
@@ -243,9 +243,9 @@ max_value = 127.0
 value = 1.0
 
 [node name="kbModeStartOffsetY" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
-margin_top = 91.0
+margin_top = 56.0
 margin_right = 474.0
-margin_bottom = 115.0
+margin_bottom = 80.0
 
 [node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY"]
 margin_top = 5.0
@@ -256,6 +256,25 @@ text = "KB Mode Start Offset Y:"
 [node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY"]
 margin_left = 152.0
 margin_right = 226.0
+margin_bottom = 24.0
+min_value = 1.0
+max_value = 127.0
+value = 1.0
+
+[node name="kbModeYConeEnd" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
+margin_top = 84.0
+margin_right = 474.0
+margin_bottom = 108.0
+
+[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeYConeEnd"]
+margin_top = 5.0
+margin_right = 135.0
+margin_bottom = 19.0
+text = "KB Mode Y Cone End:"
+
+[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeYConeEnd"]
+margin_left = 139.0
+margin_right = 213.0
 margin_bottom = 24.0
 min_value = 1.0
 max_value = 127.0

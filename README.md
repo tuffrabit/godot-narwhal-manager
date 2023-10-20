@@ -1,2 +1,2 @@
 # godot-narwhal-manager
-Godot app for managing TuFFpad devices over USB serial
+Godot app for managing TuFFrabit devices over USB serial

@@ -1,6 +1,9 @@
 extends Node
 
+enum DeviceType {None, Tuffpad, Tuffjoystick}
+
 var serial
+var deviceType: int = DeviceType.None
 
 func setSerial(serial) -> void:
 	self.serial = serial
@@ -18,8 +21,16 @@ func doHandshake() -> bool:
 			if line:
 				var lineData: Dictionary = parse_json(line)
 				
-				if lineData != null and lineData["areyouatuffpad?"]:
-					success = true
+				if lineData != null:
+					if lineData.has("areyouatuffpad?") and lineData["areyouatuffpad?"]:
+						self.deviceType = DeviceType.Tuffpad
+						success = true
+					elif lineData.has("areyouatuffjoystick?") and lineData["areyouatuffjoystick?"]:
+						self.deviceType = DeviceType.Tuffjoystick
+						success = true
+					
+					if success:
+						break
 	
 	return success
 

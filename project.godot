@@ -24,15 +24,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://inputOptionButton.gd"
 }, {
-"base": "HBoxContainer",
+"base": "ProfileBase",
 "class": "Profile",
 "language": "GDScript",
 "path": "res://profile.gd"
+}, {
+"base": "HBoxContainer",
+"class": "ProfileBase",
+"language": "GDScript",
+"path": "res://profileBase.gd"
+}, {
+"base": "ProfileBase",
+"class": "ProfileJoystick",
+"language": "GDScript",
+"path": "res://profileJoystick.gd"
 }, {
 "base": "VBoxContainer",
 "class": "Profiles",
 "language": "GDScript",
 "path": "res://profiles.gd"
+}, {
+"base": "HBoxContainer",
+"class": "SpinBoxSliderCombo",
+"language": "GDScript",
+"path": "res://spinBoxSliderCombo.gd"
 }, {
 "base": "ConfirmationDialog",
 "class": "TextInputDialog",
@@ -44,13 +59,16 @@ _global_script_class_icons={
 "Device": "",
 "InputOptionButton": "",
 "Profile": "",
+"ProfileBase": "",
+"ProfileJoystick": "",
 "Profiles": "",
+"SpinBoxSliderCombo": "",
 "TextInputDialog": ""
 }
 
 [application]
 
-config/name="TuFFpad Manager"
+config/name="TuFFrabit Device Manager"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 

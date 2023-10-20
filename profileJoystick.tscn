@@ -1,0 +1,120 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://profileJoystick.gd" type="Script" id=1]
+[ext_resource path="res://inputOptionButton.tscn" type="PackedScene" id=2]
+
+[node name="profile" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = -7.0
+margin_bottom = -7.0
+script = ExtResource( 1 )
+
+[node name="vboxLeft" type="VBoxContainer" parent="."]
+margin_right = 312.0
+margin_bottom = 526.0
+size_flags_horizontal = 3
+
+[node name="joystickButton" type="HBoxContainer" parent="vboxLeft"]
+margin_right = 312.0
+margin_bottom = 20.0
+
+[node name="label" type="Label" parent="vboxLeft/joystickButton"]
+margin_top = 3.0
+margin_right = 99.0
+margin_bottom = 17.0
+text = "Joystick Button:"
+
+[node name="joystickButton" parent="vboxLeft/joystickButton" instance=ExtResource( 2 )]
+margin_left = 103.0
+margin_right = 132.0
+
+[node name="kbModeEnabled" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 24.0
+margin_right = 312.0
+margin_bottom = 64.0
+
+[node name="label" type="Label" parent="vboxLeft/kbModeEnabled"]
+margin_top = 13.0
+margin_right = 115.0
+margin_bottom = 27.0
+text = "KB Mode Enabled:"
+
+[node name="isKbModeEnabled" type="CheckButton" parent="vboxLeft/kbModeEnabled"]
+margin_left = 119.0
+margin_right = 195.0
+margin_bottom = 40.0
+
+[node name="kbModeUp" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 68.0
+margin_right = 312.0
+margin_bottom = 88.0
+
+[node name="label" type="Label" parent="vboxLeft/kbModeUp"]
+margin_top = 3.0
+margin_right = 83.0
+margin_bottom = 17.0
+text = "KB Mode Up:"
+
+[node name="kbup" parent="vboxLeft/kbModeUp" instance=ExtResource( 2 )]
+margin_left = 87.0
+margin_right = 116.0
+
+[node name="kbModeDown" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 92.0
+margin_right = 312.0
+margin_bottom = 112.0
+
+[node name="label" type="Label" parent="vboxLeft/kbModeDown"]
+margin_top = 3.0
+margin_right = 101.0
+margin_bottom = 17.0
+text = "KB Mode Down:"
+
+[node name="kbdown" parent="vboxLeft/kbModeDown" instance=ExtResource( 2 )]
+margin_left = 105.0
+margin_right = 134.0
+
+[node name="kbModeLeft" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 116.0
+margin_right = 312.0
+margin_bottom = 136.0
+
+[node name="label" type="Label" parent="vboxLeft/kbModeLeft"]
+margin_top = 3.0
+margin_right = 89.0
+margin_bottom = 17.0
+text = "KB Mode Left:"
+
+[node name="kbleft" parent="vboxLeft/kbModeLeft" instance=ExtResource( 2 )]
+margin_left = 93.0
+margin_right = 122.0
+
+[node name="kbModeRight" type="HBoxContainer" parent="vboxLeft"]
+margin_top = 140.0
+margin_right = 312.0
+margin_bottom = 160.0
+
+[node name="label" type="Label" parent="vboxLeft/kbModeRight"]
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 17.0
+text = "KB Mode Right:"
+
+[node name="kbright" parent="vboxLeft/kbModeRight" instance=ExtResource( 2 )]
+margin_left = 101.0
+margin_right = 130.0
+
+[node name="vboxMiddle" type="VBoxContainer" parent="."]
+margin_left = 316.0
+margin_right = 629.0
+margin_bottom = 526.0
+size_flags_horizontal = 3
+
+[node name="vboxRight" type="VBoxContainer" parent="."]
+margin_left = 633.0
+margin_right = 946.0
+margin_bottom = 526.0
+size_flags_horizontal = 3

@@ -5,23 +5,19 @@ class_name Device
 signal disconnectClick;
 
 var profileScene: PackedScene = preload("res://profile.tscn")
+var profileJoystickScene: PackedScene = preload("res://profileJoystick.tscn")
 
 onready var tabs: TabContainer = $tabs
 onready var profiles: Profiles = $tabs/hsplitMain/profiles
 onready var pnlProfile: Panel = $tabs/hsplitMain/pnlProfile
-onready var stickBoundLowX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX/edit
-onready var stickBoundLowXSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX/slider
-onready var stickBoundHighX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX/edit
-onready var stickBoundHighXSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX/slider
-onready var stickBoundLowY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY/edit
-onready var stickBoundLowYSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY/slider
-onready var stickBoundHighY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY/edit
-onready var stickBoundHighYSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY/slider
-onready var deadzoneSize: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize/edit
-onready var deadzoneSizeSlider: Slider = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize/slider
-onready var kbModeStartOffsetX: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX/edit
-onready var kbModeStartOffsetY: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY/edit
-onready var kbModeYConeEnd: SpinBox = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeYConeEnd/edit
+onready var stickBoundLowX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX
+onready var stickBoundHighX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX
+onready var stickBoundLowY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY
+onready var stickBoundHighY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY
+onready var deadzoneSize: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSize
+onready var kbModeStartOffsetX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX
+onready var kbModeStartOffsetY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY
+onready var kbModeYConeEnd: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeYConeEnd
 onready var stickXAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/axis/axis
 onready var stickXAxisReverse: CheckBox = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/chkReverse
 onready var stickYAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/axis/axis
@@ -43,48 +39,43 @@ func _ready() -> void:
 		"deadzoneSize" in globalSettings and
 		"kbModeOffsets" in globalSettings and
 		"kbModeYConeEnd" in globalSettings):
-			self.stickBoundLowX.value = int(globalSettings["stickBoundaries"]["lowX"])
-			self.stickBoundLowXSlider.value = int(globalSettings["stickBoundaries"]["lowX"])
-			self.stickBoundHighX.value = int(globalSettings["stickBoundaries"]["highX"])
-			self.stickBoundHighXSlider.value = int(globalSettings["stickBoundaries"]["highX"])
-			self.stickBoundLowY.value = int(globalSettings["stickBoundaries"]["lowY"])
-			self.stickBoundLowYSlider.value = int(globalSettings["stickBoundaries"]["lowY"])
-			self.stickBoundHighY.value = int(globalSettings["stickBoundaries"]["highY"])
-			self.stickBoundHighYSlider.value = int(globalSettings["stickBoundaries"]["highY"])
-			self.deadzoneSize.value = int(globalSettings["deadzoneSize"])
-			self.deadzoneSizeSlider.value = int(globalSettings["deadzoneSize"])
-			self.kbModeStartOffsetX.value = int(globalSettings["kbModeOffsets"]["x"])
-			self.kbModeStartOffsetY.value = int(globalSettings["kbModeOffsets"]["y"])
-			self.kbModeYConeEnd.value = int(globalSettings["kbModeYConeEnd"])
+			self.stickBoundLowX.setValueNoSignal(int(globalSettings["stickBoundaries"]["lowX"]))
+			self.stickBoundHighX.setValueNoSignal(int(globalSettings["stickBoundaries"]["highX"]))
+			self.stickBoundLowY.setValueNoSignal(int(globalSettings["stickBoundaries"]["lowY"]))
+			self.stickBoundHighY.setValueNoSignal(int(globalSettings["stickBoundaries"]["highY"]))
+			self.deadzoneSize.setValueNoSignal(int(globalSettings["deadzoneSize"]))
+			self.kbModeStartOffsetX.setValueNoSignal(int(globalSettings["kbModeOffsets"]["x"]))
+			self.kbModeStartOffsetY.setValueNoSignal(int(globalSettings["kbModeOffsets"]["y"]))
+			self.kbModeYConeEnd.setValueNoSignal(int(globalSettings["kbModeYConeEnd"]))
 			self.stickXAxis.select(int(globalSettings["stickAxesOrientation"]["x"]["axis"]))
 			self.stickXAxisReverse.pressed = bool(globalSettings["stickAxesOrientation"]["x"]["reverse"])
 			self.stickYAxis.select(int(globalSettings["stickAxesOrientation"]["y"]["axis"]))
 			self.stickYAxisReverse.pressed = bool(globalSettings["stickAxesOrientation"]["y"]["reverse"])
 		
-		self.stickBoundLowX.connect("value_changed", self, "stickBoundLowXValueChanged")
-		self.stickBoundLowXSlider.connect("value_changed", self, "stickBoundLowXSliderValueChanged")
-		self.stickBoundHighX.connect("value_changed", self, "stickBoundHighXValueChanged")
-		self.stickBoundHighXSlider.connect("value_changed", self, "stickBoundHighXSliderValueChanged")
-		self.stickBoundLowY.connect("value_changed", self, "stickBoundLowYValueChanged")
-		self.stickBoundLowYSlider.connect("value_changed", self, "stickBoundLowYSliderValueChanged")
-		self.stickBoundHighY.connect("value_changed", self, "stickBoundHighYValueChanged")
-		self.stickBoundHighYSlider.connect("value_changed", self, "stickBoundHighYSliderValueChanged")
-		self.deadzoneSize.connect("value_changed", self, "deadzoneSizeValueChanged")
-		self.deadzoneSizeSlider.connect("value_changed", self, "deadzoneSizeSliderValueChanged")
-		self.kbModeStartOffsetX.connect("value_changed", self, "kbModeStartOffsetXValueChanged")
-		self.kbModeStartOffsetY.connect("value_changed", self, "kbModeStartOffsetYValueChanged")
-		self.kbModeYConeEnd.connect("value_changed", self, "kbModeYConeEndValueChanged")
+		self.stickBoundLowX.connect("valueChanged", self, "stickBoundLowXValueChanged")
+		self.stickBoundHighX.connect("valueChanged", self, "stickBoundHighXValueChanged")
+		self.stickBoundLowY.connect("valueChanged", self, "stickBoundLowYValueChanged")
+		self.stickBoundHighY.connect("valueChanged", self, "stickBoundHighYValueChanged")
+		self.deadzoneSize.connect("valueChanged", self, "deadzoneSizeValueChanged")
+		self.kbModeStartOffsetX.connect("valueChanged", self, "kbModeStartOffsetXValueChanged")
+		self.kbModeStartOffsetY.connect("valueChanged", self, "kbModeStartOffsetYValueChanged")
+		self.kbModeYConeEnd.connect("valueChanged", self, "kbModeYConeEndValueChanged")
 		self.stickXAxis.connect("item_selected", self, "stickXAxisItemSelected")
 		self.stickXAxisReverse.connect("toggled", self, "stickXAxisReverseToggled")
 		self.stickYAxis.connect("item_selected", self, "stickYAxisItemSelected")
 		self.stickYAxisReverse.connect("toggled", self, "stickYAxisReverseToggled")
 
 func profileSelected(profile: Dictionary) -> void:
-	var profileInstance: Profile = self.profileScene.instance()
-	
 	for child in self.pnlProfile.get_children():
 		self.pnlProfile.remove_child(child)
 		child.queue_free()
+	
+	var profileInstance: ProfileBase = self.profileScene.instance()
+	
+	if SerialHelper.deviceType == SerialHelper.DeviceType.Tuffpad:
+		profileInstance = self.profileScene.instance()
+	elif SerialHelper.deviceType == SerialHelper.DeviceType.Tuffjoystick:
+		profileInstance = self.profileJoystickScene.instance()
 	
 	self.pnlProfile.add_child(profileInstance)
 	profileInstance.setProfileName(profile['name'])
@@ -163,87 +154,100 @@ func saveEverything2() -> void:
 		Dialogs.showAlertDialog("Config write on device failed.", "Can't save")
 
 func stickBoundLowXValueChanged(value: float) -> void:
-	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setStickXLow", int(value))
+	var commandName: String = "setStickXLow"
+	self.stickBoundLowX.setEditable(false)
 	
-	if response and "setStickXLow" in response:
-		if value != stickBoundLowXSlider.value:
-			stickBoundLowXSlider.value = value
-
-func stickBoundLowXSliderValueChanged(value: float) -> void:
-	stickBoundLowX.value = value
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+		commandName, int(value))
+	
+	if response and commandName in response and response[commandName]:
+		self.stickBoundLowX.setEditable(true)
+	else:
+		Dialogs.showAlertDialog("Could not update Stick Boundary Low X", "Update failed")
 
 func stickBoundHighXValueChanged(value: float) -> void:
-	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setStickXHigh", int(value))
+	var commandName: String = "setStickXHigh"
+	self.stickBoundHighX.setEditable(false)
 	
-	if response and "setStickXHigh" in response:
-		if value != stickBoundHighXSlider.value:
-			stickBoundHighXSlider.value = value
-
-func stickBoundHighXSliderValueChanged(value: float) -> void:
-	stickBoundHighX.value = value
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+		commandName, int(value))
+	
+	if response and commandName in response and response[commandName]:
+		self.stickBoundHighX.setEditable(true)
+	else:
+		Dialogs.showAlertDialog("Could not update Stick Boundary High X", "Update failed")
 
 func stickBoundLowYValueChanged(value: float) -> void:
-	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setStickYLow", int(value))
+	var commandName: String = "setStickYLow"
+	self.stickBoundLowY.setEditable(false)
 	
-	if response and "setStickYLow" in response:
-		if value != stickBoundLowYSlider.value:
-			stickBoundLowYSlider.value = value
-
-func stickBoundLowYSliderValueChanged(value: float) -> void:
-	stickBoundLowY.value = value
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+		commandName, int(value))
+	
+	if response and commandName in response and response[commandName]:
+		self.stickBoundLowY.setEditable(true)
+	else:
+		Dialogs.showAlertDialog("Could not update Stick Boundary Low Y", "Update failed")
 
 func stickBoundHighYValueChanged(value: float) -> void:
-	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setStickYHigh", int(value))
+	var commandName: String = "setStickYHigh"
+	self.stickBoundHighY.setEditable(false)
 	
-	if response and "setStickYHigh" in response:
-		if value != stickBoundHighYSlider.value:
-			stickBoundHighYSlider.value = value
-
-func stickBoundHighYSliderValueChanged(value: float) -> void:
-	stickBoundHighY.value = value
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+		commandName, int(value))
+	
+	if response and commandName in response and response[commandName]:
+		self.stickBoundHighY.setEditable(true)
+	else:
+		Dialogs.showAlertDialog("Could not update Stick Boundary High Y", "Update failed")
 
 func deadzoneSizeValueChanged(value: float) -> void:
-	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setDeadzone", int(value))
+	var commandName: String = "setDeadzone"
+	self.deadzoneSize.setEditable(false)
 	
-	if response and "setDeadzone" in response:
-		if value != deadzoneSizeSlider.value:
-			deadzoneSizeSlider.value = value
-
-func deadzoneSizeSliderValueChanged(value: float) -> void:
-	if value != deadzoneSize.value:
-		deadzoneSize.value = value
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+		commandName, int(value))
+	
+	if response and commandName in response and response[commandName]:
+		self.deadzoneSize.setEditable(true)
+	else:
+		Dialogs.showAlertDialog("Could not update Deadzone Size", "Update failed")
 
 func kbModeStartOffsetXValueChanged(value: float) -> void:
-	if value <= kbModeYConeEnd.value:
-		var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-				"setKbModeXStartOffset", int(value))
-		
-		if response and "setKbModeXStartOffset" in response:
-			pass
+	var commandName: String = "setKbModeXStartOffset"
+	self.kbModeStartOffsetX.setEditable(false)
+	
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+		commandName, int(value))
+	
+	if response and commandName in response and response[commandName]:
+		self.kbModeStartOffsetX.setEditable(true)
 	else:
-		kbModeStartOffsetX.value = kbModeYConeEnd.value
+		Dialogs.showAlertDialog("Could not update KB Mode Start Offset X", "Update failed")
 
 func kbModeStartOffsetYValueChanged(value: float) -> void:
-	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setKbModeYStartOffset", int(value))
+	var commandName: String = "setKbModeYStartOffset"
+	self.kbModeStartOffsetY.setEditable(false)
 	
-	if response and "setKbModeYStartOffset" in response:
-		pass
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+		commandName, int(value))
+	
+	if response and commandName in response and response[commandName]:
+		self.kbModeStartOffsetY.setEditable(true)
+	else:
+		Dialogs.showAlertDialog("Could not update KB Mode Start Offset Y", "Update failed")
 
 func kbModeYConeEndValueChanged(value: float) -> void:
-	if value >= kbModeStartOffsetX.value:
-		var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setKbModeYConeEnd", int(value))
-		
-		if response and "setKbModeYConeEnd" in response:
-			pass
+	var commandName: String = "setKbModeYConeEnd"
+	self.kbModeYConeEnd.setEditable(false)
+	
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+		commandName, int(value))
+	
+	if response and commandName in response and response[commandName]:
+		self.kbModeYConeEnd.setEditable(true)
 	else:
-		kbModeYConeEnd.value = kbModeStartOffsetX.value
+		Dialogs.showAlertDialog("Could not update KB Mode Y Cone End", "Update failed")
 
 func stickXAxisItemSelected(value: int) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(

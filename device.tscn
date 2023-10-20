@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://profiles.tscn" type="PackedScene" id=1]
 [ext_resource path="res://device.gd" type="Script" id=2]
+[ext_resource path="res://spinBoxSliderCombo.tscn" type="PackedScene" id=3]
 
 [node name="device" type="VBoxContainer"]
 anchor_right = 1.0
@@ -77,116 +78,36 @@ margin_right = 474.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 
-[node name="stickBoundLowX" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft"]
+[node name="stickBoundLowX" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft" instance=ExtResource( 3 )]
 margin_right = 474.0
 margin_bottom = 24.0
+labelText = "Stick Boundary Low X:"
+rangeMin = 1.0
+rangeMax = 65535.0
 
-[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX"]
-margin_top = 5.0
-margin_right = 139.0
-margin_bottom = 19.0
-text = "Stick Boundary Low X:"
-
-[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX"]
-margin_left = 143.0
-margin_right = 217.0
-margin_bottom = 24.0
-min_value = 1.0
-max_value = 65535.0
-value = 1.0
-
-[node name="slider" type="HSlider" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX"]
-margin_left = 221.0
-margin_right = 474.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-min_value = 1.0
-max_value = 65535.0
-value = 1.0
-
-[node name="stickBoundHighX" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft"]
+[node name="stickBoundHighX" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft" instance=ExtResource( 3 )]
 margin_top = 28.0
 margin_right = 474.0
 margin_bottom = 52.0
+labelText = "Stick Boundary High X:"
+rangeMin = 1.0
+rangeMax = 65535.0
 
-[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX"]
-margin_top = 5.0
-margin_right = 143.0
-margin_bottom = 19.0
-text = "Stick Boundary High X:"
-
-[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX"]
-margin_left = 147.0
-margin_right = 221.0
-margin_bottom = 24.0
-min_value = 1.0
-max_value = 65535.0
-value = 1.0
-
-[node name="slider" type="HSlider" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX"]
-margin_left = 225.0
-margin_right = 474.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-min_value = 1.0
-max_value = 65535.0
-value = 1.0
-
-[node name="stickBoundLowY" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft"]
+[node name="stickBoundLowY" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft" instance=ExtResource( 3 )]
 margin_top = 56.0
 margin_right = 474.0
 margin_bottom = 80.0
+labelText = "Stick Boundary Low Y:"
+rangeMin = 1.0
+rangeMax = 65535.0
 
-[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY"]
-margin_top = 5.0
-margin_right = 138.0
-margin_bottom = 19.0
-text = "Stick Boundary Low Y:"
-
-[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY"]
-margin_left = 142.0
-margin_right = 216.0
-margin_bottom = 24.0
-min_value = 1.0
-max_value = 65535.0
-value = 1.0
-
-[node name="slider" type="HSlider" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY"]
-margin_left = 220.0
-margin_right = 474.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-min_value = 1.0
-max_value = 65535.0
-value = 1.0
-
-[node name="stickBoundHighY" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft"]
+[node name="stickBoundHighY" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft" instance=ExtResource( 3 )]
 margin_top = 84.0
 margin_right = 474.0
 margin_bottom = 108.0
-
-[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY"]
-margin_top = 5.0
-margin_right = 142.0
-margin_bottom = 19.0
-text = "Stick Boundary High Y:"
-
-[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY"]
-margin_left = 146.0
-margin_right = 220.0
-margin_bottom = 24.0
-min_value = 1.0
-max_value = 65535.0
-value = 1.0
-
-[node name="slider" type="HSlider" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY"]
-margin_left = 224.0
-margin_right = 474.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-min_value = 1.0
-max_value = 65535.0
-value = 1.0
+labelText = "Stick Boundary High Y:"
+rangeMin = 1.0
+rangeMax = 65535.0
 
 [node name="vboxRight" type="VBoxContainer" parent="tabs/vboxAdvanced/hboxSettings"]
 margin_left = 478.0
@@ -194,91 +115,35 @@ margin_right = 952.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 
-[node name="deadzoneSizeCont" type="VBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
+[node name="deadzoneSize" parent="tabs/vboxAdvanced/hboxSettings/vboxRight" instance=ExtResource( 3 )]
 margin_right = 474.0
 margin_bottom = 24.0
+labelText = "Deadzone Size:"
+rangeMax = 32768.0
 
-[node name="deadzoneSize" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont"]
-margin_right = 474.0
-margin_bottom = 24.0
-
-[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize"]
-margin_top = 5.0
-margin_right = 98.0
-margin_bottom = 19.0
-text = "Deadzone Size:"
-
-[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize"]
-margin_left = 102.0
-margin_right = 176.0
-margin_bottom = 24.0
-max_value = 32768.0
-value = 1.0
-
-[node name="slider" type="HSlider" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSizeCont/deadzoneSize"]
-margin_left = 180.0
-margin_right = 474.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-max_value = 32768.0
-value = 1.0
-
-[node name="kbModeStartOffsetX" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
+[node name="kbModeStartOffsetX" parent="tabs/vboxAdvanced/hboxSettings/vboxRight" instance=ExtResource( 3 )]
 margin_top = 28.0
 margin_right = 474.0
 margin_bottom = 52.0
+labelText = "KB Mode Start Offset X:"
+rangeMin = 1.0
+rangeMax = 127.0
 
-[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX"]
-margin_top = 5.0
-margin_right = 149.0
-margin_bottom = 19.0
-text = "KB Mode Start Offset X:"
-
-[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX"]
-margin_left = 153.0
-margin_right = 227.0
-margin_bottom = 24.0
-min_value = 1.0
-max_value = 127.0
-value = 1.0
-
-[node name="kbModeStartOffsetY" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
+[node name="kbModeStartOffsetY" parent="tabs/vboxAdvanced/hboxSettings/vboxRight" instance=ExtResource( 3 )]
 margin_top = 56.0
 margin_right = 474.0
 margin_bottom = 80.0
+labelText = "KB Mode Start Offset Y:"
+rangeMin = 1.0
+rangeMax = 127.0
 
-[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY"]
-margin_top = 5.0
-margin_right = 148.0
-margin_bottom = 19.0
-text = "KB Mode Start Offset Y:"
-
-[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY"]
-margin_left = 152.0
-margin_right = 226.0
-margin_bottom = 24.0
-min_value = 1.0
-max_value = 127.0
-value = 1.0
-
-[node name="kbModeYConeEnd" type="HBoxContainer" parent="tabs/vboxAdvanced/hboxSettings/vboxRight"]
+[node name="kbModeYConeEnd" parent="tabs/vboxAdvanced/hboxSettings/vboxRight" instance=ExtResource( 3 )]
 margin_top = 84.0
 margin_right = 474.0
 margin_bottom = 108.0
-
-[node name="label" type="Label" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeYConeEnd"]
-margin_top = 5.0
-margin_right = 135.0
-margin_bottom = 19.0
-text = "KB Mode Y Cone End:"
-
-[node name="edit" type="SpinBox" parent="tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeYConeEnd"]
-margin_left = 139.0
-margin_right = 213.0
-margin_bottom = 24.0
-min_value = 1.0
-max_value = 127.0
-value = 1.0
+labelText = "KB Mode Y Cone End:"
+rangeMin = 1.0
+rangeMax = 127.0
 
 [node name="vboxStickAxesOrientation" type="VBoxContainer" parent="tabs/vboxAdvanced"]
 margin_top = 154.0

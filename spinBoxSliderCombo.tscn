@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://spinBoxSliderCombo.gd" type="Script" id=1]
+
+[node name="spinBoxSliderCombo" type="HBoxContainer"]
+script = ExtResource( 1 )
+
+[node name="label" type="Label" parent="."]
+margin_top = 5.0
+margin_bottom = 19.0
+
+[node name="spinBox" type="SpinBox" parent="."]
+margin_left = 4.0
+margin_right = 78.0
+margin_bottom = 24.0
+
+[node name="slider" type="HSlider" parent="."]
+margin_left = 82.0
+margin_right = 98.0
+margin_bottom = 16.0
+size_flags_horizontal = 3

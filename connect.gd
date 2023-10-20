@@ -14,7 +14,7 @@ func getPortConnection() -> void:
 	if isConnected:
 		self.emit_signal("portConnected")
 	else:
-		self.showFields("Could not find a TuFFpad")
+		self.showFields("Could not find a TuFFrabit device")
 
 func showFields(errorMessage: String = "") -> void:
 	self.lblError.text = errorMessage

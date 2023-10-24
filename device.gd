@@ -10,6 +10,7 @@ var profileJoystickScene: PackedScene = preload("res://profileJoystick.tscn")
 onready var tabs: TabContainer = $tabs
 onready var profiles: Profiles = $tabs/hsplitMain/profiles
 onready var pnlProfile: Panel = $tabs/hsplitMain/pnlProfile
+onready var readStickValuesTimer = $readStickValuesTimer
 onready var stickBoundLowX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX
 onready var stickBoundHighX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX
 onready var stickBoundLowY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY
@@ -22,12 +23,16 @@ onready var stickXAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientati
 onready var stickXAxisReverse: CheckBox = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/chkReverse
 onready var stickYAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/axis/axis
 onready var stickYAxisReverse: CheckBox = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/chkReverse
+onready var rawStick: StickGraph = $tabs/vboxAdvanced/stickGraphs/raw
+onready var calculatedStick: StickGraph = $tabs/vboxAdvanced/stickGraphs/calculated
 
 func _ready() -> void:
 	self.tabs.set_tab_title(0, "Profiles")
 	self.tabs.set_tab_title(1, "Advanced")
 	self.profiles.connect("profileSelected", self, "profileSelected")
 	self.profiles.connect("profileRenamed", self, "profileRenamed")
+	self.rawStick.setRunning(false)
+	self.calculatedStick.setRunning(false)
 	
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse("getGlobalSettings")
 	
@@ -276,3 +281,35 @@ func stickYAxisReverseToggled(value: bool) -> void:
 	
 	if response and "setStickYOrientation" in response:
 		pass
+
+
+func _on_readStickValuesTimer_timeout():
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse("readStickValues")
+	
+	if response and "readStickValues" in response:
+		self.rawStick.setPoint(response["readStickValues"][0]["x"], response["readStickValues"][0]["y"])
+		self.calculatedStick.setPoint(response["readStickValues"][1]["x"], response["readStickValues"][1]["y"])
+
+func _on_Button_pressed():
+	if self.readStickValuesTimer.is_stopped():
+		self.rawStick.setRunning(true)
+		self.calculatedStick.setRunning(true)
+		self.readStickValuesTimer.start()
+	else:
+		self.rawStick.setRunning(false)
+		self.calculatedStick.setRunning(false)
+		self.readStickValuesTimer.stop()
+
+
+func _on_readStickHelp_pressed():
+	var message: String = """
+	Reading the stick will begin populating the below graphs with live stick data.
+	This is useful for fine tuning the above boundaries and for visualizing the deadzone.
+	The Raw graph shows the bare voltage readings directly from the stick.
+	The Calculated graph shows the final stick output after all axis assignment, scaling, 
+	deadzone calculation, and boundary calculation is performed.
+	
+	You should not leave this running during active use as it can potentially put a
+	heavy load on the device's microcontroller and cause input delay.
+	"""
+	Dialogs.showAlertDialog(message, "Read Stick Help")

@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://stickGraph.gd" type="Script" id=1]
+
+[node name="stickGraph" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="title" type="Label" parent="."]
+margin_right = 960.0
+margin_bottom = 14.0
+
+[node name="info" type="VBoxContainer" parent="."]
+margin_top = 18.0
+margin_right = 960.0
+margin_bottom = 68.0
+
+[node name="currentXy" type="HBoxContainer" parent="info"]
+margin_right = 960.0
+margin_bottom = 14.0
+
+[node name="lblCurrentXy" type="Label" parent="info/currentXy"]
+margin_right = 22.0
+margin_bottom = 14.0
+text = "x,y "
+
+[node name="currentXy" type="Label" parent="info/currentXy"]
+margin_left = 26.0
+margin_right = 26.0
+margin_bottom = 14.0
+
+[node name="limitsX" type="HBoxContainer" parent="info"]
+margin_top = 18.0
+margin_right = 960.0
+margin_bottom = 32.0
+
+[node name="lblLimits" type="Label" parent="info/limitsX"]
+margin_right = 65.0
+margin_bottom = 14.0
+text = "low,highX "
+
+[node name="limits" type="Label" parent="info/limitsX"]
+margin_left = 69.0
+margin_right = 69.0
+margin_bottom = 14.0
+
+[node name="limitsY" type="HBoxContainer" parent="info"]
+margin_top = 36.0
+margin_right = 960.0
+margin_bottom = 50.0
+
+[node name="lblLimits" type="Label" parent="info/limitsY"]
+margin_right = 64.0
+margin_bottom = 14.0
+text = "low,highY "
+
+[node name="limits" type="Label" parent="info/limitsY"]
+margin_left = 68.0
+margin_right = 68.0
+margin_bottom = 14.0
+
+[node name="graph" type="ReferenceRect" parent="."]
+margin_top = 72.0
+margin_right = 960.0
+margin_bottom = 72.0
+border_color = Color( 0.545098, 0.545098, 0.545098, 1 )
+editor_only = false
+
+[node name="point" type="Control" parent="graph"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="x" type="ColorRect" parent="graph/point"]
+margin_top = 4.0
+margin_right = 10.0
+margin_bottom = 6.0
+color = Color( 1, 0, 0, 1 )
+
+[node name="y" type="ColorRect" parent="graph/point"]
+margin_left = 4.0
+margin_right = 6.0
+margin_bottom = 10.0
+color = Color( 1, 0, 0, 1 )

@@ -84,6 +84,10 @@ SerialHelper="*res://serialHelper.gd"
 Inputs="*res://inputs.gd"
 Dialogs="*res://dialogs.gd"
 
+[debug]
+
+settings/fps/force_fps=30
+
 [display]
 
 window/size/width=960

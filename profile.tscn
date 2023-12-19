@@ -492,10 +492,25 @@ text = "DPAD Right:"
 margin_left = 81.0
 margin_right = 110.0
 
-[node name="rgb" type="HBoxContainer" parent="vboxRight"]
+[node name="dpadCenter" type="HBoxContainer" parent="vboxRight"]
 margin_top = 236.0
 margin_right = 313.0
 margin_bottom = 256.0
+
+[node name="label" type="Label" parent="vboxRight/dpadCenter"]
+margin_top = 3.0
+margin_right = 87.0
+margin_bottom = 17.0
+text = "DPAD Center:"
+
+[node name="dpadcenter" parent="vboxRight/dpadCenter" instance=ExtResource( 2 )]
+margin_left = 91.0
+margin_right = 120.0
+
+[node name="rgb" type="HBoxContainer" parent="vboxRight"]
+margin_top = 260.0
+margin_right = 313.0
+margin_bottom = 280.0
 
 [node name="label" type="Label" parent="vboxRight/rgb"]
 margin_top = 3.0

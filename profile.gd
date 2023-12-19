@@ -36,6 +36,7 @@ onready var btnDpadUp: InputOptionButton = $vboxRight/dpadUp/dpadup
 onready var btnDpadDown: InputOptionButton = $vboxRight/dpadDown/dpaddown
 onready var btnDpadLeft: InputOptionButton = $vboxRight/dpadLeft/dpadleft
 onready var btnDpadRight: InputOptionButton = $vboxRight/dpadRight/dpadright
+onready var btnDpadCenter: InputOptionButton = $vboxRight/dpadCenter/dpadcenter
 onready var btnRgb: ColorPickerButton = $vboxRight/rgb/rgb
 
 func setProfileData(profile: Dictionary) -> void:
@@ -70,6 +71,7 @@ func setProfileData(profile: Dictionary) -> void:
 	self.btnDpadDown.select(Inputs.getIndexFromName(profile["dpad"]["down"]))
 	self.btnDpadLeft.select(Inputs.getIndexFromName(profile["dpad"]["left"]))
 	self.btnDpadRight.select(Inputs.getIndexFromName(profile["dpad"]["right"]))
+	self.btnDpadCenter.select(Inputs.getIndexFromName(profile["dpad"]["center"]))
 	self.btnRgb.color = Color8(profile["rgb"]["red"], profile["rgb"]["green"], profile["rgb"]["blue"])
 	
 	self.setupInputBindingsForChildren(self.vboxLeft)

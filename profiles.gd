@@ -176,3 +176,34 @@ func renameProfile(newProfileName: String) -> void:
 			Dialogs.showAlertDialog("Profile with that name already exists.", "Can't rename profile")
 	
 	self.profileToRename = -1
+
+
+func _on_btnMoveUp_pressed():
+	var selectedItemIndexes: PoolIntArray = self.listProfiles.get_selected_items()
+	
+	if selectedItemIndexes.size() > 0 and selectedItemIndexes[0] > 0:
+		var newPosition: int = selectedItemIndexes[0] - 1
+		var profileName: String = self.listProfiles.get_item_text(selectedItemIndexes[0])
+		var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+				"reorderProfile", {"profileName": profileName, "position": newPosition})
+			
+		if response != null and "reorderProfile" in response:
+			if response["reorderProfile"]:
+				self.listProfiles.move_item(selectedItemIndexes[0], newPosition)
+			else:
+				Dialogs.showAlertDialog("Profile re-order failed on the device.", "Can't re-order profile")
+
+func _on_btnMoveDown_pressed():
+	var selectedItemIndexes: PoolIntArray = self.listProfiles.get_selected_items()
+	
+	if selectedItemIndexes.size() > 0 and selectedItemIndexes[0] < self.listProfiles.get_item_count() - 1:
+		var newPosition: int = selectedItemIndexes[0] + 1
+		var profileName: String = self.listProfiles.get_item_text(selectedItemIndexes[0])
+		var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
+				"reorderProfile", {"profileName": profileName, "position": newPosition})
+			
+		if response != null and "reorderProfile" in response:
+			if response["reorderProfile"]:
+				self.listProfiles.move_item(selectedItemIndexes[0], newPosition)
+			else:
+				Dialogs.showAlertDialog("Profile re-order failed on the device.", "Can't re-order profile")

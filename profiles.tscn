@@ -28,6 +28,18 @@ margin_right = 109.0
 margin_bottom = 20.0
 text = "Rename"
 
+[node name="btnMoveUp" type="Button" parent="hboxButtons"]
+margin_left = 113.0
+margin_right = 143.0
+margin_bottom = 20.0
+text = "Up"
+
+[node name="btnMoveDown" type="Button" parent="hboxButtons"]
+margin_left = 147.0
+margin_right = 195.0
+margin_bottom = 20.0
+text = "Down"
+
 [node name="hboxActiveProfile" type="HBoxContainer" parent="."]
 margin_top = 24.0
 margin_right = 960.0
@@ -54,5 +66,7 @@ size_flags_vertical = 3
 [connection signal="pressed" from="hboxButtons/btnAdd" to="." method="_on_btnAdd_pressed"]
 [connection signal="pressed" from="hboxButtons/btnDelete" to="." method="_on_btnDelete_pressed"]
 [connection signal="pressed" from="hboxButtons/btnRename" to="." method="_on_btnRename_pressed"]
+[connection signal="pressed" from="hboxButtons/btnMoveUp" to="." method="_on_btnMoveUp_pressed"]
+[connection signal="pressed" from="hboxButtons/btnMoveDown" to="." method="_on_btnMoveDown_pressed"]
 [connection signal="item_selected" from="hboxActiveProfile/btnActiveProfile" to="." method="_on_btnActiveProfile_item_selected"]
 [connection signal="item_selected" from="listProfiles" to="." method="_on_listProfiles_item_selected"]

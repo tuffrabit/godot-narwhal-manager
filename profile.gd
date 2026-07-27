@@ -2,42 +2,42 @@ extends ProfileBase
 
 class_name Profile
 
-onready var vboxLeft: VBoxContainer = $vboxLeft
-onready var vboxMiddle: VBoxContainer = $vboxMiddle
-onready var vboxRight: VBoxContainer = $vboxRight
-onready var btnKey1: InputOptionButton = $vboxLeft/hboxKey1/key0
-onready var btnKey2: InputOptionButton = $vboxLeft/hboxKey2/key1
-onready var btnKey3: InputOptionButton = $vboxLeft/hboxKey3/key2
-onready var btnKey4: InputOptionButton = $vboxLeft/hboxKey4/key3
-onready var btnKey5: InputOptionButton = $vboxLeft/hboxKey5/key4
-onready var btnKey6: InputOptionButton = $vboxLeft/hboxKey6/key5
-onready var btnKey7: InputOptionButton = $vboxLeft/hboxKey7/key6
-onready var btnKey8: InputOptionButton = $vboxLeft/hboxKey8/key7
-onready var btnKey9: InputOptionButton = $vboxLeft/hboxKey9/key8
-onready var btnKey10: InputOptionButton = $vboxLeft/hboxKey10/key9
-onready var btnThumbKey: InputOptionButton = $vboxLeft/thumbKey/thumbButton
-onready var btnKey11: InputOptionButton = $vboxMiddle/hboxKey11/key10
-onready var btnKey12: InputOptionButton = $vboxMiddle/hboxKey12/key11
-onready var btnKey13: InputOptionButton = $vboxMiddle/hboxKey13/key12
-onready var btnKey14: InputOptionButton = $vboxMiddle/hboxKey14/key13
-onready var btnKey15: InputOptionButton = $vboxMiddle/hboxKey15/key14
-onready var btnKey16: InputOptionButton = $vboxMiddle/hboxKey16/key15
-onready var btnKey17: InputOptionButton = $vboxMiddle/hboxKey17/key16
-onready var btnKey18: InputOptionButton = $vboxMiddle/hboxKey18/key17
-onready var btnKey19: InputOptionButton = $vboxMiddle/hboxKey19/key18
-onready var btnKey20: InputOptionButton = $vboxMiddle/hboxKey20/key19
-onready var btnJoystickButton: InputOptionButton = $vboxMiddle/joystickButton/joystickButton
-onready var btnKbModeEnabled: CheckButton = $vboxRight/kbModeEnabled/isKbModeEnabled
-onready var btnKbModeUp: InputOptionButton = $vboxRight/kbModeUp/kbup
-onready var btnKbModeDown: InputOptionButton = $vboxRight/kbModeDown/kbdown
-onready var btnKbModeLeft: InputOptionButton = $vboxRight/kbModeLeft/kbleft
-onready var btnKbModeRight: InputOptionButton = $vboxRight/kbModeRight/kbright
-onready var btnDpadUp: InputOptionButton = $vboxRight/dpadUp/dpadup
-onready var btnDpadDown: InputOptionButton = $vboxRight/dpadDown/dpaddown
-onready var btnDpadLeft: InputOptionButton = $vboxRight/dpadLeft/dpadleft
-onready var btnDpadRight: InputOptionButton = $vboxRight/dpadRight/dpadright
-onready var btnDpadCenter: InputOptionButton = $vboxRight/dpadCenter/dpadcenter
-onready var btnRgb: ColorPickerButton = $vboxRight/rgb/rgb
+@onready var vboxLeft: VBoxContainer = $vboxLeft
+@onready var vboxMiddle: VBoxContainer = $vboxMiddle
+@onready var vboxRight: VBoxContainer = $vboxRight
+@onready var btnKey1: InputOptionButton = $vboxLeft/hboxKey1/key0
+@onready var btnKey2: InputOptionButton = $vboxLeft/hboxKey2/key1
+@onready var btnKey3: InputOptionButton = $vboxLeft/hboxKey3/key2
+@onready var btnKey4: InputOptionButton = $vboxLeft/hboxKey4/key3
+@onready var btnKey5: InputOptionButton = $vboxLeft/hboxKey5/key4
+@onready var btnKey6: InputOptionButton = $vboxLeft/hboxKey6/key5
+@onready var btnKey7: InputOptionButton = $vboxLeft/hboxKey7/key6
+@onready var btnKey8: InputOptionButton = $vboxLeft/hboxKey8/key7
+@onready var btnKey9: InputOptionButton = $vboxLeft/hboxKey9/key8
+@onready var btnKey10: InputOptionButton = $vboxLeft/hboxKey10/key9
+@onready var btnThumbKey: InputOptionButton = $vboxLeft/thumbKey/thumbButton
+@onready var btnKey11: InputOptionButton = $vboxMiddle/hboxKey11/key10
+@onready var btnKey12: InputOptionButton = $vboxMiddle/hboxKey12/key11
+@onready var btnKey13: InputOptionButton = $vboxMiddle/hboxKey13/key12
+@onready var btnKey14: InputOptionButton = $vboxMiddle/hboxKey14/key13
+@onready var btnKey15: InputOptionButton = $vboxMiddle/hboxKey15/key14
+@onready var btnKey16: InputOptionButton = $vboxMiddle/hboxKey16/key15
+@onready var btnKey17: InputOptionButton = $vboxMiddle/hboxKey17/key16
+@onready var btnKey18: InputOptionButton = $vboxMiddle/hboxKey18/key17
+@onready var btnKey19: InputOptionButton = $vboxMiddle/hboxKey19/key18
+@onready var btnKey20: InputOptionButton = $vboxMiddle/hboxKey20/key19
+@onready var btnJoystickButton: InputOptionButton = $vboxMiddle/joystickButton/joystickButton
+@onready var btnKbModeEnabled: CheckButton = $vboxRight/kbModeEnabled/isKbModeEnabled
+@onready var btnKbModeUp: InputOptionButton = $vboxRight/kbModeUp/kbup
+@onready var btnKbModeDown: InputOptionButton = $vboxRight/kbModeDown/kbdown
+@onready var btnKbModeLeft: InputOptionButton = $vboxRight/kbModeLeft/kbleft
+@onready var btnKbModeRight: InputOptionButton = $vboxRight/kbModeRight/kbright
+@onready var btnDpadUp: InputOptionButton = $vboxRight/dpadUp/dpadup
+@onready var btnDpadDown: InputOptionButton = $vboxRight/dpadDown/dpaddown
+@onready var btnDpadLeft: InputOptionButton = $vboxRight/dpadLeft/dpadleft
+@onready var btnDpadRight: InputOptionButton = $vboxRight/dpadRight/dpadright
+@onready var btnDpadCenter: InputOptionButton = $vboxRight/dpadCenter/dpadcenter
+@onready var btnRgb: ColorPickerButton = $vboxRight/rgb/rgb
 
 func setProfileData(profile: Dictionary) -> void:
 	self.btnKey1.select(Inputs.getIndexFromName(profile["keys"][0]))
@@ -62,7 +62,7 @@ func setProfileData(profile: Dictionary) -> void:
 	self.btnKey20.select(Inputs.getIndexFromName(profile["keys"][19]))
 	self.btnThumbKey.select(Inputs.getIndexFromName(profile["thumbButton"]))
 	self.btnJoystickButton.select(Inputs.getIndexFromName(profile["joystickButton"]))
-	self.btnKbModeEnabled.pressed = profile["isKbModeEnabled"]
+	self.btnKbModeEnabled.button_pressed = profile["isKbModeEnabled"]
 	self.btnKbModeUp.select(Inputs.getIndexFromName(profile["kbMode"]["up"]))
 	self.btnKbModeDown.select(Inputs.getIndexFromName(profile["kbMode"]["down"]))
 	self.btnKbModeLeft.select(Inputs.getIndexFromName(profile["kbMode"]["left"]))

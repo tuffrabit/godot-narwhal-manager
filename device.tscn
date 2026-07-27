@@ -11,40 +11,40 @@ anchor_bottom = 1.0
 script = ExtResource( 2 )
 
 [node name="vboxGlobal" type="VBoxContainer" parent="."]
-margin_right = 960.0
-margin_bottom = 20.0
+offset_right = 960.0
+offset_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="hboxButtons" type="HBoxContainer" parent="vboxGlobal"]
-margin_right = 960.0
-margin_bottom = 20.0
+offset_right = 960.0
+offset_bottom = 20.0
 
 [node name="btnSave" type="Button" parent="vboxGlobal/hboxButtons"]
-margin_right = 41.0
-margin_bottom = 20.0
+offset_right = 41.0
+offset_bottom = 20.0
 text = "Save"
 
 [node name="btnDisconnect" type="Button" parent="vboxGlobal/hboxButtons"]
-margin_left = 45.0
-margin_right = 129.0
-margin_bottom = 20.0
+offset_left = 45.0
+offset_right = 129.0
+offset_bottom = 20.0
 text = "Disconnect"
 
 [node name="tabs" type="TabContainer" parent="."]
-margin_top = 24.0
-margin_right = 960.0
-margin_bottom = 540.0
+offset_top = 24.0
+offset_right = 960.0
+offset_bottom = 540.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-tab_align = 0
+tab_alignment = 0
 
 [node name="hsplitMain" type="HSplitContainer" parent="tabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 split_offset = 100
@@ -52,223 +52,223 @@ split_offset = 100
 [node name="profiles" parent="tabs/hsplitMain" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 222.0
-margin_bottom = 480.0
+offset_right = 222.0
+offset_bottom = 480.0
 
 [node name="pnlProfile" type="Panel" parent="tabs/hsplitMain"]
-margin_left = 234.0
-margin_right = 952.0
-margin_bottom = 480.0
+offset_left = 234.0
+offset_right = 952.0
+offset_bottom = 480.0
 
 [node name="vboxAdvanced" type="VBoxContainer" parent="tabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 
 [node name="hboxSettings" type="HBoxContainer" parent="tabs/vboxAdvanced"]
-margin_right = 952.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 0, 150 )
+offset_right = 952.0
+offset_bottom = 150.0
+custom_minimum_size = Vector2( 0, 150 )
 
 [node name="vboxLeft" type="VBoxContainer" parent="tabs/vboxAdvanced/hboxSettings"]
-margin_right = 474.0
-margin_bottom = 150.0
+offset_right = 474.0
+offset_bottom = 150.0
 size_flags_horizontal = 3
 
 [node name="stickBoundLowX" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft" instance=ExtResource( 3 )]
-margin_right = 474.0
-margin_bottom = 24.0
+offset_right = 474.0
+offset_bottom = 24.0
 labelText = "Stick Boundary Low X:"
 rangeMin = 1.0
 rangeMax = 65535.0
 
 [node name="stickBoundHighX" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft" instance=ExtResource( 3 )]
-margin_top = 28.0
-margin_right = 474.0
-margin_bottom = 52.0
+offset_top = 28.0
+offset_right = 474.0
+offset_bottom = 52.0
 labelText = "Stick Boundary High X:"
 rangeMin = 1.0
 rangeMax = 65535.0
 
 [node name="stickBoundLowY" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft" instance=ExtResource( 3 )]
-margin_top = 56.0
-margin_right = 474.0
-margin_bottom = 80.0
+offset_top = 56.0
+offset_right = 474.0
+offset_bottom = 80.0
 labelText = "Stick Boundary Low Y:"
 rangeMin = 1.0
 rangeMax = 65535.0
 
 [node name="stickBoundHighY" parent="tabs/vboxAdvanced/hboxSettings/vboxLeft" instance=ExtResource( 3 )]
-margin_top = 84.0
-margin_right = 474.0
-margin_bottom = 108.0
+offset_top = 84.0
+offset_right = 474.0
+offset_bottom = 108.0
 labelText = "Stick Boundary High Y:"
 rangeMin = 1.0
 rangeMax = 65535.0
 
 [node name="vboxRight" type="VBoxContainer" parent="tabs/vboxAdvanced/hboxSettings"]
-margin_left = 478.0
-margin_right = 952.0
-margin_bottom = 150.0
+offset_left = 478.0
+offset_right = 952.0
+offset_bottom = 150.0
 size_flags_horizontal = 3
 
 [node name="deadzoneSize" parent="tabs/vboxAdvanced/hboxSettings/vboxRight" instance=ExtResource( 3 )]
-margin_right = 474.0
-margin_bottom = 24.0
+offset_right = 474.0
+offset_bottom = 24.0
 labelText = "Deadzone Size:"
 rangeMin = 1.0
 rangeMax = 32768.0
 
 [node name="kbModeStartOffsetX" parent="tabs/vboxAdvanced/hboxSettings/vboxRight" instance=ExtResource( 3 )]
-margin_top = 28.0
-margin_right = 474.0
-margin_bottom = 52.0
+offset_top = 28.0
+offset_right = 474.0
+offset_bottom = 52.0
 labelText = "KB Mode Start Offset X:"
 rangeMin = 1.0
 rangeMax = 127.0
 
 [node name="kbModeStartOffsetY" parent="tabs/vboxAdvanced/hboxSettings/vboxRight" instance=ExtResource( 3 )]
-margin_top = 56.0
-margin_right = 474.0
-margin_bottom = 80.0
+offset_top = 56.0
+offset_right = 474.0
+offset_bottom = 80.0
 labelText = "KB Mode Start Offset Y:"
 rangeMin = 1.0
 rangeMax = 127.0
 
 [node name="kbModeYConeEnd" parent="tabs/vboxAdvanced/hboxSettings/vboxRight" instance=ExtResource( 3 )]
-margin_top = 84.0
-margin_right = 474.0
-margin_bottom = 108.0
+offset_top = 84.0
+offset_right = 474.0
+offset_bottom = 108.0
 labelText = "KB Mode Y Cone End:"
 rangeMin = 1.0
 rangeMax = 127.0
 
 [node name="vboxStickAxesOrientation" type="VBoxContainer" parent="tabs/vboxAdvanced"]
-margin_top = 154.0
-margin_right = 952.0
-margin_bottom = 220.0
+offset_top = 154.0
+offset_right = 952.0
+offset_bottom = 220.0
 
 [node name="lblStickAxesOrientation" type="Label" parent="tabs/vboxAdvanced/vboxStickAxesOrientation"]
-margin_right = 952.0
-margin_bottom = 14.0
+offset_right = 952.0
+offset_bottom = 14.0
 text = "Stick Axes Orientation"
 align = 1
 
 [node name="hboxAxes" type="HBoxContainer" parent="tabs/vboxAdvanced/vboxStickAxesOrientation"]
-margin_top = 18.0
-margin_right = 952.0
-margin_bottom = 66.0
-custom_constants/separation = 30
+offset_top = 18.0
+offset_right = 952.0
+offset_bottom = 66.0
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="xAxis" type="VBoxContainer" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes"]
-margin_left = 373.0
-margin_right = 461.0
-margin_bottom = 48.0
+offset_left = 373.0
+offset_right = 461.0
+offset_bottom = 48.0
 
 [node name="axis" type="HBoxContainer" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis"]
-margin_right = 88.0
-margin_bottom = 20.0
+offset_right = 88.0
+offset_bottom = 20.0
 
 [node name="label" type="Label" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/axis"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "X Axis: "
 
 [node name="axis" type="OptionButton" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/axis"]
-margin_left = 51.0
-margin_right = 88.0
-margin_bottom = 20.0
+offset_left = 51.0
+offset_right = 88.0
+offset_bottom = 20.0
 text = "0"
 items = [ "0", null, false, 0, null, "1", null, false, 1, null ]
 selected = 0
 
 [node name="chkReverse" type="CheckBox" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis"]
-margin_top = 24.0
-margin_right = 88.0
-margin_bottom = 48.0
+offset_top = 24.0
+offset_right = 88.0
+offset_bottom = 48.0
 text = "Reverse"
 
 [node name="yAxis" type="VBoxContainer" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes"]
-margin_left = 491.0
-margin_right = 578.0
-margin_bottom = 48.0
+offset_left = 491.0
+offset_right = 578.0
+offset_bottom = 48.0
 
 [node name="axis" type="HBoxContainer" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis"]
-margin_right = 87.0
-margin_bottom = 20.0
+offset_right = 87.0
+offset_bottom = 20.0
 
 [node name="label" type="Label" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/axis"]
-margin_top = 3.0
-margin_right = 46.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 46.0
+offset_bottom = 17.0
 text = "Y Axis: "
 
 [node name="axis" type="OptionButton" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/axis"]
-margin_left = 50.0
-margin_right = 87.0
-margin_bottom = 20.0
+offset_left = 50.0
+offset_right = 87.0
+offset_bottom = 20.0
 text = "0"
 items = [ "0", null, false, 0, null, "1", null, false, 1, null ]
 selected = 0
 
 [node name="chkReverse" type="CheckBox" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis"]
-margin_top = 24.0
-margin_right = 87.0
-margin_bottom = 48.0
+offset_top = 24.0
+offset_right = 87.0
+offset_bottom = 48.0
 text = "Reverse"
 
 [node name="CenterContainer" type="CenterContainer" parent="tabs/vboxAdvanced"]
-margin_top = 224.0
-margin_right = 952.0
-margin_bottom = 244.0
+offset_top = 224.0
+offset_right = 952.0
+offset_bottom = 244.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="tabs/vboxAdvanced/CenterContainer"]
-margin_left = 426.0
-margin_right = 525.0
-margin_bottom = 20.0
+offset_left = 426.0
+offset_right = 525.0
+offset_bottom = 20.0
 
 [node name="readStick" type="Button" parent="tabs/vboxAdvanced/CenterContainer/HBoxContainer"]
-margin_right = 77.0
-margin_bottom = 20.0
+offset_right = 77.0
+offset_bottom = 20.0
 toggle_mode = true
 text = "Read Stick"
 
 [node name="readStickHelp" type="Button" parent="tabs/vboxAdvanced/CenterContainer/HBoxContainer"]
-margin_left = 81.0
-margin_right = 99.0
-margin_bottom = 20.0
+offset_left = 81.0
+offset_right = 99.0
+offset_bottom = 20.0
 text = "?"
 
 [node name="stickGraphs" type="HBoxContainer" parent="tabs/vboxAdvanced"]
-margin_top = 248.0
-margin_right = 952.0
-margin_bottom = 320.0
+offset_top = 248.0
+offset_right = 952.0
+offset_bottom = 320.0
 alignment = 1
 
 [node name="raw" parent="tabs/vboxAdvanced/stickGraphs" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 405.0
-margin_right = 474.0
-margin_bottom = 72.0
+offset_left = 405.0
+offset_right = 474.0
+offset_bottom = 72.0
 titleText = "Raw"
-size = 160.0
+graph_size = 160.0
 rangeMax = 65535.0
 
 [node name="calculated" parent="tabs/vboxAdvanced/stickGraphs" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 478.0
-margin_right = 547.0
-margin_bottom = 72.0
+offset_left = 478.0
+offset_right = 547.0
+offset_bottom = 72.0
 titleText = "Calculated"
-size = 160.0
+graph_size = 160.0
 rangeMin = -127.0
 rangeMax = 127.0
 

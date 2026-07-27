@@ -15,13 +15,13 @@ func setupInputBindingsForChildren(parent: Container) -> void:
 		for childContainer in container.get_children():
 			print(childContainer.get_class())
 			if childContainer.is_class("OptionButton"):
-				childContainer.connect("item_selected", self, "optionButtonSelectionChanged", [childContainer.name])
+				childContainer.connect("item_selected", Callable(self, "optionButtonSelectionChanged").bind(childContainer.name))
 			
 			if childContainer.is_class("CheckButton"):
-				childContainer.connect("toggled", self, "checkButtonToggled", [childContainer.name])
+				childContainer.connect("toggled", Callable(self, "checkButtonToggled").bind(childContainer.name))
 			
 			if childContainer.is_class("ColorPickerButton"):
-				childContainer.connect("color_changed", self, "colorPickerButtonColorChanged", [childContainer.name])
+				childContainer.connect("color_changed", Callable(self, "colorPickerButtonColorChanged").bind(childContainer.name))
 
 func optionButtonSelectionChanged(selectionIndex: int, nodeName: String) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(

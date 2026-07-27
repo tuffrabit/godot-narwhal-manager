@@ -4,15 +4,15 @@ class_name Connect
 
 signal portConnected;
 
-onready var lblError: Label = $vboxMain/lblError
-onready var btnRetry: Button = $vboxMain/btnRetry
+@onready var lblError: Label = $vboxMain/lblError
+@onready var btnRetry: Button = $vboxMain/btnRetry
 
 func getPortConnection() -> void:
 	self.hideFields()
 	var isConnected = SerialHelper.doHandshake()
 	
 	if isConnected:
-		self.emit_signal("portConnected")
+		self.portConnected.emit()
 	else:
 		self.showFields("Could not find a TuFFrabit device")
 

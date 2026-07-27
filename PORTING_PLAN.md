@@ -21,28 +21,45 @@ Decisions already made (see discussion in repo history / PR notes):
 
 ---
 
-## Phase 0 — Prep and de-risking spikes
+## Phase 0 — Prep and de-risking spikes ✅ COMPLETE
 
 Do these before touching project files. If a spike fails, the plan changes, not the code.
 
-1. Create a `godot-4-port` branch. Tag the current HEAD as the last 3.x release.
-2. Install Godot 4.7.x **standard** editor (non-.NET).
-3. **Spike A — GdSerial on 4.7:** download the GdSerial release, drop `addons/gdserial`
-   into a blank 4.7 project, enable the plugin, and run `list_ports()` from a script.
-   GdSerial targets 4.4+; GDExtension is forward-compatible within 4.x so this should
-   load, but this is the single biggest unknown in the plan. Confirm on Windows and Linux.
-4. **Spike B — project converter:** copy the project to a scratch directory, open it in
-   the 4.7 editor, let the built-in 3→4 conversion run, and note what it breaks. This
-   informs Phase 1; the scratch copy is thrown away.
-5. Vendor the verified GdSerial version into the real branch under `addons/gdserial/`
-   and record its version + source URL + license in the README.
+**Results (executed on the `godot-4-port` branch):**
+
+1. ✅ Branch `godot-4-port` created; HEAD tagged `godot-3-final`. Main untouched.
+2. ✅ Godot **4.7.1-stable standard** (`4.7.1.stable.official.a13da4feb`) downloaded to
+   `tools/` (gitignored).
+3. ✅ **Spike A — GdSerial v0.3.4 loads clean on 4.7.1** (`spikes/gdserial-test/`).
+   `Initialize godot-rust (API v4.4.stable, runtime v4.7.1.stable)`, `GdSerial.new()`
+   resolves, `list_ports()` executes (returned the machine's `/dev/ttyS*` UARTs — no USB
+   serial attached, which is fine; the spike proves loading + API, not hardware).
+   **Two gotchas:**
+   - The release **zip asset ships a 0-byte `gdserial.gdextension`** (packaging bug).
+     Vendor from the **`.tar.gz` asset** (or the file from the repo tag) instead.
+   - On a fresh project the extension is **not loaded until one editor scan** has run
+     (`--editor --headless --quit` generates `.godot/extension_list.cfg`). Do one
+     editor scan before any headless run in Phases 1–2.
+4. ✅ **Spike B — converter runs fully headless** (`spikes/convert-test/`):
+   `godot --headless --editor --path <copy> --convert-3to4 --quit` (dry-run:
+   `--validate-conversion-3to4`). **30/30 files converted, zero warnings/errors.** No
+   editor dialog needed — the Phase 1 conversion step is scriptable. Confirmed the
+   known traps are NOT auto-fixed: `stickGraph.gd` still gets `@export var size`
+   (rename to `graph_size` still required, incl. the two `size = 160.0` overrides in
+   `device.tscn`), and `dialogs.gd` still connects the nonexistent `modal_closed`
+   signal (rework still required).
+5. ⏳ Vendor the verified GdSerial version (**v0.3.4, from the `.tar.gz` asset**) into
+   the real branch under `addons/gdserial/` and record version + source URL + license
+   in the README. (First task of Phase 2.)
 
 ---
 
 ## Phase 1 — Mechanical engine port (3.x → 4.7)
 
-Run the converter on the real branch, then apply the manual fixups below. The converter
-handles most renames; everything listed here was confirmed by reading every script.
+Run the converter on the real branch (verified headless in Spike B:
+`tools/Godot_v4.7.1-stable_linux.x86_64 --headless --editor --path <project> --convert-3to4 --quit`),
+then apply the manual fixups below. The converter handles most renames; everything listed
+here was confirmed by reading every script and by the Spike B spot-checks.
 
 ### Global GDScript changes
 
@@ -241,9 +258,9 @@ Don't chase the last few MB at the cost of unbuildable templates.
 
 ## Risks and open questions
 
-- **GdSerial on 4.7** (mitigated by Phase 0 Spike A; worst case: build it from source
-  against 4.7 — it's MIT-licensed Rust over `serialport-rs`, or fall back to keeping
-  Godot .NET).
+- ~~**GdSerial on 4.7**~~ — **resolved by Spike A**: v0.3.4 loads and runs on 4.7.1
+  (see Phase 0 for the two packaging gotchas). Remaining fallback if trouble appears
+  later: build from source, or temporarily keep Godot .NET.
 - **Scene layout drift** from the anchor/offset conversion — cosmetic, caught in
   Phase 1 review.
 - **Firmware protocol is unchanged** — the device doesn't know or care what engine

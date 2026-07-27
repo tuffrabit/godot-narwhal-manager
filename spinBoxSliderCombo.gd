@@ -4,15 +4,15 @@ class_name SpinBoxSliderCombo
 
 signal valueChanged(value);
 
-onready var label: Label = $label
-onready var spinner: SpinBox = $spinBox
-onready var slider: HSlider = $slider
-onready var emitValueChangedSignal: bool = true
+@onready var label: Label = $label
+@onready var spinner: SpinBox = $spinBox
+@onready var slider: HSlider = $slider
+@onready var emitValueChangedSignal: bool = true
 
-export var labelText: String = "" setget setLabelText
-export var rangeMin: float = 0 setget setRangeMin
-export var rangeMax: float = 0 setget setRangeMax
-export var value: float = 0 setget setValue
+@export var labelText: String = "": set = setLabelText
+@export var rangeMin: float = 0: set = setRangeMin
+@export var rangeMax: float = 0: set = setRangeMax
+@export var value: float = 0: set = setValue
 
 func _ready() -> void:
 	self.label.text = self.labelText
@@ -20,8 +20,8 @@ func _ready() -> void:
 	self.slider.min_value = self.rangeMin
 	self.spinner.max_value = self.rangeMax
 	self.slider.max_value = self.rangeMax
-	self.spinner.connect("value_changed", self, "spinnerValueChanged")
-	self.slider.connect("value_changed", self, "sliderValueChanged")
+	self.spinner.connect("value_changed", Callable(self, "spinnerValueChanged"))
+	self.slider.connect("value_changed", Callable(self, "sliderValueChanged"))
 
 func setLabelText(value: String) -> void:
 	labelText = value
@@ -51,7 +51,7 @@ func spinnerValueChanged(value: float) -> void:
 		if value != self.slider.value:
 			self.slider.value = value
 		
-		self.emit_signal("valueChanged", value)
+		self.valueChanged.emit(value)
 
 func sliderValueChanged(value: float) -> void:
 	if self.emitValueChangedSignal:

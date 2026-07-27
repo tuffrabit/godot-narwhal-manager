@@ -1,13 +1,15 @@
 extends Node
 
-onready var textInputDialogScene: PackedScene = preload("res://textInputDialog.tscn")
+@onready var textInputDialogScene: PackedScene = preload("res://textInputDialog.tscn")
 
 func showAlertDialog(message: String, title: String = "Alert!") -> void:
 	var dialog = AcceptDialog.new()
 	
 	dialog.dialog_text = message
-	dialog.window_title = title
-	dialog.connect('modal_closed', dialog, 'queue_free')
+	dialog.title = title
+	dialog.confirmed.connect(dialog.queue_free)
+	dialog.canceled.connect(dialog.queue_free)
+	dialog.close_requested.connect(dialog.queue_free)
 	
 	var sceneTree = Engine.get_main_loop()
 	
@@ -18,9 +20,11 @@ func showConfirmationDialog(message: String, confirmedTarget: Object, confirmedM
 	var dialog = ConfirmationDialog.new()
 	
 	dialog.dialog_text = message
-	dialog.window_title = title
-	dialog.connect("confirmed", confirmedTarget, confirmedMethod)
-	dialog.connect('modal_closed', dialog, 'queue_free')
+	dialog.title = title
+	dialog.confirmed.connect(Callable(confirmedTarget, confirmedMethod))
+	dialog.confirmed.connect(dialog.queue_free)
+	dialog.canceled.connect(dialog.queue_free)
+	dialog.close_requested.connect(dialog.queue_free)
 	
 	var sceneTree = Engine.get_main_loop()
 	
@@ -28,11 +32,13 @@ func showConfirmationDialog(message: String, confirmedTarget: Object, confirmedM
 	dialog.popup_centered()
 
 func showTextInputDialog(title: String, confirmedTarget: Object, confirmedMethod: String) -> void:
-	var textInputDialog: TextInputDialog = self.textInputDialogScene.instance()
+	var textInputDialog: TextInputDialog = self.textInputDialogScene.instantiate()
 	
-	textInputDialog.window_title = title
-	textInputDialog.connect("confirmedWithValue", confirmedTarget, confirmedMethod)
-	textInputDialog.connect("modal_closed", textInputDialog, "queue_free")
+	textInputDialog.title = title
+	textInputDialog.confirmedWithValue.connect(Callable(confirmedTarget, confirmedMethod))
+	textInputDialog.confirmedWithValue.connect(textInputDialog.queue_free)
+	textInputDialog.canceled.connect(textInputDialog.queue_free)
+	textInputDialog.close_requested.connect(textInputDialog.queue_free)
 	
 	var sceneTree = Engine.get_main_loop()
 	

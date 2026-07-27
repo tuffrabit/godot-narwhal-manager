@@ -6,76 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "CenterContainer",
-"class": "Connect",
-"language": "GDScript",
-"path": "res://connect.gd"
-}, {
-"base": "VBoxContainer",
-"class": "Device",
-"language": "GDScript",
-"path": "res://device.gd"
-}, {
-"base": "OptionButton",
-"class": "InputOptionButton",
-"language": "GDScript",
-"path": "res://inputOptionButton.gd"
-}, {
-"base": "ProfileBase",
-"class": "Profile",
-"language": "GDScript",
-"path": "res://profile.gd"
-}, {
-"base": "HBoxContainer",
-"class": "ProfileBase",
-"language": "GDScript",
-"path": "res://profileBase.gd"
-}, {
-"base": "ProfileBase",
-"class": "ProfileJoystick",
-"language": "GDScript",
-"path": "res://profileJoystick.gd"
-}, {
-"base": "VBoxContainer",
-"class": "Profiles",
-"language": "GDScript",
-"path": "res://profiles.gd"
-}, {
-"base": "HBoxContainer",
-"class": "SpinBoxSliderCombo",
-"language": "GDScript",
-"path": "res://spinBoxSliderCombo.gd"
-}, {
-"base": "VBoxContainer",
-"class": "StickGraph",
-"language": "GDScript",
-"path": "res://stickGraph.gd"
-}, {
-"base": "ConfirmationDialog",
-"class": "TextInputDialog",
-"language": "GDScript",
-"path": "res://textInputDialog.gd"
-} ]
-_global_script_class_icons={
-"Connect": "",
-"Device": "",
-"InputOptionButton": "",
-"Profile": "",
-"ProfileBase": "",
-"ProfileJoystick": "",
-"Profiles": "",
-"SpinBoxSliderCombo": "",
-"StickGraph": "",
-"TextInputDialog": ""
-}
+config_version=5
 
 [application]
 
 config/name="TuFFrabit Device Manager"
 run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.7")
 config/icon="res://icon.png"
 
 [autoload]
@@ -90,17 +27,13 @@ settings/fps/force_fps=30
 
 [display]
 
-window/size/width=960
-window/size/height=540
+window/size/viewport_width=960
+window/size/viewport_height=540
 window/size/resizable=false
 
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
-
-[mono]
-
-project/assembly_name="godot-narwhal-manager"
 
 [physics]
 
@@ -109,4 +42,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://default_env.tres"

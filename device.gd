@@ -7,30 +7,30 @@ signal disconnectClick;
 var profileScene: PackedScene = preload("res://profile.tscn")
 var profileJoystickScene: PackedScene = preload("res://profileJoystick.tscn")
 
-onready var tabs: TabContainer = $tabs
-onready var profiles: Profiles = $tabs/hsplitMain/profiles
-onready var pnlProfile: Panel = $tabs/hsplitMain/pnlProfile
-onready var readStickValuesTimer = $readStickValuesTimer
-onready var stickBoundLowX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX
-onready var stickBoundHighX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX
-onready var stickBoundLowY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY
-onready var stickBoundHighY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY
-onready var deadzoneSize: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSize
-onready var kbModeStartOffsetX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX
-onready var kbModeStartOffsetY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY
-onready var kbModeYConeEnd: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeYConeEnd
-onready var stickXAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/axis/axis
-onready var stickXAxisReverse: CheckBox = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/chkReverse
-onready var stickYAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/axis/axis
-onready var stickYAxisReverse: CheckBox = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/chkReverse
-onready var rawStick: StickGraph = $tabs/vboxAdvanced/stickGraphs/raw
-onready var calculatedStick: StickGraph = $tabs/vboxAdvanced/stickGraphs/calculated
+@onready var tabs: TabContainer = $tabs
+@onready var profiles: Profiles = $tabs/hsplitMain/profiles
+@onready var pnlProfile: Panel = $tabs/hsplitMain/pnlProfile
+@onready var readStickValuesTimer = $readStickValuesTimer
+@onready var stickBoundLowX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX
+@onready var stickBoundHighX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX
+@onready var stickBoundLowY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY
+@onready var stickBoundHighY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighY
+@onready var deadzoneSize: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/deadzoneSize
+@onready var kbModeStartOffsetX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetX
+@onready var kbModeStartOffsetY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeStartOffsetY
+@onready var kbModeYConeEnd: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxRight/kbModeYConeEnd
+@onready var stickXAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/axis/axis
+@onready var stickXAxisReverse: CheckBox = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis/chkReverse
+@onready var stickYAxis: OptionButton = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/axis/axis
+@onready var stickYAxisReverse: CheckBox = $tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis/chkReverse
+@onready var rawStick: StickGraph = $tabs/vboxAdvanced/stickGraphs/raw
+@onready var calculatedStick: StickGraph = $tabs/vboxAdvanced/stickGraphs/calculated
 
 func _ready() -> void:
 	self.tabs.set_tab_title(0, "Profiles")
 	self.tabs.set_tab_title(1, "Advanced")
-	self.profiles.connect("profileSelected", self, "profileSelected")
-	self.profiles.connect("profileRenamed", self, "profileRenamed")
+	self.profiles.connect("profileSelected", Callable(self, "profileSelected"))
+	self.profiles.connect("profileRenamed", Callable(self, "profileRenamed"))
 	self.rawStick.setRunning(false)
 	self.calculatedStick.setRunning(false)
 	
@@ -53,34 +53,34 @@ func _ready() -> void:
 			self.kbModeStartOffsetY.setValueNoSignal(int(globalSettings["kbModeOffsets"]["y"]))
 			self.kbModeYConeEnd.setValueNoSignal(int(globalSettings["kbModeYConeEnd"]))
 			self.stickXAxis.select(int(globalSettings["stickAxesOrientation"]["x"]["axis"]))
-			self.stickXAxisReverse.pressed = bool(globalSettings["stickAxesOrientation"]["x"]["reverse"])
+			self.stickXAxisReverse.button_pressed = bool(globalSettings["stickAxesOrientation"]["x"]["reverse"])
 			self.stickYAxis.select(int(globalSettings["stickAxesOrientation"]["y"]["axis"]))
-			self.stickYAxisReverse.pressed = bool(globalSettings["stickAxesOrientation"]["y"]["reverse"])
+			self.stickYAxisReverse.button_pressed = bool(globalSettings["stickAxesOrientation"]["y"]["reverse"])
 		
-		self.stickBoundLowX.connect("valueChanged", self, "stickBoundLowXValueChanged")
-		self.stickBoundHighX.connect("valueChanged", self, "stickBoundHighXValueChanged")
-		self.stickBoundLowY.connect("valueChanged", self, "stickBoundLowYValueChanged")
-		self.stickBoundHighY.connect("valueChanged", self, "stickBoundHighYValueChanged")
-		self.deadzoneSize.connect("valueChanged", self, "deadzoneSizeValueChanged")
-		self.kbModeStartOffsetX.connect("valueChanged", self, "kbModeStartOffsetXValueChanged")
-		self.kbModeStartOffsetY.connect("valueChanged", self, "kbModeStartOffsetYValueChanged")
-		self.kbModeYConeEnd.connect("valueChanged", self, "kbModeYConeEndValueChanged")
-		self.stickXAxis.connect("item_selected", self, "stickXAxisItemSelected")
-		self.stickXAxisReverse.connect("toggled", self, "stickXAxisReverseToggled")
-		self.stickYAxis.connect("item_selected", self, "stickYAxisItemSelected")
-		self.stickYAxisReverse.connect("toggled", self, "stickYAxisReverseToggled")
+		self.stickBoundLowX.connect("valueChanged", Callable(self, "stickBoundLowXValueChanged"))
+		self.stickBoundHighX.connect("valueChanged", Callable(self, "stickBoundHighXValueChanged"))
+		self.stickBoundLowY.connect("valueChanged", Callable(self, "stickBoundLowYValueChanged"))
+		self.stickBoundHighY.connect("valueChanged", Callable(self, "stickBoundHighYValueChanged"))
+		self.deadzoneSize.connect("valueChanged", Callable(self, "deadzoneSizeValueChanged"))
+		self.kbModeStartOffsetX.connect("valueChanged", Callable(self, "kbModeStartOffsetXValueChanged"))
+		self.kbModeStartOffsetY.connect("valueChanged", Callable(self, "kbModeStartOffsetYValueChanged"))
+		self.kbModeYConeEnd.connect("valueChanged", Callable(self, "kbModeYConeEndValueChanged"))
+		self.stickXAxis.connect("item_selected", Callable(self, "stickXAxisItemSelected"))
+		self.stickXAxisReverse.connect("toggled", Callable(self, "stickXAxisReverseToggled"))
+		self.stickYAxis.connect("item_selected", Callable(self, "stickYAxisItemSelected"))
+		self.stickYAxisReverse.connect("toggled", Callable(self, "stickYAxisReverseToggled"))
 
 func profileSelected(profile: Dictionary) -> void:
 	for child in self.pnlProfile.get_children():
 		self.pnlProfile.remove_child(child)
 		child.queue_free()
 	
-	var profileInstance: ProfileBase = self.profileScene.instance()
+	var profileInstance: ProfileBase = self.profileScene.instantiate()
 	
 	if SerialHelper.deviceType == SerialHelper.DeviceType.Tuffpad:
-		profileInstance = self.profileScene.instance()
+		profileInstance = self.profileScene.instantiate()
 	elif SerialHelper.deviceType == SerialHelper.DeviceType.Tuffjoystick:
-		profileInstance = self.profileJoystickScene.instance()
+		profileInstance = self.profileJoystickScene.instantiate()
 	
 	self.pnlProfile.add_child(profileInstance)
 	profileInstance.setProfileName(profile['name'])
@@ -95,7 +95,7 @@ func profileRenamed(oldProfileName: String, newProfileName: String) -> void:
 				break
 
 func _on_btnDisconnect_pressed() -> void:
-	self.emit_signal("disconnectClick")
+	self.disconnectClick.emit()
 
 func _on_btnSave_pressed() -> void:
 	Dialogs.showConfirmationDialog("Are you sure? This will save all configurations to the device.", self, "saveEverything2")
@@ -103,14 +103,14 @@ func _on_btnSave_pressed() -> void:
 
 func getCorrectDriveName() -> String:
 	var driveName: String = ""
-	var dir: Directory = Directory.new()
-	var driveCount: int = dir.get_drive_count()
+	var dir: DirAccess = DirAccess.open("res://")
+	var driveCount: int = DirAccess.get_drive_count()
 	
 	for driveIndex in driveCount:
 		var drive: String = dir.get_drive(driveIndex)
 		var checkFilename: String = drive + "\\iamindeedatuffpad"
 		
-		if dir.file_exists(checkFilename):
+		if FileAccess.file_exists(checkFilename):
 			driveName = drive
 			break
 	
@@ -119,13 +119,12 @@ func getCorrectDriveName() -> String:
 
 func getCorrectDriveName2() -> String:
 	var driveName: String = ""
-	var dir: Directory = Directory.new()
 	var possibleDrives = ["A:", "B:", "C:", "D:", "E:", "F:", "G:", "H:", "I:", "J:", "K:", "L:", "M:", "N:", "O:", "P:", "Q:", "R:", "S:", "T:", "U:", "V:", "W:", "X:", "Y:", "Z:"]
 	
 	for possibleDrive in possibleDrives:
 		var checkFilename: String = possibleDrive + "\\iamindeedatuffpad"
 		
-		if dir.file_exists(checkFilename):
+		if FileAccess.file_exists(checkFilename):
 			driveName = possibleDrive
 			break
 	
@@ -139,12 +138,12 @@ func saveEverything() -> void:
 		
 		if response != null and "getSaveData" in response:
 			var data: String = response["getSaveData"]
-			var file: File = File.new()
 			var configFilename: String = drive + "\\config.json"
+			var file: FileAccess = FileAccess.open(configFilename, FileAccess.WRITE)
 			
-			file.open(configFilename, File.WRITE)
-			file.store_string(data)
-			file.close()
+			if file:
+				file.store_string(data)
+				file.close()
 		else:
 			Dialogs.showAlertDialog("Could not retrieve valid data to save from TuFFpad.", "Can't save")
 	else:
@@ -256,7 +255,7 @@ func kbModeYConeEndValueChanged(value: float) -> void:
 
 func stickXAxisItemSelected(value: int) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setStickXOrientation", {"axis": value, "reverse": self.stickXAxisReverse.pressed})
+			"setStickXOrientation", {"axis": value, "reverse": self.stickXAxisReverse.button_pressed})
 	
 	if response and "setStickXOrientation" in response:
 		pass
@@ -270,7 +269,7 @@ func stickXAxisReverseToggled(value: bool) -> void:
 
 func stickYAxisItemSelected(value: int) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
-			"setStickYOrientation", {"axis": value, "reverse": self.stickYAxisReverse.pressed})
+			"setStickYOrientation", {"axis": value, "reverse": self.stickYAxisReverse.button_pressed})
 	
 	if response and "setStickYOrientation" in response:
 		pass

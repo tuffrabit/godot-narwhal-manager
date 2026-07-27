@@ -15,7 +15,6 @@
 
 # Mono auto generated files
 mono_crash.*
-.mono/metadata/*
 
 # Build results
 [Dd]ebug/
@@ -397,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Godot 4 local cache
+.godot/
+
+tools/
+spikes/

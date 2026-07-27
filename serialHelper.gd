@@ -11,6 +11,9 @@ func setSerial(serial) -> void:
 func doHandshake() -> bool:
 	var success: bool = false
 	
+	if self.serial == null:
+		return success
+	
 	for portName in self.serial.getAvailablePortNames():
 		var connected: bool = self.serial.connectToPort(portName)
 		
@@ -19,7 +22,7 @@ func doHandshake() -> bool:
 			var line = self.serial.readLine()
 			
 			if line:
-				var lineData: Dictionary = parse_json(line)
+				var lineData = JSON.parse_string(line)
 				
 				if lineData != null:
 					if lineData.has("areyouatuffpad?") and lineData["areyouatuffpad?"]:
@@ -41,15 +44,15 @@ func sendCommandAndGetResponse(command: String, commandValue = null) -> Dictiona
 		var jsonData: String
 		
 		if commandValue != null:
-			jsonData = JSON.print({command: commandValue})
+			jsonData = JSON.stringify({command: commandValue})
 		else:
-			jsonData = JSON.print([command])
+			jsonData = JSON.stringify([command])
 		
 		self.serial.writeLine(jsonData)
 		var line = self.serial.readLine()
 		
 		if line:
-			var lineData: Dictionary = parse_json(line)
+			var lineData = JSON.parse_string(line)
 			
 			if lineData != null and command in lineData:
 				result = lineData

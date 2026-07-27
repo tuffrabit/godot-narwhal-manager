@@ -4,18 +4,18 @@
 
 [node name="textInputDialog" type="ConfirmationDialog"]
 visible = true
-margin_right = 40.0
-margin_bottom = 40.0
-popup_exclusive = true
-window_title = "New Value"
+offset_right = 40.0
+offset_bottom = 40.0
+exclusive = true
+title = "New Value"
 script = ExtResource( 1 )
 
 [node name="txtValue" type="LineEdit" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -85.5
-margin_top = 7.0
-margin_right = 85.5
-margin_bottom = 24.0
+offset_left = -85.5
+offset_top = 7.0
+offset_right = 85.5
+offset_bottom = 24.0
 
 [connection signal="confirmed" from="." to="." method="_on_textInputDialog_confirmed"]

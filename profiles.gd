@@ -10,8 +10,8 @@ var previousActiveProfile: int
 var profileToDelete: int
 var profileToRename: int
 
-onready var btnActiveProfile: OptionButton = $hboxActiveProfile/btnActiveProfile
-onready var listProfiles: ItemList = $listProfiles
+@onready var btnActiveProfile: OptionButton = $hboxActiveProfile/btnActiveProfile
+@onready var listProfiles: ItemList = $listProfiles
 
 func _ready() -> void:
 	self.getProfileNames()
@@ -76,7 +76,7 @@ func _on_listProfiles_item_selected(index):
 		var profile: Dictionary = self.getProfile(profileName)
 		
 		if profile:
-			self.emit_signal("profileSelected", profile)
+			self.profileSelected.emit(profile)
 
 func _on_btnActiveProfile_item_selected(index):
 	self.previousActiveProfile = index
@@ -115,7 +115,7 @@ func createNewProfile(newProfileName: String) -> void:
 			Dialogs.showAlertDialog("Profile with that name already exists.", "Can't create new profile")
 
 func _on_btnDelete_pressed() -> void:
-	var selectedItemIndexes: PoolIntArray = self.listProfiles.get_selected_items()
+	var selectedItemIndexes: PackedInt32Array = self.listProfiles.get_selected_items()
 	
 	if selectedItemIndexes.size() > 0:
 		if selectedItemIndexes[0] != self.btnActiveProfile.selected:
@@ -141,7 +141,7 @@ func deleteProfile():
 				Dialogs.showAlertDialog("Profile removal failed on the device.", "Can't remove profile")
 
 func _on_btnRename_pressed():
-	var selectedItemIndexes: PoolIntArray = self.listProfiles.get_selected_items()
+	var selectedItemIndexes: PackedInt32Array = self.listProfiles.get_selected_items()
 	
 	if selectedItemIndexes.size() > 0:
 		if selectedItemIndexes[0] != self.btnActiveProfile.selected:
@@ -168,7 +168,7 @@ func renameProfile(newProfileName: String) -> void:
 				if response["renameProfile"]:
 					self.listProfiles.set_item_text(self.profileToRename, newProfileName)
 					self.btnActiveProfile.set_item_text(self.profileToRename, newProfileName)
-					self.emit_signal("profileRenamed", oldProfileName, newProfileName)
+					self.profileRenamed.emit(oldProfileName, newProfileName)
 					Dialogs.showAlertDialog("Profile successfully renamed.", "Success!")
 				else:
 					Dialogs.showAlertDialog("Profile creation failed on the device.", "Can't create new profile")
@@ -179,7 +179,7 @@ func renameProfile(newProfileName: String) -> void:
 
 
 func _on_btnMoveUp_pressed():
-	var selectedItemIndexes: PoolIntArray = self.listProfiles.get_selected_items()
+	var selectedItemIndexes: PackedInt32Array = self.listProfiles.get_selected_items()
 	
 	if selectedItemIndexes.size() > 0 and selectedItemIndexes[0] > 0:
 		var newPosition: int = selectedItemIndexes[0] - 1
@@ -194,7 +194,7 @@ func _on_btnMoveUp_pressed():
 				Dialogs.showAlertDialog("Profile re-order failed on the device.", "Can't re-order profile")
 
 func _on_btnMoveDown_pressed():
-	var selectedItemIndexes: PoolIntArray = self.listProfiles.get_selected_items()
+	var selectedItemIndexes: PackedInt32Array = self.listProfiles.get_selected_items()
 	
 	if selectedItemIndexes.size() > 0 and selectedItemIndexes[0] < self.listProfiles.get_item_count() - 1:
 		var newPosition: int = selectedItemIndexes[0] + 1

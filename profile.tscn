@@ -6,521 +6,521 @@
 [node name="profile" type="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 7.0
-margin_top = 7.0
-margin_right = -7.0
-margin_bottom = -7.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
 script = ExtResource( 1 )
 
 [node name="vboxLeft" type="VBoxContainer" parent="."]
-margin_right = 312.0
-margin_bottom = 526.0
+offset_right = 312.0
+offset_bottom = 526.0
 size_flags_horizontal = 3
 
 [node name="hboxKey1" type="HBoxContainer" parent="vboxLeft"]
-margin_right = 312.0
-margin_bottom = 20.0
+offset_right = 312.0
+offset_bottom = 20.0
 
 [node name="label" type="Label" parent="vboxLeft/hboxKey1"]
-margin_top = 3.0
-margin_right = 39.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 17.0
 text = "Key 1:"
 
 [node name="key0" parent="vboxLeft/hboxKey1" instance=ExtResource( 2 )]
-margin_left = 43.0
-margin_right = 72.0
+offset_left = 43.0
+offset_right = 72.0
 
 [node name="hboxKey2" type="HBoxContainer" parent="vboxLeft"]
-margin_top = 24.0
-margin_right = 312.0
-margin_bottom = 44.0
+offset_top = 24.0
+offset_right = 312.0
+offset_bottom = 44.0
 
 [node name="label" type="Label" parent="vboxLeft/hboxKey2"]
-margin_top = 3.0
-margin_right = 39.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 17.0
 text = "Key 2:"
 
 [node name="key1" parent="vboxLeft/hboxKey2" instance=ExtResource( 2 )]
-margin_left = 43.0
-margin_right = 72.0
+offset_left = 43.0
+offset_right = 72.0
 
 [node name="hboxKey3" type="HBoxContainer" parent="vboxLeft"]
-margin_top = 48.0
-margin_right = 312.0
-margin_bottom = 68.0
+offset_top = 48.0
+offset_right = 312.0
+offset_bottom = 68.0
 
 [node name="label" type="Label" parent="vboxLeft/hboxKey3"]
-margin_top = 3.0
-margin_right = 39.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 17.0
 text = "Key 3:"
 
 [node name="key2" parent="vboxLeft/hboxKey3" instance=ExtResource( 2 )]
-margin_left = 43.0
-margin_right = 72.0
+offset_left = 43.0
+offset_right = 72.0
 
 [node name="hboxKey4" type="HBoxContainer" parent="vboxLeft"]
-margin_top = 72.0
-margin_right = 312.0
-margin_bottom = 92.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 92.0
 
 [node name="label" type="Label" parent="vboxLeft/hboxKey4"]
-margin_top = 3.0
-margin_right = 39.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 17.0
 text = "Key 4:"
 
 [node name="key3" parent="vboxLeft/hboxKey4" instance=ExtResource( 2 )]
-margin_left = 43.0
-margin_right = 72.0
+offset_left = 43.0
+offset_right = 72.0
 
 [node name="hboxKey5" type="HBoxContainer" parent="vboxLeft"]
-margin_top = 96.0
-margin_right = 312.0
-margin_bottom = 116.0
+offset_top = 96.0
+offset_right = 312.0
+offset_bottom = 116.0
 
 [node name="label" type="Label" parent="vboxLeft/hboxKey5"]
-margin_top = 3.0
-margin_right = 39.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 17.0
 text = "Key 5:"
 
 [node name="key4" parent="vboxLeft/hboxKey5" instance=ExtResource( 2 )]
-margin_left = 43.0
-margin_right = 72.0
+offset_left = 43.0
+offset_right = 72.0
 
 [node name="hboxKey6" type="HBoxContainer" parent="vboxLeft"]
-margin_top = 120.0
-margin_right = 312.0
-margin_bottom = 140.0
+offset_top = 120.0
+offset_right = 312.0
+offset_bottom = 140.0
 
 [node name="label" type="Label" parent="vboxLeft/hboxKey6"]
-margin_top = 3.0
-margin_right = 39.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 17.0
 text = "Key 6:"
 
 [node name="key5" parent="vboxLeft/hboxKey6" instance=ExtResource( 2 )]
-margin_left = 43.0
-margin_right = 72.0
+offset_left = 43.0
+offset_right = 72.0
 
 [node name="hboxKey7" type="HBoxContainer" parent="vboxLeft"]
-margin_top = 144.0
-margin_right = 312.0
-margin_bottom = 164.0
+offset_top = 144.0
+offset_right = 312.0
+offset_bottom = 164.0
 
 [node name="label" type="Label" parent="vboxLeft/hboxKey7"]
-margin_top = 3.0
-margin_right = 39.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 17.0
 text = "Key 7:"
 
 [node name="key6" parent="vboxLeft/hboxKey7" instance=ExtResource( 2 )]
-margin_left = 43.0
-margin_right = 72.0
+offset_left = 43.0
+offset_right = 72.0
 
 [node name="hboxKey8" type="HBoxContainer" parent="vboxLeft"]
-margin_top = 168.0
-margin_right = 312.0
-margin_bottom = 188.0
+offset_top = 168.0
+offset_right = 312.0
+offset_bottom = 188.0
 
 [node name="label" type="Label" parent="vboxLeft/hboxKey8"]
-margin_top = 3.0
-margin_right = 39.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 17.0
 text = "Key 8:"
 
 [node name="key7" parent="vboxLeft/hboxKey8" instance=ExtResource( 2 )]
-margin_left = 43.0
-margin_right = 72.0
+offset_left = 43.0
+offset_right = 72.0
 
 [node name="hboxKey9" type="HBoxContainer" parent="vboxLeft"]
-margin_top = 192.0
-margin_right = 312.0
-margin_bottom = 212.0
+offset_top = 192.0
+offset_right = 312.0
+offset_bottom = 212.0
 
 [node name="label" type="Label" parent="vboxLeft/hboxKey9"]
-margin_top = 3.0
-margin_right = 39.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 17.0
 text = "Key 9:"
 
 [node name="key8" parent="vboxLeft/hboxKey9" instance=ExtResource( 2 )]
-margin_left = 43.0
-margin_right = 72.0
+offset_left = 43.0
+offset_right = 72.0
 
 [node name="hboxKey10" type="HBoxContainer" parent="vboxLeft"]
-margin_top = 216.0
-margin_right = 312.0
-margin_bottom = 236.0
+offset_top = 216.0
+offset_right = 312.0
+offset_bottom = 236.0
 
 [node name="label" type="Label" parent="vboxLeft/hboxKey10"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 10:"
 
 [node name="key9" parent="vboxLeft/hboxKey10" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="thumbKey" type="HBoxContainer" parent="vboxLeft"]
-margin_top = 240.0
-margin_right = 312.0
-margin_bottom = 260.0
+offset_top = 240.0
+offset_right = 312.0
+offset_bottom = 260.0
 
 [node name="label" type="Label" parent="vboxLeft/thumbKey"]
-margin_top = 3.0
-margin_right = 75.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 75.0
+offset_bottom = 17.0
 text = "Thumb Key:"
 
 [node name="thumbButton" parent="vboxLeft/thumbKey" instance=ExtResource( 2 )]
-margin_left = 79.0
-margin_right = 108.0
+offset_left = 79.0
+offset_right = 108.0
 
 [node name="vboxMiddle" type="VBoxContainer" parent="."]
-margin_left = 316.0
-margin_right = 629.0
-margin_bottom = 526.0
+offset_left = 316.0
+offset_right = 629.0
+offset_bottom = 526.0
 size_flags_horizontal = 3
 
 [node name="hboxKey11" type="HBoxContainer" parent="vboxMiddle"]
-margin_right = 313.0
-margin_bottom = 20.0
+offset_right = 313.0
+offset_bottom = 20.0
 
 [node name="label" type="Label" parent="vboxMiddle/hboxKey11"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 11:"
 
 [node name="key10" parent="vboxMiddle/hboxKey11" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="hboxKey12" type="HBoxContainer" parent="vboxMiddle"]
-margin_top = 24.0
-margin_right = 313.0
-margin_bottom = 44.0
+offset_top = 24.0
+offset_right = 313.0
+offset_bottom = 44.0
 
 [node name="label" type="Label" parent="vboxMiddle/hboxKey12"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 12:"
 
 [node name="key11" parent="vboxMiddle/hboxKey12" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="hboxKey13" type="HBoxContainer" parent="vboxMiddle"]
-margin_top = 48.0
-margin_right = 313.0
-margin_bottom = 68.0
+offset_top = 48.0
+offset_right = 313.0
+offset_bottom = 68.0
 
 [node name="label" type="Label" parent="vboxMiddle/hboxKey13"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 13:"
 
 [node name="key12" parent="vboxMiddle/hboxKey13" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="hboxKey14" type="HBoxContainer" parent="vboxMiddle"]
-margin_top = 72.0
-margin_right = 313.0
-margin_bottom = 92.0
+offset_top = 72.0
+offset_right = 313.0
+offset_bottom = 92.0
 
 [node name="label" type="Label" parent="vboxMiddle/hboxKey14"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 14:"
 
 [node name="key13" parent="vboxMiddle/hboxKey14" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="hboxKey15" type="HBoxContainer" parent="vboxMiddle"]
-margin_top = 96.0
-margin_right = 313.0
-margin_bottom = 116.0
+offset_top = 96.0
+offset_right = 313.0
+offset_bottom = 116.0
 
 [node name="label" type="Label" parent="vboxMiddle/hboxKey15"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 15:"
 
 [node name="key14" parent="vboxMiddle/hboxKey15" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="hboxKey16" type="HBoxContainer" parent="vboxMiddle"]
-margin_top = 120.0
-margin_right = 313.0
-margin_bottom = 140.0
+offset_top = 120.0
+offset_right = 313.0
+offset_bottom = 140.0
 
 [node name="label" type="Label" parent="vboxMiddle/hboxKey16"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 16:"
 
 [node name="key15" parent="vboxMiddle/hboxKey16" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="hboxKey17" type="HBoxContainer" parent="vboxMiddle"]
-margin_top = 144.0
-margin_right = 313.0
-margin_bottom = 164.0
+offset_top = 144.0
+offset_right = 313.0
+offset_bottom = 164.0
 
 [node name="label" type="Label" parent="vboxMiddle/hboxKey17"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 17:"
 
 [node name="key16" parent="vboxMiddle/hboxKey17" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="hboxKey18" type="HBoxContainer" parent="vboxMiddle"]
-margin_top = 168.0
-margin_right = 313.0
-margin_bottom = 188.0
+offset_top = 168.0
+offset_right = 313.0
+offset_bottom = 188.0
 
 [node name="label" type="Label" parent="vboxMiddle/hboxKey18"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 18:"
 
 [node name="key17" parent="vboxMiddle/hboxKey18" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="hboxKey19" type="HBoxContainer" parent="vboxMiddle"]
-margin_top = 192.0
-margin_right = 313.0
-margin_bottom = 212.0
+offset_top = 192.0
+offset_right = 313.0
+offset_bottom = 212.0
 
 [node name="label" type="Label" parent="vboxMiddle/hboxKey19"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 19:"
 
 [node name="key18" parent="vboxMiddle/hboxKey19" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="hboxKey20" type="HBoxContainer" parent="vboxMiddle"]
-margin_top = 216.0
-margin_right = 313.0
-margin_bottom = 236.0
+offset_top = 216.0
+offset_right = 313.0
+offset_bottom = 236.0
 
 [node name="label" type="Label" parent="vboxMiddle/hboxKey20"]
-margin_top = 3.0
-margin_right = 47.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 17.0
 text = "Key 20:"
 
 [node name="key19" parent="vboxMiddle/hboxKey20" instance=ExtResource( 2 )]
-margin_left = 51.0
-margin_right = 80.0
+offset_left = 51.0
+offset_right = 80.0
 
 [node name="joystickButton" type="HBoxContainer" parent="vboxMiddle"]
-margin_top = 240.0
-margin_right = 313.0
-margin_bottom = 260.0
+offset_top = 240.0
+offset_right = 313.0
+offset_bottom = 260.0
 
 [node name="label" type="Label" parent="vboxMiddle/joystickButton"]
-margin_top = 3.0
-margin_right = 99.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 99.0
+offset_bottom = 17.0
 text = "Joystick Button:"
 
 [node name="joystickButton" parent="vboxMiddle/joystickButton" instance=ExtResource( 2 )]
-margin_left = 103.0
-margin_right = 132.0
+offset_left = 103.0
+offset_right = 132.0
 
 [node name="vboxRight" type="VBoxContainer" parent="."]
-margin_left = 633.0
-margin_right = 946.0
-margin_bottom = 526.0
+offset_left = 633.0
+offset_right = 946.0
+offset_bottom = 526.0
 size_flags_horizontal = 3
 
 [node name="kbModeEnabled" type="HBoxContainer" parent="vboxRight"]
-margin_right = 313.0
-margin_bottom = 40.0
+offset_right = 313.0
+offset_bottom = 40.0
 
 [node name="label" type="Label" parent="vboxRight/kbModeEnabled"]
-margin_top = 13.0
-margin_right = 115.0
-margin_bottom = 27.0
+offset_top = 13.0
+offset_right = 115.0
+offset_bottom = 27.0
 text = "KB Mode Enabled:"
 
 [node name="isKbModeEnabled" type="CheckButton" parent="vboxRight/kbModeEnabled"]
-margin_left = 119.0
-margin_right = 195.0
-margin_bottom = 40.0
+offset_left = 119.0
+offset_right = 195.0
+offset_bottom = 40.0
 
 [node name="kbModeUp" type="HBoxContainer" parent="vboxRight"]
-margin_top = 44.0
-margin_right = 313.0
-margin_bottom = 64.0
+offset_top = 44.0
+offset_right = 313.0
+offset_bottom = 64.0
 
 [node name="label" type="Label" parent="vboxRight/kbModeUp"]
-margin_top = 3.0
-margin_right = 83.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 83.0
+offset_bottom = 17.0
 text = "KB Mode Up:"
 
 [node name="kbup" parent="vboxRight/kbModeUp" instance=ExtResource( 2 )]
-margin_left = 87.0
-margin_right = 116.0
+offset_left = 87.0
+offset_right = 116.0
 
 [node name="kbModeDown" type="HBoxContainer" parent="vboxRight"]
-margin_top = 68.0
-margin_right = 313.0
-margin_bottom = 88.0
+offset_top = 68.0
+offset_right = 313.0
+offset_bottom = 88.0
 
 [node name="label" type="Label" parent="vboxRight/kbModeDown"]
-margin_top = 3.0
-margin_right = 101.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 101.0
+offset_bottom = 17.0
 text = "KB Mode Down:"
 
 [node name="kbdown" parent="vboxRight/kbModeDown" instance=ExtResource( 2 )]
-margin_left = 105.0
-margin_right = 134.0
+offset_left = 105.0
+offset_right = 134.0
 
 [node name="kbModeLeft" type="HBoxContainer" parent="vboxRight"]
-margin_top = 92.0
-margin_right = 313.0
-margin_bottom = 112.0
+offset_top = 92.0
+offset_right = 313.0
+offset_bottom = 112.0
 
 [node name="label" type="Label" parent="vboxRight/kbModeLeft"]
-margin_top = 3.0
-margin_right = 89.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 89.0
+offset_bottom = 17.0
 text = "KB Mode Left:"
 
 [node name="kbleft" parent="vboxRight/kbModeLeft" instance=ExtResource( 2 )]
-margin_left = 93.0
-margin_right = 122.0
+offset_left = 93.0
+offset_right = 122.0
 
 [node name="kbModeRight" type="HBoxContainer" parent="vboxRight"]
-margin_top = 116.0
-margin_right = 313.0
-margin_bottom = 136.0
+offset_top = 116.0
+offset_right = 313.0
+offset_bottom = 136.0
 
 [node name="label" type="Label" parent="vboxRight/kbModeRight"]
-margin_top = 3.0
-margin_right = 97.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 97.0
+offset_bottom = 17.0
 text = "KB Mode Right:"
 
 [node name="kbright" parent="vboxRight/kbModeRight" instance=ExtResource( 2 )]
-margin_left = 101.0
-margin_right = 130.0
+offset_left = 101.0
+offset_right = 130.0
 
 [node name="dpadUp" type="HBoxContainer" parent="vboxRight"]
-margin_top = 140.0
-margin_right = 313.0
-margin_bottom = 160.0
+offset_top = 140.0
+offset_right = 313.0
+offset_bottom = 160.0
 
 [node name="label" type="Label" parent="vboxRight/dpadUp"]
-margin_top = 3.0
-margin_right = 63.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 63.0
+offset_bottom = 17.0
 text = "DPAD Up:"
 
 [node name="dpadup" parent="vboxRight/dpadUp" instance=ExtResource( 2 )]
-margin_left = 67.0
-margin_right = 96.0
+offset_left = 67.0
+offset_right = 96.0
 
 [node name="dpadDown" type="HBoxContainer" parent="vboxRight"]
-margin_top = 164.0
-margin_right = 313.0
-margin_bottom = 184.0
+offset_top = 164.0
+offset_right = 313.0
+offset_bottom = 184.0
 
 [node name="label" type="Label" parent="vboxRight/dpadDown"]
-margin_top = 3.0
-margin_right = 81.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 81.0
+offset_bottom = 17.0
 text = "DPAD Down:"
 
 [node name="dpaddown" parent="vboxRight/dpadDown" instance=ExtResource( 2 )]
-margin_left = 85.0
-margin_right = 114.0
+offset_left = 85.0
+offset_right = 114.0
 
 [node name="dpadLeft" type="HBoxContainer" parent="vboxRight"]
-margin_top = 188.0
-margin_right = 313.0
-margin_bottom = 208.0
+offset_top = 188.0
+offset_right = 313.0
+offset_bottom = 208.0
 
 [node name="label" type="Label" parent="vboxRight/dpadLeft"]
-margin_top = 3.0
-margin_right = 69.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 69.0
+offset_bottom = 17.0
 text = "DPAD Left:"
 
 [node name="dpadleft" parent="vboxRight/dpadLeft" instance=ExtResource( 2 )]
-margin_left = 73.0
-margin_right = 102.0
+offset_left = 73.0
+offset_right = 102.0
 
 [node name="dpadRight" type="HBoxContainer" parent="vboxRight"]
-margin_top = 212.0
-margin_right = 313.0
-margin_bottom = 232.0
+offset_top = 212.0
+offset_right = 313.0
+offset_bottom = 232.0
 
 [node name="label" type="Label" parent="vboxRight/dpadRight"]
-margin_top = 3.0
-margin_right = 77.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 77.0
+offset_bottom = 17.0
 text = "DPAD Right:"
 
 [node name="dpadright" parent="vboxRight/dpadRight" instance=ExtResource( 2 )]
-margin_left = 81.0
-margin_right = 110.0
+offset_left = 81.0
+offset_right = 110.0
 
 [node name="dpadCenter" type="HBoxContainer" parent="vboxRight"]
-margin_top = 236.0
-margin_right = 313.0
-margin_bottom = 256.0
+offset_top = 236.0
+offset_right = 313.0
+offset_bottom = 256.0
 
 [node name="label" type="Label" parent="vboxRight/dpadCenter"]
-margin_top = 3.0
-margin_right = 87.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 87.0
+offset_bottom = 17.0
 text = "DPAD Center:"
 
 [node name="dpadcenter" parent="vboxRight/dpadCenter" instance=ExtResource( 2 )]
-margin_left = 91.0
-margin_right = 120.0
+offset_left = 91.0
+offset_right = 120.0
 
 [node name="rgb" type="HBoxContainer" parent="vboxRight"]
-margin_top = 260.0
-margin_right = 313.0
-margin_bottom = 280.0
+offset_top = 260.0
+offset_right = 313.0
+offset_bottom = 280.0
 
 [node name="label" type="Label" parent="vboxRight/rgb"]
-margin_top = 3.0
-margin_right = 59.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 59.0
+offset_bottom = 17.0
 text = "RGB LED:"
 
 [node name="rgb" type="ColorPickerButton" parent="vboxRight/rgb"]
-margin_left = 63.0
-margin_right = 93.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 30, 0 )
+offset_left = 63.0
+offset_right = 93.0
+offset_bottom = 20.0
+custom_minimum_size = Vector2( 30, 0 )
 edit_alpha = false

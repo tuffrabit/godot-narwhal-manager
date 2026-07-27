@@ -9,6 +9,7 @@ var pingFailureCount: int = 0
 @onready var pingTimer = $pingTimer
 
 func _ready() -> void:
+	SerialHelper.setSerial(GdSerial.new())
 	self.createConnectScene()
 	self.connectInstance.getPortConnection()
 

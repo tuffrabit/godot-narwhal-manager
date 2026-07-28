@@ -184,9 +184,12 @@ text = "X Axis: "
 offset_left = 51.0
 offset_right = 88.0
 offset_bottom = 20.0
-text = "0"
-items = [ "0", null, false, 0, null, "1", null, false, 1, null ]
 selected = 0
+item_count = 2
+popup/item_0/text = "0"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
 
 [node name="chkReverse" type="CheckBox" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/xAxis"]
 offset_top = 24.0
@@ -213,9 +216,12 @@ text = "Y Axis: "
 offset_left = 50.0
 offset_right = 87.0
 offset_bottom = 20.0
-text = "0"
-items = [ "0", null, false, 0, null, "1", null, false, 1, null ]
 selected = 0
+item_count = 2
+popup/item_0/text = "0"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
 
 [node name="chkReverse" type="CheckBox" parent="tabs/vboxAdvanced/vboxStickAxesOrientation/hboxAxes/yAxis"]
 offset_top = 24.0
@@ -273,7 +279,7 @@ rangeMin = -127.0
 rangeMax = 127.0
 
 [node name="readStickValuesTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 
 [connection signal="pressed" from="vboxGlobal/hboxButtons/btnSave" to="." method="_on_btnSave_pressed"]
 [connection signal="pressed" from="vboxGlobal/hboxButtons/btnDisconnect" to="." method="_on_btnDisconnect_pressed"]

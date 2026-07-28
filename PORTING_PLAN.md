@@ -139,6 +139,14 @@ Only its internals and the `serial` node swap out.
    stalls every poll. Signals + `poll_events()` fix this without touching the UI.
    Defer to 2b if the synchronous port proves correct first.
 
+   **Known limitation (observed on real hardware):** `GdSerialManager` adds response-
+   to-screen latency for the stick graphs because updates are processed on frame
+   boundaries via `_process()` + `poll_events()`. Even with the 30 FPS cap removed,
+   the graphs can feel less responsive than the synchronous `GdSerial` path. If this
+   becomes a problem, the pragmatic fallback is to keep `GdSerialManager` for the
+   handshake and commands, but use a dedicated synchronous `GdSerial` instance with a
+   short timeout (e.g. 50 ms) just for the `readStickValuesTimer` stick-graph polling.
+
 ### Validation gate for Phase 2
 
 Full handshake with real hardware, `getGlobalSettings` load, a round-trip of every

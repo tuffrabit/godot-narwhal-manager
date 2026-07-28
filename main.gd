@@ -9,7 +9,7 @@ var pingFailureCount: int = 0
 @onready var pingTimer = $pingTimer
 
 func _ready() -> void:
-	SerialHelper.setSerial(GdSerial.new())
+	SerialHelper.setSerial(GdSerialManager.new())
 	self.createConnectScene()
 	self.connectInstance.getPortConnection()
 
@@ -31,6 +31,7 @@ func createConnectScene() -> void:
 
 func disconnectClick() -> void:
 	self.pingTimer.stop()
+	SerialHelper.closeSerial()
 	self.remove_child(self.deviceInstance)
 	self.createConnectScene()
 	self.connectInstance.showFields("Disconnected from TuFFpad")
@@ -46,6 +47,7 @@ func _on_pingTimer_timeout():
 		
 		if self.pingFailureCount > 3:
 			self.pingTimer.stop()
+			SerialHelper.closeSerial()
 			self.remove_child(self.deviceInstance)
 			self.createConnectScene()
 			self.connectInstance.showFields("Something went wrong, no response from TuFFpad")

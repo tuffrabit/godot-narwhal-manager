@@ -31,6 +31,7 @@ func _ready() -> void:
 	self.tabs.set_tab_title(1, "Advanced")
 	self.profiles.connect("profileSelected", Callable(self, "profileSelected"))
 	self.profiles.connect("profileRenamed", Callable(self, "profileRenamed"))
+	SerialHelper.stick_values_received.connect(Callable(self, "_on_stick_values_received"))
 	self.rawStick.setRunning(false)
 	self.calculatedStick.setRunning(false)
 	
@@ -283,20 +284,22 @@ func stickYAxisReverseToggled(value: bool) -> void:
 
 
 func _on_readStickValuesTimer_timeout():
-	var response: Dictionary = SerialHelper.sendCommandAndGetResponse("readStickValues")
-	
-	if response and "readStickValues" in response:
-		self.rawStick.setPoint(response["readStickValues"][0]["x"], response["readStickValues"][0]["y"])
-		self.calculatedStick.setPoint(response["readStickValues"][1]["x"], response["readStickValues"][1]["y"])
+	SerialHelper.startStickPolling()
+
+func _on_stick_values_received(raw: Dictionary, calculated: Dictionary) -> void:
+	self.rawStick.setPoint(raw["x"], raw["y"])
+	self.calculatedStick.setPoint(calculated["x"], calculated["y"])
 
 func _on_Button_pressed():
 	if self.readStickValuesTimer.is_stopped():
 		self.rawStick.setRunning(true)
 		self.calculatedStick.setRunning(true)
+		SerialHelper.startStickPolling()
 		self.readStickValuesTimer.start()
 	else:
 		self.rawStick.setRunning(false)
 		self.calculatedStick.setRunning(false)
+		SerialHelper.stopStickPolling()
 		self.readStickValuesTimer.stop()
 
 

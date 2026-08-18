@@ -72,7 +72,6 @@ offset_bottom = -4.0
 [node name="hboxSettings" type="HBoxContainer" parent="tabs/vboxAdvanced"]
 offset_right = 952.0
 offset_bottom = 150.0
-custom_minimum_size = Vector2( 0, 150 )
 
 [node name="vboxLeft" type="VBoxContainer" parent="tabs/vboxAdvanced/hboxSettings"]
 offset_right = 474.0
@@ -264,7 +263,7 @@ offset_left = 405.0
 offset_right = 474.0
 offset_bottom = 72.0
 titleText = "Raw"
-graph_size = 160.0
+graph_size = 140.0
 rangeMax = 65535.0
 
 [node name="calculated" parent="tabs/vboxAdvanced/stickGraphs" instance=ExtResource( 4 )]
@@ -274,7 +273,7 @@ offset_left = 478.0
 offset_right = 547.0
 offset_bottom = 72.0
 titleText = "Calculated"
-graph_size = 160.0
+graph_size = 140.0
 rangeMin = -127.0
 rangeMax = 127.0
 

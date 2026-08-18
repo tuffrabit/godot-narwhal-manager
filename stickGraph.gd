@@ -14,8 +14,6 @@ class_name StickGraph
 @export var rangeMin: float = 0: set = setRangeMin
 @export var rangeMax: float = 0: set = setRangeMax
 
-var middleX: float = 0
-var middleY: float = 0
 var lowX: float = 0
 var highX: float = 0
 var lowY: float = 0
@@ -27,8 +25,9 @@ func _ready() -> void:
 	self.graph.size.y = self.graph_size
 	self.graph.custom_minimum_size.x = self.graph_size
 	self.graph.custom_minimum_size.y = self.graph_size
-	self.middleX = self.graph.position.x + self.graph_size / 2
-	self.middleY = self.graph.position.y + self.graph_size / 2
+	# The parent VBoxContainer repositions the graph after _ready, so the axes
+	# must follow the graph's live rect at draw time, not cached coordinates.
+	self.graph.item_rect_changed.connect(queue_redraw)
 	self.lowX = self.rangeMax
 	self.highX = self.rangeMin
 	self.lowY = self.rangeMax
@@ -77,22 +76,24 @@ func setPoint(x: float, y: float) -> void:
 	self.limitsX.text = "%s,%s" % [self.lowX, self.highX]
 	self.limitsY.text = "%s,%s" % [self.lowY, self.highY]
 	
-	var scaledX: float = self.rangeMap(x, self.rangeMin, self.rangeMax, 0, self.graph_size)
-	var scaledY: float = self.rangeMap(y, self.rangeMin, self.rangeMax, 0, self.graph_size)
+	var scaledX: float = self.rangeMap(x, self.rangeMin, self.rangeMax, 0, self.graph.size.x)
+	var scaledY: float = self.rangeMap(y, self.rangeMin, self.rangeMax, 0, self.graph.size.y)
 	self.point.position.x = scaledX - 5
 	self.point.position.y = scaledY - 5
 
 func drawVerticalAxis() -> void:
 	var startY: float = self.graph.position.y
-	var endY: float = self.graph.position.y + self.graph_size
+	var endY: float = self.graph.position.y + self.graph.size.y
+	var middleX: float = self.graph.position.x + self.graph.size.x / 2
 	
-	self.draw_line(Vector2(self.middleX,startY), Vector2(self.middleX,endY), Color("8b8b8b"), 1)
+	self.draw_line(Vector2(middleX,startY), Vector2(middleX,endY), Color("8b8b8b"), 1)
 
 func drawHorizontalAxis() -> void:
 	var startX: float = self.graph.position.x
-	var endX: float = self.graph.position.x + self.graph_size
+	var endX: float = self.graph.position.x + self.graph.size.x
+	var middleY: float = self.graph.position.y + self.graph.size.y / 2
 	
-	self.draw_line(Vector2(startX,self.middleY), Vector2(endX,self.middleY), Color("8b8b8b"), 1)
+	self.draw_line(Vector2(startX,middleY), Vector2(endX,middleY), Color("8b8b8b"), 1)
 
 func _draw():
 	self.drawVerticalAxis()

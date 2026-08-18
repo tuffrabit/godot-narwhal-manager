@@ -154,11 +154,19 @@ Full handshake with real hardware, `getGlobalSettings` load, a round-trip of eve
 
 ---
 
-## Phase 3 — Low-hanging fruit (no API or UI changes)
+## Phase 3 — Low-hanging fruit (no API or UI changes) ✅ COMPLETE
 
-Bugs and cleanups found while reading the code. Each is small; do them as separate
-commits after the port is green. Items marked *(string)* alter a user-visible message
-only to fix wrong text.
+All items done. Item 8 was implemented as a per-OS candidate-root scan
+(Windows drive letters via `DirAccess.get_drive_name()`, `/Volumes` on macOS,
+`/media` + `/run/media` + `/mnt` on Linux) looking for the `iamindeedatuffpad`
+marker file. Also done beyond the list: `addons/gdserial/bin/` un-ignored in
+`.gitignore` so the vendored binaries are actually committed, GdSerial LICENSE
+vendored, `.import/` (Godot 3 cache) deleted, device screens freed on
+disconnect, immediate disconnect handling via `port_disconnected`, and
+self-paced stick polling (request-on-response with a 150 ms watchdog)
+replacing the 50 ms timer.
+
+Original list, for the record:
 
 1. **Leaked profile instance** — `device.gd:78-83`: `profileScene.instance()` is called
    unconditionally, then reassigned in the `if/elif`. For Tuffjoystick the first

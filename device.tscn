@@ -278,11 +278,7 @@ graph_size = 160.0
 rangeMin = -127.0
 rangeMax = 127.0
 
-[node name="readStickValuesTimer" type="Timer" parent="."]
-wait_time = 0.05
-
 [connection signal="pressed" from="vboxGlobal/hboxButtons/btnSave" to="." method="_on_btnSave_pressed"]
 [connection signal="pressed" from="vboxGlobal/hboxButtons/btnDisconnect" to="." method="_on_btnDisconnect_pressed"]
 [connection signal="pressed" from="tabs/vboxAdvanced/CenterContainer/HBoxContainer/readStick" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="tabs/vboxAdvanced/CenterContainer/HBoxContainer/readStickHelp" to="." method="_on_readStickHelp_pressed"]
-[connection signal="timeout" from="readStickValuesTimer" to="." method="_on_readStickValuesTimer_timeout"]

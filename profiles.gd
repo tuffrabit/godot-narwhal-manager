@@ -5,7 +5,6 @@ class_name Profiles
 signal profileSelected(profile)
 signal profileRenamed(oldProfileName, newProfileName)
 
-var profiles: Dictionary
 var previousActiveProfile: int
 var profileToDelete: int
 var profileToRename: int
@@ -20,7 +19,6 @@ func _ready() -> void:
 func getProfileNames() -> void:
 	self.btnActiveProfile.clear()
 	self.listProfiles.clear()
-	self.profiles = {}
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse("getProfiles")
 	
 	if response != null and "getProfiles" in response:
@@ -56,16 +54,11 @@ func setActiveProfile(profileName: String) -> void:
 			Dialogs.showAlertDialog("Set active profile failed.", "Error")
 
 func getProfile(profileName: String) -> Dictionary:
-	var profile: Dictionary
+	var profile: Dictionary = {}
+	var response: Dictionary = SerialHelper.sendCommandAndGetResponse("getProfile", profileName)
 	
-	if profileName in self.profiles:
-		profile = self.profiles[profileName]
-	else:
-		var response: Dictionary = SerialHelper.sendCommandAndGetResponse("getProfile", profileName)
-		
-		if response != null and "getProfile" in response:
-			profile = response["getProfile"]
-			self.profiles[profileName] = profile
+	if response != null and "getProfile" in response:
+		profile = response["getProfile"]
 	
 	return profile
 
@@ -171,7 +164,7 @@ func renameProfile(newProfileName: String) -> void:
 					self.profileRenamed.emit(oldProfileName, newProfileName)
 					Dialogs.showAlertDialog("Profile successfully renamed.", "Success!")
 				else:
-					Dialogs.showAlertDialog("Profile creation failed on the device.", "Can't create new profile")
+					Dialogs.showAlertDialog("Profile rename failed on the device.", "Can't rename profile")
 		else:
 			Dialogs.showAlertDialog("Profile with that name already exists.", "Can't rename profile")
 	
@@ -190,6 +183,7 @@ func _on_btnMoveUp_pressed():
 		if response != null and "reorderProfile" in response:
 			if response["reorderProfile"]:
 				self.listProfiles.move_item(selectedItemIndexes[0], newPosition)
+				self.syncActiveProfileOrder()
 			else:
 				Dialogs.showAlertDialog("Profile re-order failed on the device.", "Can't re-order profile")
 
@@ -205,5 +199,22 @@ func _on_btnMoveDown_pressed():
 		if response != null and "reorderProfile" in response:
 			if response["reorderProfile"]:
 				self.listProfiles.move_item(selectedItemIndexes[0], newPosition)
+				self.syncActiveProfileOrder()
 			else:
 				Dialogs.showAlertDialog("Profile re-order failed on the device.", "Can't re-order profile")
+
+# OptionButton has no move_item, so rebuild it to match the reordered
+# profile list while preserving the selected active profile.
+func syncActiveProfileOrder() -> void:
+	var activeProfileName: String = ""
+	
+	if self.btnActiveProfile.selected > -1:
+		activeProfileName = self.btnActiveProfile.get_item_text(self.btnActiveProfile.selected)
+	
+	self.btnActiveProfile.clear()
+	
+	for index in range(self.listProfiles.get_item_count()):
+		self.btnActiveProfile.add_item(self.listProfiles.get_item_text(index))
+		
+		if self.listProfiles.get_item_text(index) == activeProfileName:
+			self.btnActiveProfile.select(index)

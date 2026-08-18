@@ -13,7 +13,6 @@ func setProfileName(name: String) -> void:
 func setupInputBindingsForChildren(parent: Container) -> void:
 	for container in parent.get_children():
 		for childContainer in container.get_children():
-			print(childContainer.get_class())
 			if childContainer.is_class("OptionButton"):
 				childContainer.connect("item_selected", Callable(self, "optionButtonSelectionChanged").bind(childContainer.name))
 			

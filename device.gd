@@ -10,7 +10,6 @@ var profileJoystickScene: PackedScene = preload("res://profileJoystick.tscn")
 @onready var tabs: TabContainer = $tabs
 @onready var profiles: Profiles = $tabs/hsplitMain/profiles
 @onready var pnlProfile: Panel = $tabs/hsplitMain/pnlProfile
-@onready var readStickValuesTimer = $readStickValuesTimer
 @onready var stickBoundLowX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowX
 @onready var stickBoundHighX: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundHighX
 @onready var stickBoundLowY: SpinBoxSliderCombo = $tabs/vboxAdvanced/hboxSettings/vboxLeft/stickBoundLowY
@@ -76,12 +75,15 @@ func profileSelected(profile: Dictionary) -> void:
 		self.pnlProfile.remove_child(child)
 		child.queue_free()
 	
-	var profileInstance: ProfileBase = self.profileScene.instantiate()
+	var profileInstance: ProfileBase
 	
 	if SerialHelper.deviceType == SerialHelper.DeviceType.Tuffpad:
 		profileInstance = self.profileScene.instantiate()
 	elif SerialHelper.deviceType == SerialHelper.DeviceType.Tuffjoystick:
 		profileInstance = self.profileJoystickScene.instantiate()
+	
+	if profileInstance == null:
+		return
 	
 	self.pnlProfile.add_child(profileInstance)
 	profileInstance.setProfileName(profile['name'])
@@ -100,51 +102,65 @@ func _on_btnDisconnect_pressed() -> void:
 
 func _on_btnSave_pressed() -> void:
 	Dialogs.showConfirmationDialog("Are you sure? This will save all configurations to the device.", self, "saveEverything2")
-	#Dialogs.showConfirmationDialog("Are you sure? This will save all configurations to the device, and it will self-reboot.", self, "saveEverything")
 
-func getCorrectDriveName() -> String:
-	var driveName: String = ""
-	var dir: DirAccess = DirAccess.open("res://")
-	var driveCount: int = DirAccess.get_drive_count()
+func getDeviceDrive() -> String:
+	for root in self.getCandidateDriveRoots():
+		if FileAccess.file_exists(root + "/iamindeedatuffpad"):
+			return root
 	
-	for driveIndex in driveCount:
-		var drive: String = dir.get_drive(driveIndex)
-		var checkFilename: String = drive + "\\iamindeedatuffpad"
-		
-		if FileAccess.file_exists(checkFilename):
-			driveName = drive
-			break
-	
-	print("Good drivename: " + driveName)
-	return driveName
+	return ""
 
-func getCorrectDriveName2() -> String:
-	var driveName: String = ""
-	var possibleDrives = ["A:", "B:", "C:", "D:", "E:", "F:", "G:", "H:", "I:", "J:", "K:", "L:", "M:", "N:", "O:", "P:", "Q:", "R:", "S:", "T:", "U:", "V:", "W:", "X:", "Y:", "Z:"]
+func getCandidateDriveRoots() -> Array[String]:
+	var roots: Array[String] = []
 	
-	for possibleDrive in possibleDrives:
-		var checkFilename: String = possibleDrive + "\\iamindeedatuffpad"
-		
-		if FileAccess.file_exists(checkFilename):
-			driveName = possibleDrive
-			break
+	if OS.has_feature("windows"):
+		for driveIndex in DirAccess.get_drive_count():
+			roots.append(DirAccess.get_drive_name(driveIndex))
+	elif OS.has_feature("macos"):
+		roots.append_array(self.listSubdirs("/Volumes"))
+	else:
+		# Linux: removable media mounts one or two levels deep depending on distro
+		for base in ["/media", "/run/media", "/mnt"]:
+			for subdir in self.listSubdirs(base):
+				roots.append(subdir)
+				roots.append_array(self.listSubdirs(subdir))
 	
-	return driveName
+	return roots
+
+func listSubdirs(path: String) -> Array[String]:
+	var subdirs: Array[String] = []
+	var dir: DirAccess = DirAccess.open(path)
+	
+	if dir == null:
+		return subdirs
+	
+	dir.list_dir_begin()
+	var entry: String = dir.get_next()
+	
+	while entry != "":
+		if dir.current_is_dir() and not entry.begins_with("."):
+			subdirs.append(path + "/" + entry)
+		entry = dir.get_next()
+	
+	dir.list_dir_end()
+	return subdirs
 
 func saveEverything() -> void:
-	var drive: String = self.getCorrectDriveName2()
+	var drive: String = self.getDeviceDrive()
 	
 	if drive != "":
 		var response: Dictionary = SerialHelper.sendCommandAndGetResponse("getSaveData")
 		
 		if response != null and "getSaveData" in response:
 			var data: String = response["getSaveData"]
-			var configFilename: String = drive + "\\config.json"
+			var configFilename: String = drive + "/config.json"
 			var file: FileAccess = FileAccess.open(configFilename, FileAccess.WRITE)
 			
 			if file:
 				file.store_string(data)
 				file.close()
+			else:
+				Dialogs.showAlertDialog("Could not write config file to " + drive, "Can't save")
 		else:
 			Dialogs.showAlertDialog("Could not retrieve valid data to save from TuFFpad.", "Can't save")
 	else:
@@ -165,9 +181,9 @@ func stickBoundLowXValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 		commandName, int(value))
 	
-	if response and commandName in response and response[commandName]:
-		self.stickBoundLowX.setEditable(true)
-	else:
+	self.stickBoundLowX.setEditable(true)
+	
+	if not (response and commandName in response and response[commandName]):
 		Dialogs.showAlertDialog("Could not update Stick Boundary Low X", "Update failed")
 
 func stickBoundHighXValueChanged(value: float) -> void:
@@ -177,9 +193,9 @@ func stickBoundHighXValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 		commandName, int(value))
 	
-	if response and commandName in response and response[commandName]:
-		self.stickBoundHighX.setEditable(true)
-	else:
+	self.stickBoundHighX.setEditable(true)
+	
+	if not (response and commandName in response and response[commandName]):
 		Dialogs.showAlertDialog("Could not update Stick Boundary High X", "Update failed")
 
 func stickBoundLowYValueChanged(value: float) -> void:
@@ -189,9 +205,9 @@ func stickBoundLowYValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 		commandName, int(value))
 	
-	if response and commandName in response and response[commandName]:
-		self.stickBoundLowY.setEditable(true)
-	else:
+	self.stickBoundLowY.setEditable(true)
+	
+	if not (response and commandName in response and response[commandName]):
 		Dialogs.showAlertDialog("Could not update Stick Boundary Low Y", "Update failed")
 
 func stickBoundHighYValueChanged(value: float) -> void:
@@ -201,9 +217,9 @@ func stickBoundHighYValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 		commandName, int(value))
 	
-	if response and commandName in response and response[commandName]:
-		self.stickBoundHighY.setEditable(true)
-	else:
+	self.stickBoundHighY.setEditable(true)
+	
+	if not (response and commandName in response and response[commandName]):
 		Dialogs.showAlertDialog("Could not update Stick Boundary High Y", "Update failed")
 
 func deadzoneSizeValueChanged(value: float) -> void:
@@ -213,9 +229,9 @@ func deadzoneSizeValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 		commandName, int(value))
 	
-	if response and commandName in response and response[commandName]:
-		self.deadzoneSize.setEditable(true)
-	else:
+	self.deadzoneSize.setEditable(true)
+	
+	if not (response and commandName in response and response[commandName]):
 		Dialogs.showAlertDialog("Could not update Deadzone Size", "Update failed")
 
 func kbModeStartOffsetXValueChanged(value: float) -> void:
@@ -225,9 +241,9 @@ func kbModeStartOffsetXValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 		commandName, int(value))
 	
-	if response and commandName in response and response[commandName]:
-		self.kbModeStartOffsetX.setEditable(true)
-	else:
+	self.kbModeStartOffsetX.setEditable(true)
+	
+	if not (response and commandName in response and response[commandName]):
 		Dialogs.showAlertDialog("Could not update KB Mode Start Offset X", "Update failed")
 
 func kbModeStartOffsetYValueChanged(value: float) -> void:
@@ -237,9 +253,9 @@ func kbModeStartOffsetYValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 		commandName, int(value))
 	
-	if response and commandName in response and response[commandName]:
-		self.kbModeStartOffsetY.setEditable(true)
-	else:
+	self.kbModeStartOffsetY.setEditable(true)
+	
+	if not (response and commandName in response and response[commandName]):
 		Dialogs.showAlertDialog("Could not update KB Mode Start Offset Y", "Update failed")
 
 func kbModeYConeEndValueChanged(value: float) -> void:
@@ -249,9 +265,9 @@ func kbModeYConeEndValueChanged(value: float) -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse(
 		commandName, int(value))
 	
-	if response and commandName in response and response[commandName]:
-		self.kbModeYConeEnd.setEditable(true)
-	else:
+	self.kbModeYConeEnd.setEditable(true)
+	
+	if not (response and commandName in response and response[commandName]):
 		Dialogs.showAlertDialog("Could not update KB Mode Y Cone End", "Update failed")
 
 func stickXAxisItemSelected(value: int) -> void:
@@ -283,24 +299,23 @@ func stickYAxisReverseToggled(value: bool) -> void:
 		pass
 
 
-func _on_readStickValuesTimer_timeout():
-	SerialHelper.startStickPolling()
+var stickReadingActive: bool = false
 
 func _on_stick_values_received(raw: Dictionary, calculated: Dictionary) -> void:
 	self.rawStick.setPoint(raw["x"], raw["y"])
 	self.calculatedStick.setPoint(calculated["x"], calculated["y"])
 
 func _on_Button_pressed():
-	if self.readStickValuesTimer.is_stopped():
+	if not self.stickReadingActive:
+		self.stickReadingActive = true
 		self.rawStick.setRunning(true)
 		self.calculatedStick.setRunning(true)
 		SerialHelper.startStickPolling()
-		self.readStickValuesTimer.start()
 	else:
+		self.stickReadingActive = false
 		self.rawStick.setRunning(false)
 		self.calculatedStick.setRunning(false)
 		SerialHelper.stopStickPolling()
-		self.readStickValuesTimer.stop()
 
 
 func _on_readStickHelp_pressed():

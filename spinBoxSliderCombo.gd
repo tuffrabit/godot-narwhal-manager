@@ -32,14 +32,25 @@ func setRangeMin(value: float) -> void:
 func setRangeMax(value: float) -> void:
 	rangeMax = value
 
-func setValue(value: float) -> void:
+func setValue(newValue: float) -> void:
+	value = newValue
+	
+	if not self.is_node_ready():
+		return
+	
 	self.emitValueChangedSignal = true
-	self.spinner.value = value
+	self.spinner.value = newValue
+	self.slider.value = newValue
 
-func setValueNoSignal(value: float) -> void:
+func setValueNoSignal(newValue: float) -> void:
+	# Assigning self.value here would invoke the setValue setter and emit
+	# valueChanged, so only the controls are updated.
+	if not self.is_node_ready():
+		return
+	
 	self.emitValueChangedSignal = false
-	self.spinner.value = value
-	self.slider.value = value
+	self.spinner.value = newValue
+	self.slider.value = newValue
 	self.emitValueChangedSignal = true
 
 func setEditable(value: bool) -> void:

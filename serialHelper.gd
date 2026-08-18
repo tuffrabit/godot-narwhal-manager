@@ -10,8 +10,11 @@ const TIMEOUT_MS := 100
 const HANDSHAKE_TIMEOUT_MS := 1000
 const COMMAND_TIMEOUT_MS := 1000
 const POLL_INTERVAL_MS := 5
+const STICK_REQUEST_INTERVAL_MS := 16
+const STICK_RESPONSE_TIMEOUT_MS := 150
 
 signal stick_values_received(raw: Dictionary, calculated: Dictionary)
+signal device_disconnected()
 
 var manager: GdSerialManager
 var deviceType: int = DeviceType.None
@@ -22,6 +25,7 @@ var _pendingResponse: Dictionary = {}
 var _handshakeLines: Array[Dictionary] = []
 var _stickPollingActive: bool = false
 var _stickResponsePending: bool = false
+var _stickRequestTime: int = 0
 
 func setSerial(serial: GdSerialManager) -> void:
 	manager = serial
@@ -29,8 +33,20 @@ func setSerial(serial: GdSerialManager) -> void:
 	manager.port_disconnected.connect(_on_port_disconnected)
 
 func _process(_delta: float) -> void:
-	if manager != null:
-		manager.poll_events()
+	if manager == null:
+		return
+	
+	manager.poll_events()
+	_updateStickPolling()
+
+func getDeviceName() -> String:
+	match deviceType:
+		DeviceType.Tuffpad:
+			return "TuFFpad"
+		DeviceType.Tuffjoystick:
+			return "TuFFjoystick"
+		_:
+			return "TuFFrabit device"
 
 func doHandshake() -> bool:
 	deviceType = DeviceType.None
@@ -38,6 +54,8 @@ func doHandshake() -> bool:
 	_pendingCommand = ""
 	_pendingResponse = {}
 	_handshakeLines.clear()
+	_stickPollingActive = false
+	_stickResponsePending = false
 	
 	if manager == null:
 		return false
@@ -128,19 +146,35 @@ func sendCommandAndGetResponse(command: String, commandValue = null) -> Dictiona
 
 func startStickPolling() -> void:
 	_stickPollingActive = true
-	_requestStickValues()
+	_stickResponsePending = false
+	_stickRequestTime = 0
+	_updateStickPolling()
 
 func stopStickPolling() -> void:
 	_stickPollingActive = false
+	_stickResponsePending = false
 
-func _requestStickValues() -> void:
+# Self-paced stick polling: a new request goes out as soon as the previous
+# response arrives (capped at STICK_REQUEST_INTERVAL_MS), so the graphs track
+# the device instead of a fixed timer. If a response is lost, the watchdog
+# re-requests after STICK_RESPONSE_TIMEOUT_MS instead of stalling forever.
+func _updateStickPolling() -> void:
+	if not _stickPollingActive:
+		return
 	if manager == null or _currentPort.is_empty() or not manager.is_open(_currentPort):
 		return
-	if _stickResponsePending:
-		return
 	
-	_stickResponsePending = true
-	manager.write(_currentPort, "[\"readStickValues\"]\n".to_utf8_buffer())
+	var now: int = Time.get_ticks_msec()
+	
+	if _stickResponsePending:
+		if now - _stickRequestTime < STICK_RESPONSE_TIMEOUT_MS:
+			return
+		_stickResponsePending = false
+	
+	if now - _stickRequestTime >= STICK_REQUEST_INTERVAL_MS:
+		_stickResponsePending = true
+		_stickRequestTime = now
+		manager.write(_currentPort, "[\"readStickValues\"]\n".to_utf8_buffer())
 
 func closeSerial() -> void:
 	_closeAllPorts()
@@ -172,17 +206,24 @@ func _on_data_received(port: String, data: PackedByteArray) -> void:
 		var lineData = JSON.parse_string(line)
 		
 		if lineData != null and lineData.has("readStickValues"):
-			var values = lineData["readStickValues"]
-			
-			if values is Array and values.size() >= 2:
-				stick_values_received.emit(values[0], values[1])
-			
 			_stickResponsePending = false
+			
+			if _stickPollingActive:
+				var values = lineData["readStickValues"]
+				
+				if values is Array and values.size() >= 2 and values[0] is Dictionary and values[1] is Dictionary:
+					stick_values_received.emit(values[0], values[1])
 
 func _on_port_disconnected(port: String) -> void:
 	if port == _currentPort:
+		# Emit before clearing state so handlers can still read the device name.
+		device_disconnected.emit()
 		_currentPort = ""
 		deviceType = DeviceType.None
+		_pendingCommand = ""
+		_pendingResponse = {}
+		_stickPollingActive = false
+		_stickResponsePending = false
 
 func _closeAllPorts() -> void:
 	if manager == null:

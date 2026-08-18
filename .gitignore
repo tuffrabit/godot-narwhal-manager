@@ -402,3 +402,7 @@ FodyWeavers.xsd
 
 tools/
 spikes/
+
+# Vendored GDExtension binaries must be tracked despite the [Bb]in/ rule above
+!addons/gdserial/bin/
+!addons/gdserial/bin/**

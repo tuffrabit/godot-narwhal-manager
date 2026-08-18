@@ -1,6 +1,6 @@
 extends Node
 
-@onready var textInputDialogScene: PackedScene = preload("res://textInputDialog.tscn")
+var textInputDialogScene: PackedScene = preload("res://textInputDialog.tscn")
 
 func showAlertDialog(message: String, title: String = "Alert!") -> void:
 	var dialog = AcceptDialog.new()

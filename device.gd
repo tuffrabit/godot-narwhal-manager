@@ -169,7 +169,7 @@ func saveEverything() -> void:
 func saveEverything2() -> void:
 	var response: Dictionary = SerialHelper.sendCommandAndGetResponse("save")
 	
-	if response != null and "save" in response:
+	if response != null and response.get("save", false) == true:
 		pass
 	else:
 		Dialogs.showAlertDialog("Config write on device failed.", "Can't save")

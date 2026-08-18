@@ -330,3 +330,44 @@ func _on_readStickHelp_pressed():
 	heavy load on the device's microcontroller and cause input delay.
 	"""
 	Dialogs.showAlertDialog(message, "Read Stick Help")
+
+func _on_steamMapping_pressed() -> void:
+	var deviceKey: String = "tuffpad"
+
+	if SerialHelper.deviceType == SerialHelper.DeviceType.Tuffjoystick:
+		deviceKey = "tuffjoystick"
+
+	var mappingLines: Array[String] = SteamHelper.getMappingStrings(deviceKey)
+
+	if mappingLines.is_empty():
+		Dialogs.showAlertDialog("No Steam mapping is available for the connected device.", "Steam Mapping")
+		return
+
+	DisplayServer.clipboard_set("\n".join(mappingLines))
+
+	var message: String = """
+	Steam controller mapping copied to the clipboard.
+
+	In Steam:
+	1. Open Settings -> Controller and turn on
+	   "Enable Steam Input for generic controllers".
+	2. Select this device and click "Begin Setup".
+	3. On the "Press the A button" screen, click "Paste from Clipboard".
+
+	Once that is done you can bind only the inputs you want
+	(such as just the stick) in each game's controller layout.
+	"""
+	Dialogs.showAlertDialog(message, "Steam Mapping Copied")
+
+func _on_steamMappingHelp_pressed() -> void:
+	var message: String = """
+	Steam Input will not configure an unknown controller until it knows which
+	physical input is which. Its setup wizard normally makes you press every
+	button on demand, but it also accepts a pre-made mapping pasted from the
+	clipboard.
+
+	The "Copy Steam Mapping" button copies the correct mapping for the
+	connected device so you can paste it into Steam instead of running
+	through the whole wizard.
+	"""
+	Dialogs.showAlertDialog(message, "Steam Mapping Help")

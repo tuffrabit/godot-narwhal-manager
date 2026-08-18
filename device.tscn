@@ -250,6 +250,18 @@ offset_right = 99.0
 offset_bottom = 20.0
 text = "?"
 
+[node name="steamMapping" type="Button" parent="tabs/vboxAdvanced/CenterContainer/HBoxContainer"]
+offset_left = 103.0
+offset_right = 241.0
+offset_bottom = 20.0
+text = "Copy Steam Mapping"
+
+[node name="steamMappingHelp" type="Button" parent="tabs/vboxAdvanced/CenterContainer/HBoxContainer"]
+offset_left = 245.0
+offset_right = 263.0
+offset_bottom = 20.0
+text = "?"
+
 [node name="stickGraphs" type="HBoxContainer" parent="tabs/vboxAdvanced"]
 offset_top = 248.0
 offset_right = 952.0
@@ -281,3 +293,5 @@ rangeMax = 127.0
 [connection signal="pressed" from="vboxGlobal/hboxButtons/btnDisconnect" to="." method="_on_btnDisconnect_pressed"]
 [connection signal="pressed" from="tabs/vboxAdvanced/CenterContainer/HBoxContainer/readStick" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="tabs/vboxAdvanced/CenterContainer/HBoxContainer/readStickHelp" to="." method="_on_readStickHelp_pressed"]
+[connection signal="pressed" from="tabs/vboxAdvanced/CenterContainer/HBoxContainer/steamMapping" to="." method="_on_steamMapping_pressed"]
+[connection signal="pressed" from="tabs/vboxAdvanced/CenterContainer/HBoxContainer/steamMappingHelp" to="." method="_on_steamMappingHelp_pressed"]
